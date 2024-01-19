@@ -85,10 +85,10 @@ const ModalContainer: React.FC = () => {
 
 const ModalContent = styled.div`
   position: fixed;
-  background-color: #0f0f0f;
-  border: 2px ridge #ffffff;
-  max-width: 1000px;
-  color: whitesmoke;
+  background-color: #363b3f;
+  max-width: 800px;
+  border-radius: 5px;
+  color: #f0f5f9;
   width: 100%;
   padding: 20px 10px;
   z-index: 1042;
