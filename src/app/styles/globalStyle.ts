@@ -7,6 +7,11 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
 }
+
+body {
+  background-color: #4c5665;
+  color: #fffffe;
+}
 `;
 
 export default GlobalStyle;
