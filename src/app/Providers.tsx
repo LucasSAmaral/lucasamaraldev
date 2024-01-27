@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalProvider } from "./components/Modal.context";
+import { ModalProvider } from "./components/modal/Modal.context";
 import GlobalStyle from "./styles/globalStyle";
 
 const Providers: React.FC<{ children: React.ReactNode }> = ({ children }) => {
