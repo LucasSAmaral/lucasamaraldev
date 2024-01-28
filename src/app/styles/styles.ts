@@ -7,7 +7,6 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 125px;
 `;
 
 export const Section = styled.section`
