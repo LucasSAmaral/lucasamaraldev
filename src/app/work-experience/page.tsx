@@ -1,5 +1,5 @@
 const WorkExperience = () => {
-  return <h1>Experiência Profissional</h1>;
+  return <h2>Experiência Profissional</h2>;
 };
 
 export default WorkExperience;

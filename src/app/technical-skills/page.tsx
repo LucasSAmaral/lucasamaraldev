@@ -1,5 +1,5 @@
 const TechnicalSkills = () => {
-  return <h1>Habilidades Técnicas</h1>;
+  return <h2>Habilidades Técnicas</h2>;
 };
 
 export default TechnicalSkills;
