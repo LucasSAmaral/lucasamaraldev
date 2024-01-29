@@ -1,6 +1,7 @@
-import { AboutMeWrapper } from "../styles/styles";
+"use client";
+import styled from "styled-components";
 
-const AboutMe = () => {
+const AboutMe: React.FC = () => {
   return (
     <AboutMeWrapper>
       <h2>Sobre Mim</h2>
@@ -20,5 +21,16 @@ const AboutMe = () => {
     </AboutMeWrapper>
   );
 };
+
+const AboutMeWrapper = styled.div`
+  text-align: center;
+  p {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: justify;
+    margin-top: 10px;
+  }
+`;
 
 export default AboutMe;

@@ -1,27 +1,16 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Container,
-  Footer,
-  Main,
-  MainSection,
-  MainSectionContent,
-  Menu,
-} from "./styles/styles";
+import MenuComponent from "./components/Menu.component";
+import { Container, Main, Section } from "./styles/styles";
+import styled from "styled-components";
+import FooterComponent from "./components/Footer.component";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <Main>
-      <Menu>
-        <Link href="/">Home</Link>
-        <Link href="/about-me">Sobre Mim</Link>
-        <Link href="/technical-skills">Habilidades Técnicas</Link>
-        <Link href="/work-experience">Experiência Profissional</Link>
-        <Link href="/contact">Contato</Link>
-      </Menu>
+      <MenuComponent />
       <AnimatePresence>
         <motion.div
           initial={{ y: 20, opacity: 0, filter: "blur(40px)" }}
@@ -36,7 +25,14 @@ export default function Template({ children }: { children: React.ReactNode }) {
           </MainSection>
         </motion.div>
       </AnimatePresence>
-      <Footer>O rodape</Footer>
+      <FooterComponent />
     </Main>
   );
 }
+
+const MainSection = styled(Section)``;
+
+const MainSectionContent = styled.div`
+  margin: 0 auto;
+  text-align: center;
+`;
