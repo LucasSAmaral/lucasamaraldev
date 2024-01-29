@@ -22,6 +22,7 @@ const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
   return (
     <MenuOption
       className={inter.className}
+      $isActualRoute={actualRoute === nextRoute}
       onClick={() => {
         if (actualRoute != nextRoute) {
           setTransitionState({ ...exitingObject, nextRoute });
@@ -33,7 +34,9 @@ const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
   );
 };
 
-const MenuOption = styled.button`
+const MenuOption = styled.button.attrs<{ $isActualRoute: boolean }>(
+  (props) => ({ $isActualRoute: props.$isActualRoute })
+)`
   text-decoration: none;
   color: #fffffe;
   font-size: 16px;
@@ -41,6 +44,9 @@ const MenuOption = styled.button`
   transition: 200ms;
   background-color: transparent;
   border: none;
+  border-top: 1px solid transparent;
+  border-bottom: ${({ $isActualRoute }) =>
+    $isActualRoute ? "1px solid #fffffe" : "1px solid transparent"};
   cursor: pointer;
 
   &:hover {

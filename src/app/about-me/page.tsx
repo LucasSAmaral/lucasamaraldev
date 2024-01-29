@@ -4,7 +4,6 @@ import styled from "styled-components";
 const AboutMe: React.FC = () => {
   return (
     <AboutMeWrapper>
-      <h2>Sobre Mim</h2>
       <p>
         Meu nome é Lucas Amaral. Tenho 31 anos. Moro no Rio de Janeiro e sou
         desenvolvedor front-end.

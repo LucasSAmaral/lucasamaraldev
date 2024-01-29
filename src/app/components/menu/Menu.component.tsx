@@ -7,7 +7,7 @@ type MenuComponentProps = {
 };
 
 const menuOptionList = [
-  { nextRoute: "/", optionName: "Home" },
+  { nextRoute: "/", optionName: "Início" },
   { nextRoute: "/about-me", optionName: "Sobre Mim" },
   { nextRoute: "/technical-skills", optionName: "Habilidades Técnicas" },
   { nextRoute: "/work-experience", optionName: "Experiência Profissional" },
@@ -39,24 +39,6 @@ const Menu = styled.menu`
   gap: 24px;
   padding: 20px;
   background-color: #363b3f;
-
-  button {
-    text-decoration: none;
-    color: #fffffe;
-    font-size: 16px;
-    font-weight: 600;
-    transition: 200ms;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-
-    &:hover {
-      scale: 1.02;
-    }
-    &:active {
-      scale: 0.98;
-    }
-  }
 `;
 
 export default MenuComponent;

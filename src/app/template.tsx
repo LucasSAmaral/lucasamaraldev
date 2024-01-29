@@ -73,7 +73,7 @@ const SlideOutLeft = keyframes`
 `;
 
 const MainSection = styled(Section).attrs<{ $exiting: boolean }>((props) => ({
-  $exiting: props.$exiting || false,
+  $exiting: props.$exiting,
 }))`
   animation: ${({ $exiting }) => (!$exiting ? SlideInRight : SlideOutLeft)}
     300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
