@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import MenuComponent from "./components/Menu/Menu.component";
+import MenuComponent from "./components/menu/Menu.component";
 import { Container, Main, Section } from "./styles/styles";
 import styled, { keyframes, css } from "styled-components";
 import FooterComponent from "./components/Footer.component";
