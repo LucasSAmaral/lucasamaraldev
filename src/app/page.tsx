@@ -10,7 +10,7 @@ export default function Home() {
       <Image
         src={Photo}
         alt="Minha selfie no pé da torre Eifell"
-        loading="lazy"
+        priority={true}
       />
       <Title>Lucas Amaral</Title>
       <Subtitle>Desenvolvedor Front-End</Subtitle>
