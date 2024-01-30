@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import MenuComponent from "./components/menu/Menu.component";
 import { Container, Main, Section } from "./styles/styles";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import FooterComponent from "./components/Footer.component";
 
 export type TransitionStateType = {

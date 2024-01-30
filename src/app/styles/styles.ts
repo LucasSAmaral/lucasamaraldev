@@ -25,8 +25,8 @@ export const Subtitle = styled.p`
 `;
 
 export const Container = styled.div`
-  height: 100%;
-  min-height: 650px;
+  height: auto;
+
   img {
     border-radius: 50%;
     width: 100%;
