@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import ModalContainer from "./components/modal/Modal.container";
 import Providers from "./Providers";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
         <Providers>
           {children}
           <ModalContainer />
+          <SpeedInsights />
         </Providers>
         <div id="modal"></div>
       </body>
