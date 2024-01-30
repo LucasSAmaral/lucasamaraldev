@@ -25,6 +25,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setTransitionState({ ...transitionState, exiting: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { exiting, nextRoute } = transitionState;
