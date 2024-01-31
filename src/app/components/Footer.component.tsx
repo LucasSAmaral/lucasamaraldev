@@ -40,6 +40,10 @@ const Footer = styled.footer`
   justify-content: center;
   align-items: center;
   gap: 10px;
+
+  a {
+    height: 25px;
+  }
 `;
 
 export default FooterComponent;
