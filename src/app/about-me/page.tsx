@@ -5,7 +5,7 @@ const AboutMe: React.FC = () => {
   return (
     <AboutMeWrapper>
       <p>
-        Meu nome é Lucas Amaral. Tenho 31 anos. Moro no Rio de Janeiro e sou
+        Meu nome é Lucas Amaral. Tenho 32 anos. Moro no Rio de Janeiro e sou
         desenvolvedor front-end.
       </p>
       <p>
