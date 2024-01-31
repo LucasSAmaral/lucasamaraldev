@@ -2,6 +2,8 @@ import { TransitionStateType } from "@/app/template";
 import { Inter } from "next/font/google";
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
+import { ActualRoute, MenuState } from "./Menu.context";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,19 +12,26 @@ const exitingObject = { exiting: true };
 type MenuOptionComponentProps = {
   children: React.ReactNode;
   nextRoute: string;
+  updateMenuState: (value: React.SetStateAction<MenuState>) => void;
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
 };
 
 const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
   children,
   nextRoute,
+  updateMenuState,
   setTransitionState,
 }) => {
   const actualRoute = usePathname();
+
+  useEffect(() => {
+    updateMenuState({ actualRouteState: actualRoute as ActualRoute });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <MenuOption
       className={inter.className}
-      $isActualRoute={actualRoute === nextRoute}
       onClick={() => {
         if (actualRoute != nextRoute) {
           setTransitionState({ ...exitingObject, nextRoute });
@@ -34,9 +43,7 @@ const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
   );
 };
 
-const MenuOption = styled.button.attrs<{ $isActualRoute: boolean }>(
-  (props) => ({ $isActualRoute: props.$isActualRoute })
-)`
+const MenuOption = styled.button`
   text-decoration: none;
   color: #fffffe;
   font-size: 16px;
@@ -44,9 +51,6 @@ const MenuOption = styled.button.attrs<{ $isActualRoute: boolean }>(
   transition: 200ms;
   background-color: transparent;
   border: none;
-  border-top: 1px solid transparent;
-  border-bottom: ${({ $isActualRoute }) =>
-    $isActualRoute ? "1px solid #fffffe" : "1px solid transparent"};
   cursor: pointer;
 
   &:hover {
