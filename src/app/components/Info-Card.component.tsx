@@ -47,6 +47,7 @@ export const InfoCard = styled.div.attrs<{ $left?: boolean; $right?: boolean }>(
             flex-direction: column;
             align-items: center;
             border-radius: 20px;
+            line-height: 1.2;
             font-weight: 500;
             box-shadow: 0px 0px 2px 7px rgb(255, 255, 254, 0.2);
             top: 15px;
