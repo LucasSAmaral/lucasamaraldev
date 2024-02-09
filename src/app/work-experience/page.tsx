@@ -2,8 +2,11 @@
 import styled from 'styled-components';
 import InfoCardComponent from '../components/Info-Card.component';
 import { useModal } from '../components/modal/Modal.context';
+import config from '../../../generated-config.json';
 
 const WorkExperience = () => {
+  const workExperienceLocale = config.locale['pt-br'].workExperience;
+
   const { openModal } = useModal();
 
   return (
@@ -19,9 +22,9 @@ const WorkExperience = () => {
             )
           }
         >
-          <p>Abril de 2019 - Agora</p>
-          <h3>Americanas S.A.</h3>
-          <p>Desenvolvedor Front-End</p>
+          <p>{workExperienceLocale.company1.periodWorked}</p>
+          <h3>{workExperienceLocale.company1.companyName}</h3>
+          <p>{workExperienceLocale.company1.function}</p>
         </InfoCardComponent>
         <Placeholder />
         <InfoCardComponent
@@ -34,9 +37,9 @@ const WorkExperience = () => {
             )
           }
         >
-          <p>Novembro de 2016 - Novembro de 2018</p>
-          <h3>GRITO.cc</h3>
-          <p>Desenvolvedor Front-End</p>
+          <p>{workExperienceLocale.company3.periodWorked}</p>
+          <h3>{workExperienceLocale.company3.companyName}</h3>
+          <p>{workExperienceLocale.company3.function}</p>
         </InfoCardComponent>
       </LeftColumn>
       <RightColumn>
@@ -51,9 +54,9 @@ const WorkExperience = () => {
             )
           }
         >
-          <p>Dezembro de 2018 - Abril de 2019</p>
-          <h3>MJV Technology & Innovation</h3>
-          <p>Desenvolvedor Front-End</p>
+          <p>{workExperienceLocale.company2.periodWorked}</p>
+          <h3>{workExperienceLocale.company2.companyName}</h3>
+          <p>{workExperienceLocale.company2.function}</p>
         </InfoCardComponent>
         <Placeholder />
         <InfoCardComponent
@@ -66,9 +69,9 @@ const WorkExperience = () => {
             )
           }
         >
-          <p>Janeiro de 2015 - Outubro de 2016</p>
-          <h3>Agência Amo</h3>
-          <p>Desenvolvedor Front-End</p>
+          <p>{workExperienceLocale.company4.periodWorked}</p>
+          <h3>{workExperienceLocale.company4.companyName}</h3>
+          <p>{workExperienceLocale.company4.function}</p>
         </InfoCardComponent>
       </RightColumn>
     </Wrapper>

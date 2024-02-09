@@ -1,3 +1,45 @@
 {
-  "pt-br": {}
+  "locale": {
+    "pt-br": {
+      "home": {
+        "name": "Lucas Amaral",
+        "profission": "Desenvolvedor Front-End",
+        "alt": "Minha selfie no pé da torre Eifell"
+      },
+      "aboutMe": {
+        "paragraph1": "Meu nome é Lucas Amaral. Tenho 32 anos. Moro no Rio de Janeiro e sou desenvolvedor front-end.      ",
+        "paragraph2": "Gosto de conversar sobre a cultura pop, mas especificamente sobre cinema. Gosto de assistir filmes e séries, jogar video game e ler livros e quadrinhos no meu tempo livre.",
+        "paragraph3": "Me formei em Sistemas de Informação em 2014 e trabalho como desenvolvedor front-end desde 2015."
+      },
+      "workExperience": {
+        "company1": {
+          "companyName": "Americanas S.A.",
+          "periodWorked": "Abril de 2019 - Agora",
+          "function": "Desenvolvedor Front-End"
+        },
+        "company2": {
+          "companyName": "MJV Technology & Innovation",
+          "periodWorked": "Dezembro de 2018 - Abril de 2019",
+          "function": "Desenvolvedor Front-End"
+        },
+        "company3": {
+          "companyName": "GRITO.cc",
+          "periodWorked": "Novembro de 2016 - Novembro de 2018",
+          "function": "Desenvolvedor Front-End"
+        },
+        "company4": {
+          "companyName": "Agência Amo",
+          "periodWorked": "Janeiro de 2015 - Outubro de 2016",
+          "function": "Desenvolvedor Front-End"
+        }
+      },
+      "footer": {
+        "socialNetworks": {
+          "text": "Redes sociais:",
+          "linkedIn": { "alt": "Logo do LinkedIn", "title": "Me encontre no LinkedIn" },
+          "instagram": { "alt": "Logo do Instagram", "title": "Me siga no Instagram" }
+        }
+      }
+    }
+  }
 }

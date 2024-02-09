@@ -1,22 +1,15 @@
-"use client";
-import styled from "styled-components";
+'use client';
+import styled from 'styled-components';
+import config from '../../../generated-config.json';
 
 const AboutMe: React.FC = () => {
+  const aboutMeLocale = config.locale['pt-br'].aboutMe;
+
   return (
     <AboutMeWrapper>
-      <p>
-        Meu nome é Lucas Amaral. Tenho 32 anos. Moro no Rio de Janeiro e sou
-        desenvolvedor front-end.
-      </p>
-      <p>
-        Gosto de conversar sobre a cultura pop, mas especificamente sobre
-        cinema. Gosto de assistir filmes e séries, jogar video game e ler livros
-        e quadrinhos no meu tempo livre.
-      </p>
-      <p>
-        Me formei em Sistemas de Informação em 2014 e trabalho como
-        desenvolvedor front-end desde 2015.
-      </p>
+      <p>{aboutMeLocale.paragraph1}</p>
+      <p>{aboutMeLocale.paragraph2}</p>
+      <p>{aboutMeLocale.paragraph3}</p>
     </AboutMeWrapper>
   );
 };

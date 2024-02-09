@@ -1,27 +1,29 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import MenuComponent from "./components/menu/Menu.component";
-import { Container, Main, Section } from "./styles/styles";
-import styled, { keyframes } from "styled-components";
-import FooterComponent from "./components/Footer.component";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import MenuComponent from './components/menu/Menu.component';
+import { Container, Main, Section } from './styles/styles';
+import styled, { keyframes } from 'styled-components';
+import FooterComponent from './components/Footer.component';
+import { Inter } from 'next/font/google';
 
 export type TransitionStateType = {
   exiting: boolean;
   nextRoute: string;
 };
 
+const inter = Inter({ subsets: ['latin'] });
+
 const initialTransitionState = {
   exiting: false,
-  nextRoute: "",
+  nextRoute: '',
 };
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const [transitionState, setTransitionState] = useState<TransitionStateType>(
-    initialTransitionState
-  );
+  const [transitionState, setTransitionState] =
+    useState<TransitionStateType>(initialTransitionState);
 
   useEffect(() => {
     setTransitionState({ ...transitionState, exiting: false });
@@ -31,7 +33,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const { exiting, nextRoute } = transitionState;
 
   return (
-    <Main>
+    <Main className={inter.className}>
       <MenuComponent setTransitionState={setTransitionState} />
       <MainSection
         $exiting={exiting}
@@ -73,11 +75,11 @@ const SlideOutLeft = keyframes`
   }
 `;
 
-const MainSection = styled(Section).attrs<{ $exiting: boolean }>((props) => ({
+const MainSection = styled(Section).attrs<{ $exiting: boolean }>(props => ({
   $exiting: props.$exiting,
 }))`
-  animation: ${({ $exiting }) => (!$exiting ? SlideInRight : SlideOutLeft)}
-    300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: ${({ $exiting }) => (!$exiting ? SlideInRight : SlideOutLeft)} 300ms
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 `;
 
 const MainSectionContent = styled.div`

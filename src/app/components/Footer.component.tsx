@@ -1,31 +1,31 @@
-import styled from "styled-components";
-import Image from "next/image";
-import LinkeInLogo from "../../assets/linkedin_logo_icon.svg";
-import InstagramLogo from "../../assets/instagram_logo_icon.svg";
+import styled from 'styled-components';
+import Image from 'next/image';
+import LinkeInLogo from '../../assets/linkedin_logo_icon.svg';
+import InstagramLogo from '../../assets/instagram_logo_icon.svg';
+import config from '../../../generated-config.json';
+
+const appConfig = config.appConfig;
 
 const FooterComponent: React.FC = () => {
+  const footerLocale = config.locale['pt-br'].footer;
+
   return (
     <Footer>
-      Redes sociais:{" "}
-      <a
-        href="https://www.linkedin.com/in/lucas-amaral-193a459b/"
-        target="_blank"
-      >
+      {footerLocale.socialNetworks.text}{' '}
+      <a href={appConfig.linkedInProfileUrl} target="_blank">
         <Image
           src={LinkeInLogo}
           priority={true}
           width={25}
-          alt="Logo do LinkedIn"
-          title="Me encontre no LinkedIn"
-        />{" "}
+          {...footerLocale.socialNetworks.linkedIn}
+        />{' '}
       </a>
-      <a href="https://www.instagram.com/lucass.amaral/" target="_blank">
+      <a href={appConfig.linkedInProfileUrl} target="_blank">
         <Image
           src={InstagramLogo}
           priority={true}
           width={25}
-          alt="Logo do Instagram"
-          title="Me siga no Instagram"
+          {...footerLocale.socialNetworks.instagram}
         />
       </a>
     </Footer>

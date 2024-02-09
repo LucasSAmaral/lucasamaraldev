@@ -8,7 +8,14 @@ const buildConfigObject = async () => {
 
   const menuConfig = JSON.parse(await fs.readFile('src/config/menu-config.json', 'utf8'));
 
-  const configAndLocaleMerged = mergeOptions(menuConfig, portugueseLocale, englishLocale);
+  const appConfig = JSON.parse(await fs.readFile('src/config/app-config.json', 'utf8'));
+
+  const configAndLocaleMerged = mergeOptions(
+    menuConfig,
+    appConfig,
+    portugueseLocale,
+    englishLocale,
+  );
 
   await fs.writeFile('generated-config.json', JSON.stringify(configAndLocaleMerged, null, 2));
 };
