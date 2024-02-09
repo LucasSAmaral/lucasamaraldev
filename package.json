@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm run config && next dev",
     "config": "ts-node src/config/build-config.ts",
-    "build": "next build",
+    "build": "npm run config && next build",
     "start": "next start",
     "lint": "next lint"
   },
