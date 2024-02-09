@@ -1,24 +1,15 @@
-import { useContext } from "react";
-import styled, { css } from "styled-components";
-import { TransitionStateType } from "../../template";
-import MenuOption from "./Menu-Option.component";
-import { ActualRoute, MenuContext } from "./Menu.context";
+import { useContext } from 'react';
+import styled, { css } from 'styled-components';
+import { TransitionStateType } from '../../template';
+import MenuOption from './Menu-Option.component';
+import { ActualRoute, MenuContext } from './Menu.context';
+import config from '../../../../generated-config.json';
 
 type MenuComponentProps = {
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
 };
 
-const menuOptionList = [
-  { nextRoute: "/", optionName: "Início" },
-  { nextRoute: "/about-me", optionName: "Sobre Mim" },
-  { nextRoute: "/technical-skills", optionName: "Habilidades Técnicas" },
-  { nextRoute: "/work-experience", optionName: "Experiência Profissional" },
-  { nextRoute: "/contact", optionName: "Contato" },
-];
-
-const MenuComponent: React.FC<MenuComponentProps> = ({
-  setTransitionState,
-}) => {
+const MenuComponent: React.FC<MenuComponentProps> = ({ setTransitionState }) => {
   const {
     menuState: { actualRouteState },
     updateMenuState,
@@ -27,14 +18,14 @@ const MenuComponent: React.FC<MenuComponentProps> = ({
   return (
     <MenuWrapper>
       <Menu>
-        {menuOptionList.map((menuOption, index) => (
+        {config.menu.menuOptionList.map((menuOption, index) => (
           <MenuOption
-            key={`${menuOption.optionName}-${index}`}
+            key={`${menuOption.optionName['pt-br']}-${index}`}
             updateMenuState={updateMenuState}
             setTransitionState={setTransitionState}
             nextRoute={menuOption.nextRoute}
           >
-            {menuOption.optionName}
+            {menuOption.optionName['pt-br']}
           </MenuOption>
         ))}
       </Menu>
@@ -69,7 +60,7 @@ const ActiveBarWrapper = styled.div`
   position: relative;
 `;
 
-const ActiveBar = styled.div.attrs<{ $actualRoute: ActualRoute }>((props) => ({
+const ActiveBar = styled.div.attrs<{ $actualRoute: ActualRoute }>(props => ({
   $actualRoute: props.$actualRoute,
 }))`
   background-color: #fffffe;
@@ -83,29 +74,29 @@ const ActiveBar = styled.div.attrs<{ $actualRoute: ActualRoute }>((props) => ({
 
 const TransformActiveBar = (actualRoute: ActualRoute) => {
   switch (actualRoute) {
-    case "/":
+    case '/':
       return css`
         width: 41.47px;
         transform: translateX(0);
       `;
-    case "/about-me":
+    case '/about-me':
       return css`
         width: 82.87px;
         transform: translateX(65px);
       `;
-    case "/technical-skills":
+    case '/technical-skills':
       return css`
         width: 164.45px;
         transform: translateX(173px);
       `;
 
-    case "/work-experience":
+    case '/work-experience':
       return css`
         width: 185.33px;
         transform: translateX(361px);
       `;
 
-    case "/contact":
+    case '/contact':
       return css`
         width: 62.38px;
         transform: translateX(571px);

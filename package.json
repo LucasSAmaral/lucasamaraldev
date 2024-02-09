@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run config && next dev",
+    "config": "ts-node src/config/build-config.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -20,7 +21,9 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "merge-options": "^3.0.4",
     "styled-components": "^6.1.6",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
