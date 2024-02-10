@@ -4,8 +4,10 @@ import InfoCardComponent from '../components/Info-Card.component';
 import { useModal } from '../components/modal/Modal.context';
 import config from '../../../generated-config.json';
 
+const { locale } = config;
+
 const WorkExperience = () => {
-  const workExperienceLocale = config.locale['pt-br'].workExperience;
+  const workExperienceLocale = locale['pt-br'].workExperience;
 
   const { openModal } = useModal();
 

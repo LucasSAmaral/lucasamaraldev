@@ -3,8 +3,10 @@ import Photo from '../assets/selfie.jpg';
 import { Subtitle, Title } from './styles/styles';
 import config from '../../generated-config.json';
 
+const { locale } = config;
+
 export default function Home() {
-  const homeLocale = config.locale['pt-br'].home;
+  const homeLocale = locale['pt-br'].home;
 
   return (
     <>

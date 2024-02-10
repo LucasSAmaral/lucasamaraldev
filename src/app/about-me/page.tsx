@@ -2,8 +2,10 @@
 import styled from 'styled-components';
 import config from '../../../generated-config.json';
 
+const { locale } = config;
+
 const AboutMe: React.FC = () => {
-  const aboutMeLocale = config.locale['pt-br'].aboutMe;
+  const aboutMeLocale = locale['pt-br'].aboutMe;
 
   return (
     <AboutMeWrapper>

@@ -4,10 +4,10 @@ import LinkeInLogo from '../../assets/linkedin_logo_icon.svg';
 import InstagramLogo from '../../assets/instagram_logo_icon.svg';
 import config from '../../../generated-config.json';
 
-const appConfig = config.appConfig;
+const { appConfig, locale } = config;
 
 const FooterComponent: React.FC = () => {
-  const footerLocale = config.locale['pt-br'].footer;
+  const footerLocale = locale['pt-br'].footer;
 
   return (
     <Footer>
