@@ -5,9 +5,10 @@ const InfoCardComponent: React.FC<{
   onClick?: () => void;
   left?: boolean;
   right?: boolean;
-}> = ({ children, left, right, onClick = () => {} }) => {
+  className?: string;
+}> = ({ children, left, right, onClick = () => {}, className = '' }) => {
   return (
-    <InfoCard $left={left} $right={right} onClick={onClick}>
+    <InfoCard className={className} $left={left} $right={right} onClick={onClick}>
       {children}
     </InfoCard>
   );

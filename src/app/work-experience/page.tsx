@@ -13,8 +13,8 @@ const WorkExperience = () => {
 
   return (
     <Wrapper>
-      <LeftColumn>
-        <InfoCardComponent
+      <Column>
+        <InfoCard
           left
           onClick={() =>
             openModal(
@@ -27,9 +27,8 @@ const WorkExperience = () => {
           <p>{workExperienceLocale.company1.periodWorked}</p>
           <h3>{workExperienceLocale.company1.companyName}</h3>
           <p>{workExperienceLocale.company1.function}</p>
-        </InfoCardComponent>
-        <Placeholder />
-        <InfoCardComponent
+        </InfoCard>
+        <InfoCard
           left
           onClick={() =>
             openModal(
@@ -42,11 +41,10 @@ const WorkExperience = () => {
           <p>{workExperienceLocale.company3.periodWorked}</p>
           <h3>{workExperienceLocale.company3.companyName}</h3>
           <p>{workExperienceLocale.company3.function}</p>
-        </InfoCardComponent>
-      </LeftColumn>
-      <RightColumn>
-        <FirstPlaceholder />
-        <InfoCardComponent
+        </InfoCard>
+      </Column>
+      <Column>
+        <InfoCard
           right
           onClick={() =>
             openModal(
@@ -59,9 +57,8 @@ const WorkExperience = () => {
           <p>{workExperienceLocale.company2.periodWorked}</p>
           <h3>{workExperienceLocale.company2.companyName}</h3>
           <p>{workExperienceLocale.company2.function}</p>
-        </InfoCardComponent>
-        <Placeholder />
-        <InfoCardComponent
+        </InfoCard>
+        <InfoCard
           right
           onClick={() =>
             openModal(
@@ -74,8 +71,8 @@ const WorkExperience = () => {
           <p>{workExperienceLocale.company4.periodWorked}</p>
           <h3>{workExperienceLocale.company4.companyName}</h3>
           <p>{workExperienceLocale.company4.function}</p>
-        </InfoCardComponent>
-      </RightColumn>
+        </InfoCard>
+      </Column>
     </Wrapper>
   );
 };
@@ -85,22 +82,24 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const RightColumn = styled.div`
+const InfoCard = styled(InfoCardComponent)``;
+
+const Column = styled.div`
   padding: 40px 20px;
   position: relative;
-`;
-
-const LeftColumn = styled(RightColumn)`
   border-right: 5px solid #843235;
-`;
 
-const FirstPlaceholder = styled.div`
-  height: 70px;
-  width: 100%;
-`;
+  ${InfoCard}:last-child {
+    margin-top: 35px;
+  }
 
-const Placeholder = styled(FirstPlaceholder)`
-  height: 35px;
+  &:last-child {
+    border: none;
+
+    ${InfoCard}:first-child {
+      margin-top: 70px;
+    }
+  }
 `;
 
 export default WorkExperience;
