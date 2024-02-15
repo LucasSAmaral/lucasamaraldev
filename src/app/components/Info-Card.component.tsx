@@ -14,7 +14,7 @@ const InfoCardComponent: React.FC<{
   );
 };
 
-export const InfoCard = styled.div.attrs<{ $left?: boolean; $right?: boolean }>(props => ({
+const InfoCard = styled.div.attrs<{ $left?: boolean; $right?: boolean }>(props => ({
   $left: props.$left || false,
   $right: props.$right || false,
 }))`

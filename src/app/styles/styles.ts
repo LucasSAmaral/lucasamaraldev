@@ -1,5 +1,5 @@
-"use client";
-import styled from "styled-components";
+'use client';
+import styled from 'styled-components';
 
 export const Main = styled.main`
   width: 100%;
@@ -34,4 +34,14 @@ export const Container = styled.div`
     height: 300px;
     margin-bottom: 20px;
   }
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const Column = styled.div`
+  padding: 40px 20px;
+  position: relative;
 `;
