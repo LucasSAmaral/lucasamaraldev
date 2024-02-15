@@ -1,5 +1,11 @@
 {
   "locale": {
-    "en-us": {}
+    "en-us": {
+      "home": {
+        "name": "Lucas Amaral",
+        "profission": "Front-End Developer",
+        "alt": "My selfie at the bottom of Eiffel Tower"
+      }
+    }
   }
 }
