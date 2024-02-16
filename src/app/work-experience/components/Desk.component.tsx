@@ -83,15 +83,15 @@ const DeskWrapper = styled(Wrapper)`
 const InfoCard = styled(InfoCardComponent)``;
 
 const DeskColumn = styled(Column)`
-  border-right: 5px solid #843235;
+  &:first-child {
+    border-right: 5px solid #843235;
+  }
 
   ${InfoCard}:last-child {
     margin-top: 35px;
   }
 
   &:last-child {
-    border: none;
-
     ${InfoCard}:first-child {
       margin-top: 70px;
     }
