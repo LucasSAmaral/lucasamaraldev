@@ -20,7 +20,7 @@ const FooterComponent: React.FC = () => {
           {...footerLocale.socialNetworks.linkedIn}
         />{' '}
       </a>
-      <a href={appConfig.linkedInProfileUrl} target="_blank">
+      <a href={appConfig.instagramProfileUrl} target="_blank">
         <Image
           src={InstagramLogo}
           priority={true}
