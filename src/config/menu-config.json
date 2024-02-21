@@ -4,14 +4,9 @@
       { "nextRoute": "/", "optionName": { "pt-br": "Início", "en-us": "Home" } },
       { "nextRoute": "/about-me", "optionName": { "pt-br": "Sobre Mim", "en-us": "About Me" } },
       {
-        "nextRoute": "/technical-skills",
-        "optionName": { "pt-br": "Habilidades Técnicas", "en-us": "Technical Skills" }
-      },
-      {
         "nextRoute": "/work-experience",
         "optionName": { "pt-br": "Experiência Profissional", "en-us": "Work Experience" }
-      },
-      { "nextRoute": "/contact", "optionName": { "pt-br": "Contato", "en-us": "Contact" } }
+      }
     ]
   }
 }
