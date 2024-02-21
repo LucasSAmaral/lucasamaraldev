@@ -12,25 +12,56 @@
         "paragraph3": "Me formei em Sistemas de Informação em 2014 e trabalho como desenvolvedor front-end desde 2015."
       },
       "workExperience": {
+        "modalCommonTitle": {
+          "companyName": "Nome da empresa: ",
+          "periodWorked": "Período trabalhado: ",
+          "function": "Função exercida: ",
+          "workDescription": "Descrição do trabalho: ",
+          "technicalSkills": "Habilidades técnicas: "
+        },
         "company1": {
           "companyName": "Americanas S.A.",
           "periodWorked": "Abril de 2019 - Agora",
-          "function": "Desenvolvedor Front-End"
+          "function": "Desenvolvedor Front-End Pleno",
+          "modal": {
+            "text": {
+              "workDescription": "",
+              "technicalSkills": ""
+            }
+          }
         },
         "company2": {
           "companyName": "MJV Technology & Innovation",
           "periodWorked": "Dezembro de 2018 - Abril de 2019",
-          "function": "Desenvolvedor Front-End"
+          "function": "Desenvolvedor Front-End",
+          "modal": {
+            "text": {
+              "workDescription": "",
+              "technicalSkills": ""
+            }
+          }
         },
         "company3": {
           "companyName": "GRITO.cc",
           "periodWorked": "Novembro de 2016 - Novembro de 2018",
-          "function": "Desenvolvedor Front-End"
+          "function": "Desenvolvedor Front-End Pleno",
+          "modal": {
+            "text": {
+              "workDescription": "",
+              "technicalSkills": ""
+            }
+          }
         },
         "company4": {
           "companyName": "Agência Amo",
           "periodWorked": "Janeiro de 2015 - Outubro de 2016",
-          "function": "Desenvolvedor Front-End"
+          "function": "Desenvolvedor Front-End Junior",
+          "modal": {
+            "text": {
+              "workDescription": "",
+              "technicalSkills": ""
+            }
+          }
         }
       },
       "footer": {
