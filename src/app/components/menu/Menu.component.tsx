@@ -135,7 +135,7 @@ const Menu = styled.menu.attrs<{ $menuMobileStatus: MenuMobileStatus }>(props =>
 const ActiveBarWrapper = styled.div`
   height: 2px;
   width: 100%;
-  max-width: 633px;
+  max-width: 357.47px;
   position: relative;
 
   @media (max-width: 672px) {
@@ -167,18 +167,11 @@ const TransformActiveBar = (actualRoute: ActualRoute) => {
         width: 82.87px;
         transform: translateX(65px);
       `;
-    case '/technical-skills':
-      return css`
-        width: 164.45px;
-        transform: translateX(173px);
-      `;
-
     case '/work-experience':
       return css`
         width: 185.33px;
-        transform: translateX(361px);
+        transform: translateX(173px);
       `;
-
     case '/contact':
       return css`
         width: 62.38px;
