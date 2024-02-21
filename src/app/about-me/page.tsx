@@ -24,6 +24,10 @@ const AboutMeWrapper = styled.div`
     margin: 0 auto;
     text-align: justify;
     margin-top: 10px;
+
+    @media (max-width: 672px) {
+      padding: 0 15px;
+    }
   }
 `;
 
