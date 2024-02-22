@@ -2,7 +2,12 @@ import styled from 'styled-components';
 import { CompanyOption } from '../page';
 import config from '../../../../generated-config.json';
 
-const { locale } = config;
+const {
+  locale,
+  appConfig: {
+    workExperiencePage: { companiesUrls },
+  },
+} = config;
 
 const CompanyModalComponent: React.FC<{ companyOption: CompanyOption }> = ({ companyOption }) => {
   const workExperienceLocale = locale['pt-br'].workExperience;
@@ -11,7 +16,9 @@ const CompanyModalComponent: React.FC<{ companyOption: CompanyOption }> = ({ com
     <CompanyModalWrapper>
       <h3>
         <strong>{workExperienceLocale.modalCommonTitle.companyName}</strong>
-        {workExperienceLocale[companyOption].companyName}
+        <a href={companiesUrls[companyOption]} target="_blank">
+          {workExperienceLocale[companyOption].companyName}
+        </a>
       </h3>
 
       <p>
@@ -49,6 +56,10 @@ const CompanyModalWrapper = styled.div`
   h3 {
     font-weight: normal;
     margin-bottom: 20px;
+
+    a {
+      color: inherit;
+    }
   }
 
   p {
@@ -67,6 +78,10 @@ const WorkDescriptionWrapper = styled.div`
 
 const WorkDescriptionTextContainer = styled.div`
   text-align: justify;
+
+  a {
+    color: inherit;
+  }
 `;
 
 export default CompanyModalComponent;

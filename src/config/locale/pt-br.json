@@ -47,7 +47,7 @@
           "function": "Desenvolvedor Front-End Pleno",
           "modal": {
             "text": {
-              "workDescription": "<p>Eu continuei ajudando na manutenção do Website da TIM Brasil. Porém, fazendo parte do projeto para adicionar responsividade ao site.</p><p>Também participei da implementação de páginas com interatividade do usuário utilizando Vue.js.</p>",
+              "workDescription": "<p>Eu continuei ajudando na manutenção do <a href='https://tim.com.br/' target='_blank'>Website da TIM Brasil</a>, porém, fazendo parte do projeto para adicionar responsividade ao site.</p><p>Também participei da implementação de páginas com interatividade do usuário utilizando Vue.js.</p>",
               "technicalSkills": "HTML5, CSS, jQuery, JavaScript, Vue.js, Git, Gulp, SCSS, Responsive Web Design"
             }
           }
@@ -58,7 +58,7 @@
           "function": "Desenvolvedor Front-End Junior",
           "modal": {
             "text": {
-              "workDescription": "<p>Durante o expediente, eu ajudava na manutenção do Website da TIM Brasil. Realizando alterações no site de acordo com a demanda do cliente, além de criar novas páginas quando houvesse solicitação.</p>",
+              "workDescription": "<p>Durante o expediente eu ajudava na manutenção do <a href='https://tim.com.br/' target='_blank'>Website da TIM Brasil</a>. Realizando alterações no site de acordo com a demanda do cliente, além de criar novas páginas quando houvesse solicitação.</p>",
               "technicalSkills": "HTML5, CSS, jQuery, JavaScript"
             }
           }

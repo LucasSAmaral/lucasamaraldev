@@ -3,6 +3,12 @@
     "linkedInProfileUrl": "https://www.linkedin.com/in/lucas-amaral-193a459b/",
     "instagramProfileUrl": "https://www.instagram.com/lucass.amaral/",
     "workExperiencePage": {
+      "companiesUrls": {
+        "company1": "https://www.americanas.com.br/",
+        "company2": "https://www.mjvinnovation.com/",
+        "company3": "https://www.grito.cc/",
+        "company4": "https://amo.ag/"
+      },
       "desktop": {
         "left": [
           { "option": "company1", "left": true },
