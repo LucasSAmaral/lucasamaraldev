@@ -1,7 +1,7 @@
 import InfoCardComponent from '@/app/components/InfoCard.component';
 import styled from 'styled-components';
 import { Column, Wrapper } from '@/app/styles/styles';
-import DeskCardComponent from './Desk-Card.component';
+import DeskCardComponent from './DeskCard.component';
 
 const DeskWorkExperience = () => {
   return (
