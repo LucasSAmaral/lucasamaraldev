@@ -1,12 +1,7 @@
-"use client";
-import React, { createContext, useState } from "react";
+'use client';
+import React, { createContext, useState } from 'react';
 
-export type ActualRoute =
-  | "/"
-  | "/about-me"
-  | "/technical-skills"
-  | "/work-experience"
-  | "/contact";
+export type ActualRoute = '/' | '/about-me' | '/work-experience' | '/contact';
 
 export type MenuState = {
   actualRouteState: ActualRoute;
@@ -18,7 +13,7 @@ type MenuContext = {
 };
 
 const initialState: MenuState = {
-  actualRouteState: "/",
+  actualRouteState: '/',
 };
 
 export const MenuContext = createContext<MenuContext>({
@@ -26,11 +21,11 @@ export const MenuContext = createContext<MenuContext>({
   updateMenuState: () => {},
 });
 
-MenuContext.displayName = "MenuContext";
+MenuContext.displayName = 'MenuContext';
 
 export const MenuProvider = ({ children }: { children: React.ReactNode }) => {
   const [menuState, updateMenuState] = useState<MenuState>({
-    actualRouteState: "/",
+    actualRouteState: '/',
   });
 
   return (

@@ -12,25 +12,56 @@
         "paragraph3": "Me formei em Sistemas de Informação em 2014 e trabalho como desenvolvedor front-end desde 2015."
       },
       "workExperience": {
+        "modalCommonTitle": {
+          "companyName": "Nome da empresa: ",
+          "periodWorked": "Período trabalhado: ",
+          "function": "Função exercida: ",
+          "workDescription": "Descrição do trabalho: ",
+          "technicalSkills": "Habilidades técnicas: "
+        },
         "company1": {
           "companyName": "Americanas S.A.",
-          "periodWorked": "Abril de 2019 - Agora",
-          "function": "Desenvolvedor Front-End"
+          "periodWorked": "Abril de 2019 - Atualmente",
+          "function": "Desenvolvedor Front-End Pleno",
+          "modal": {
+            "text": {
+              "workDescription": "<p>Ajudo na manutenção e desenvolvimento das aplicações do fluxo de pagamento e minha conta (acompanhamento de pedidos e dados do usuário).</p> <p>Cada um desses projetos possuem uma aplicação referente ao frontend, no qual utilizamos react, typescript, styled-components e cypress, e uma aplicação backend (BFF - backend - for - frontend) em que utilizamos nestjs e typescript para a aplicação do pagamento com orientação a objetos e fastify com programação funcional e typescript para a aplicação do minha conta.</p> <p>Há também uma aplicação legada na qual utilizamos nextjs para o frontend e expressJs para o BFF.</p>",
+              "technicalSkills": "React, Typescript, NestJS, NextJS, Git, HTML5, Styled-Components, Cypress, Express.js, Responsive Web Design"
+            }
+          }
         },
         "company2": {
           "companyName": "MJV Technology & Innovation",
           "periodWorked": "Dezembro de 2018 - Abril de 2019",
-          "function": "Desenvolvedor Front-End"
+          "function": "Desenvolvedor Front-End",
+          "modal": {
+            "text": {
+              "workDescription": "<p>Eu utilizava css para realizar alterações visuais numa aplicação interna do banco Bradesco.</p>",
+              "technicalSkills": "React, Git, HTML5, CSS, SCSS"
+            }
+          }
         },
         "company3": {
           "companyName": "GRITO.cc",
           "periodWorked": "Novembro de 2016 - Novembro de 2018",
-          "function": "Desenvolvedor Front-End"
+          "function": "Desenvolvedor Front-End Pleno",
+          "modal": {
+            "text": {
+              "workDescription": "<p>Eu continuei ajudando na manutenção do <a href='https://tim.com.br/' target='_blank'>Website da TIM Brasil</a>, porém, fazendo parte do projeto para adicionar responsividade ao site.</p><p>Também participei da implementação de páginas com interatividade do usuário utilizando Vue.js.</p>",
+              "technicalSkills": "HTML5, CSS, jQuery, JavaScript, Vue.js, Git, Gulp, SCSS, Responsive Web Design"
+            }
+          }
         },
         "company4": {
           "companyName": "Agência Amo",
           "periodWorked": "Janeiro de 2015 - Outubro de 2016",
-          "function": "Desenvolvedor Front-End"
+          "function": "Desenvolvedor Front-End Junior",
+          "modal": {
+            "text": {
+              "workDescription": "<p>Durante o expediente eu ajudava na manutenção do <a href='https://tim.com.br/' target='_blank'>Website da TIM Brasil</a>. Realizando alterações no site de acordo com a demanda do cliente, além de criar novas páginas quando houvesse solicitação.</p>",
+              "technicalSkills": "HTML5, CSS, jQuery, JavaScript"
+            }
+          }
         }
       },
       "footer": {

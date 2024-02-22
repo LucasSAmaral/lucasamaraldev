@@ -1,6 +1,32 @@
 {
   "appConfig": {
     "linkedInProfileUrl": "https://www.linkedin.com/in/lucas-amaral-193a459b/",
-    "instagramProfileUrl": "https://www.instagram.com/lucass.amaral/"
+    "instagramProfileUrl": "https://www.instagram.com/lucass.amaral/",
+    "workExperiencePage": {
+      "companiesUrls": {
+        "company1": "https://www.americanas.com.br/",
+        "company2": "https://www.mjvinnovation.com/",
+        "company3": "https://www.grito.cc/",
+        "company4": "https://amo.ag/"
+      },
+      "desktop": {
+        "left": [
+          { "option": "company1", "left": true },
+          { "option": "company3", "left": true }
+        ],
+        "right": [
+          { "option": "company2", "right": true },
+          { "option": "company4", "right": true }
+        ]
+      },
+      "mobile": {
+        "companies": [
+          { "option": "company1" },
+          { "option": "company2" },
+          { "option": "company3" },
+          { "option": "company4" }
+        ]
+      }
+    }
   }
 }
