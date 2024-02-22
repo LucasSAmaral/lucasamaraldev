@@ -1,7 +1,8 @@
 import { useModal } from '@/app/components/modal/Modal.context';
 import config from '../../../../generated-config.json';
 import { InfoCardDesk } from './Desk.component';
-import { Option } from '../page';
+import { CompanyOption } from '../page';
+import CompanyModalComponent from './CompanyModal.component';
 
 const {
   locale,
@@ -19,20 +20,17 @@ const DeskCardComponent: React.FC<{ cardPosition: 'left' | 'right' }> = ({ cardP
       {desktop[cardPosition].map(company => {
         const { option, ...cardPositionObj } = company;
 
+        const companyOption = option as CompanyOption;
+
         return (
           <InfoCardDesk
+            key={`desk-${companyOption}`}
             {...cardPositionObj}
-            onClick={() =>
-              openModal(
-                <>
-                  <h1>Americanas S.A.</h1>
-                </>,
-              )
-            }
+            onClick={() => openModal(<CompanyModalComponent companyOption={companyOption} />)}
           >
-            <p>{workExperienceLocale[`${option as Option}`].periodWorked}</p>
-            <h3>{workExperienceLocale[`${option as Option}`].companyName}</h3>
-            <p>{workExperienceLocale[`${option as Option}`].function}</p>
+            <p>{workExperienceLocale[companyOption].periodWorked}</p>
+            <h3>{workExperienceLocale[companyOption].companyName}</h3>
+            <p>{workExperienceLocale[companyOption].function}</p>
           </InfoCardDesk>
         );
       })}

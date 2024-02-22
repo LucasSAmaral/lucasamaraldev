@@ -1,8 +1,9 @@
 import { useModal } from '@/app/components/modal/Modal.context';
 import config from '../../../../generated-config.json';
-import { Option } from '../page';
+import { CompanyOption } from '../page';
 import styled from 'styled-components';
-import InfoCardComponent from '@/app/components/Info-Card.component';
+import InfoCardComponent from '@/app/components/InfoCard.component';
+import CompanyModalComponent from './CompanyModal.component';
 
 const {
   locale,
@@ -20,19 +21,16 @@ const MobileCardComponent = () => {
       {mobile.companies.map(company => {
         const { option } = company;
 
+        const companyOption = option as CompanyOption;
+
         return (
           <InfoCardMobile
-            onClick={() =>
-              openModal(
-                <>
-                  <h1>Americanas S.A.</h1>
-                </>,
-              )
-            }
+            key={`mobile-${companyOption}`}
+            onClick={() => openModal(<CompanyModalComponent companyOption={companyOption} />)}
           >
-            <p>{workExperienceLocale[`${option as Option}`].periodWorked}</p>
-            <h3>{workExperienceLocale[`${option as Option}`].companyName}</h3>
-            <p>{workExperienceLocale[`${option as Option}`].function}</p>
+            <p>{workExperienceLocale[companyOption].periodWorked}</p>
+            <h3>{workExperienceLocale[companyOption].companyName}</h3>
+            <p>{workExperienceLocale[companyOption].function}</p>
           </InfoCardMobile>
         );
       })}

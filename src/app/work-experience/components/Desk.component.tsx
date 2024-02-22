@@ -1,9 +1,9 @@
-import InfoCardComponent from '@/app/components/Info-Card.component';
+import InfoCardComponent from '@/app/components/InfoCard.component';
 import styled from 'styled-components';
 import { Column, Wrapper } from '@/app/styles/styles';
 import DeskCardComponent from './Desk-Card.component';
 
-const DeskWorkExperience: React.FC<{}> = () => {
+const DeskWorkExperience = () => {
   return (
     <DeskWrapper>
       <DeskColumn>

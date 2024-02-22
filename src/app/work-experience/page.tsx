@@ -2,7 +2,7 @@
 import DeskWorkExperience from './components/Desk.component';
 import MobileWorkExperience from './components/Mobile.component';
 
-export type Option = 'company1' | 'company2' | 'company3' | 'company4';
+export type CompanyOption = 'company1' | 'company2' | 'company3' | 'company4';
 
 const WorkExperience = () => {
   return (
