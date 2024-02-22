@@ -1,5 +1,13 @@
 {
   "locale": {
-    "en-us": {}
+    "en-us": {
+      "footer": {
+        "socialNetworks": {
+          "text": "Social Networks:",
+          "linkedIn": { "alt": "LinkedIn's Logo", "title": "Find me on LinkedIn" },
+          "instagram": { "alt": "Instagram's Logo", "title": "Follow me on Instagram" }
+        }
+      }
+    }
   }
 }
