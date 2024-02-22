@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Column, Wrapper } from '@/app/styles/styles';
-import MobileCardComponent from './Mobile-Card.component';
+import MobileCardComponent from './MobileCard.component';
 
 const MobileWorkExperience = () => {
   return (

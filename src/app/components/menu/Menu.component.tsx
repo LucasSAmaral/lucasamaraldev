@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { TransitionStateType } from '../../template';
-import MenuOption from './Menu-Option.component';
+import MenuOption from './MenuOption.component';
 import { ActualRoute, MenuContext } from './Menu.context';
 import config from '../../../../generated-config.json';
-import MenuMobileToggle from './Menu-Mobile-Toggle.component';
+import MenuMobileToggle from './MenuMobileToggle.component';
 
 type MenuComponentProps = {
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
