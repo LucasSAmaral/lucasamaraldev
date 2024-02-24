@@ -26,7 +26,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
     - name: Push Docker image
-      run: docker push lucassamaral/lucasamaraldev:latest
+      run: docker push docker.io/library/lucasamaraldev:latest
 
   deploy:
     needs: build
