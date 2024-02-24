@@ -7,13 +7,15 @@
     "config": "ts-node src/config/build-config.ts",
     "build": "npm run config && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "standard-version"
   },
   "dependencies": {
     "@vercel/speed-insights": "^1.0.8",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "standard-version": "^9.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",
