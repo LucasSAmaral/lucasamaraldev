@@ -1,6 +1,6 @@
 {
   "name": "lucasamaraldev",
-  "version": "0.1.8",
+  "version": "0.1.15",
   "private": true,
   "scripts": {
     "dev": "npm run config && next dev",
@@ -8,7 +8,7 @@
     "build": "npm run config && next build",
     "start": "next start",
     "lint": "next lint",
-    "release": "standard-version"
+    "release": "standard-version && git push --follow-tags origin main"
   },
   "dependencies": {
     "@vercel/speed-insights": "^1.0.8",
