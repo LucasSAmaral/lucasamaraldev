@@ -1,6 +1,6 @@
 {
   "name": "lucasamaraldev",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "private": true,
   "scripts": {
     "dev": "npm run config && next dev",
