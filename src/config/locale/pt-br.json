@@ -47,7 +47,7 @@
           "function": "Desenvolvedor Front-End Pleno",
           "modal": {
             "text": {
-              "workDescription": "<p>Eu continuei ajudando na manutenção do <a href='https://tim.com.br/' target='_blank'>Website da TIM Brasil</a>, porém, fazendo parte do projeto para adicionar responsividade ao site.</p><p>Também participei da implementação de páginas com interatividade do usuário utilizando Vue.js.</p>",
+              "workDescription": "<p>No final de 2016 a TIM deixou de ser cliente da agência Amo e passou a ser cliente da agência Grito. Com isso, todos os desenvolvedores que estavam envolvidos com a conta da TIM foram transferidos de uma agência para a outra. Então eu continuei ajudando na manutenção do <a href='https://tim.com.br/' target='_blank'>Website da TIM Brasil</a> fazendo parte do projeto para adicionar responsividade ao site.</p><p>Também participei da implementação de páginas com interatividade do usuário utilizando Vue.js.</p>",
               "technicalSkills": "HTML5, CSS, jQuery, JavaScript, Vue.js, Git, Gulp, SCSS, Responsive Web Design"
             }
           }
