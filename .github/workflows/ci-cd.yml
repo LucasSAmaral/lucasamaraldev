@@ -1,7 +1,4 @@
 name: CI/CD Pipeline
-env:
-  VERCEL_ORG_ID: ${{secrets.VERCEL_ORG_ID}}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
@@ -26,7 +23,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Push Docker image
-        run: docker tag lucasamaraldev lucassamaral/lucasamaraldev:${{github.sha}} && docker push lucassamaral/lucasamaraldev:${{github.sha}}
+        run: docker tag lucasamaraldev lucassamaral/lucasamaraldev:${{github.ref}} && docker push lucassamaral/lucasamaraldev:${{github.ref}}
 
   Deploy-Production:
     needs: Docker-Image
@@ -43,15 +40,4 @@ jobs:
           host: ${{secrets.EC2_HOST}}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
-          script: docker pull lucassamaral/lucasamaraldev:${{github.sha}} && docker stop lucasamaraldev && docker rm lucasamaraldev && docker run -d -p 80:3000 --name lucasamaraldev lucassamaral/lucasamaraldev:${{github.sha}}
-
-    # steps:
-    #   - uses: actions/checkout@v3
-    #   - name: Install Vercel CLI
-    #     run: npm install --global vercel@latest
-    #   - name: Pull Vercel Environment Information
-    #     run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-    #   - name: Build Project Artifacts
-    #     run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-    #   - name: Deploy Project Artifacts to Vercel
-    #     run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+          script: docker pull lucassamaral/lucasamaraldev:${{github.ref}} && docker stop lucasamaraldev && docker rm lucasamaraldev && docker run -d -p 80:3000 --name lucasamaraldev lucassamaral/lucasamaraldev:${{github.ref}}
