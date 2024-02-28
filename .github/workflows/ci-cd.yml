@@ -28,7 +28,7 @@ jobs:
   Deploy-Production:
     needs: Docker-Image
     runs-on: ubuntu-latest
-    environment: production
+    environment: Production
 
     steps:
       - name: Checkout Repository
