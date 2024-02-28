@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Push Docker image
-        run: docker tag lucasamaraldev lucassamaral/lucasamaraldev:${{github.ref}} && docker push lucassamaral/lucasamaraldev:${{github.ref}}
+        run: docker tag lucasamaraldev lucassamaral/lucasamaraldev:${{github.ref_name}} && docker push lucassamaral/lucasamaraldev:${{github.ref_name}}
 
   Deploy-Production:
     needs: Docker-Image
@@ -40,4 +40,4 @@ jobs:
           host: ${{secrets.EC2_HOST}}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
-          script: docker pull lucassamaral/lucasamaraldev:${{github.ref}} && docker stop lucasamaraldev && docker rm lucasamaraldev && docker run -d -p 80:3000 --name lucasamaraldev lucassamaral/lucasamaraldev:${{github.ref}}
+          script: docker pull lucassamaral/lucasamaraldev:${{github.ref_name}} && docker stop lucasamaraldev && docker rm lucasamaraldev && docker run -d -p 80:3000 --name lucasamaraldev lucassamaral/lucasamaraldev:${{github.ref_name}}
