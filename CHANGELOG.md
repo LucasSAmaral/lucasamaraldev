@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.16](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.15...v0.1.16) (2024-02-28)
+
 ### [0.1.15](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.14...v0.1.15) (2024-02-26)
 
 ### [0.1.14](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.13...v0.1.14) (2024-02-26)
