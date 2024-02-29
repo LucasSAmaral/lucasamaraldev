@@ -6,6 +6,10 @@ const buildConfigObject = async () => {
 
   const englishLocale = JSON.parse(await fs.readFile('src/config/locale/en-us.json', 'utf8'));
 
+  const commonLocale = JSON.parse(
+    await fs.readFile('src/config/locale/common-locale.json', 'utf8'),
+  );
+
   const menuConfig = JSON.parse(await fs.readFile('src/config/menu-config.json', 'utf8'));
 
   const appConfig = JSON.parse(await fs.readFile('src/config/app-config.json', 'utf8'));
@@ -13,6 +17,7 @@ const buildConfigObject = async () => {
   const configAndLocaleMerged = mergeOptions(
     menuConfig,
     appConfig,
+    commonLocale,
     portugueseLocale,
     englishLocale,
   );

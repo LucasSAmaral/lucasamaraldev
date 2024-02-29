@@ -1,0 +1,36 @@
+{
+  "locale": {
+    "commonLocale": {
+      "workExperience": {
+        "company1": {
+          "modal": {
+            "text": {
+              "technicalSkills": "React, Typescript, NestJS, NextJS, Git, HTML5, Styled-Components, Cypress, Express.js, Responsive Web Design"
+            }
+          }
+        },
+        "company2": {
+          "modal": {
+            "text": {
+              "technicalSkills": "React, Git, HTML5, CSS, SCSS"
+            }
+          }
+        },
+        "company3": {
+          "modal": {
+            "text": {
+              "technicalSkills": "HTML5, CSS, jQuery, JavaScript, Vue.js, Git, Gulp, SCSS, Responsive Web Design"
+            }
+          }
+        },
+        "company4": {
+          "modal": {
+            "text": {
+              "technicalSkills": "HTML5, CSS, jQuery, JavaScript"
+            }
+          }
+        }
+      }
+    }
+  }
+}

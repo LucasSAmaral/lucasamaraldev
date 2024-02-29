@@ -25,8 +25,7 @@
           "function": "Mid-level Front-End Developer",
           "modal": {
             "text": {
-              "workDescription": "<p>I help with the maintenance and development of the applications of the payment and my account (order tracking and user data) fluxes.</p> <p>Each of these projects has a front-end application, which we use react, typescript, styled-components and cypress. And a backend application (BFF - back-end - for - front-end) which we use nestjs and typescript for the payment application and fastify with functional programming and typescript for my account application.</p> <p>We also have a legacy project using nextjs for the front-end and expressJs for the BFF.</p>",
-              "technicalSkills": "React, Typescript, NestJS, NextJS, Git, HTML5, Styled-Components, Cypress, Express.js, Responsive Web Design"
+              "workDescription": "<p>I help with the maintenance and development of the applications of the payment and my account (order tracking and user data) fluxes.</p> <p>Each of these projects has a front-end application, which we use react, typescript, styled-components and cypress. And a backend application (BFF - back-end - for - front-end) which we use nestjs and typescript for the payment application and fastify with functional programming and typescript for my account application.</p> <p>We also have a legacy project using nextjs for the front-end and expressJs for the BFF.</p>"
             }
           }
         },
@@ -36,8 +35,7 @@
           "function": "Front-End Developer",
           "modal": {
             "text": {
-              "workDescription": "<p>I used css to make visual updates on an internal application for Bradesco Bank.</p>",
-              "technicalSkills": "React, Git, HTML5, CSS, SCSS"
+              "workDescription": "<p>I used css to make visual updates on an internal application for Bradesco Bank.</p>"
             }
           }
         },
@@ -47,8 +45,7 @@
           "function": "Mid-level Front-End Developer",
           "modal": {
             "text": {
-              "workDescription": "<p>At the end of 2016, the company TIM stopped being a client of Amo agency and started a new contract with Grito agency. Due to this fact, all developers involved with the TIM account were transferred from one agency to another. So I continued helping with the maintenance of <a href='https://tim.com.br/' target='_blank'>TIM Brasil's website</a> being part of a project to add responsivity to the site.</p><p>I also was part of the implementation of pages with user interactivity using Vue.js.</p>",
-              "technicalSkills": "HTML5, CSS, jQuery, JavaScript, Vue.js, Git, Gulp, SCSS, Responsive Web Design"
+              "workDescription": "<p>At the end of 2016, the company TIM stopped being a client of Amo agency and started a new contract with Grito agency. Due to this fact, all developers involved with the TIM account were transferred from one agency to another. So I continued helping with the maintenance of <a href='https://tim.com.br/' target='_blank'>TIM Brasil's website</a> being part of a project to add responsivity to the site.</p><p>I also was part of the implementation of pages with user interactivity using Vue.js.</p>"
             }
           }
         },
@@ -58,8 +55,7 @@
           "function": "Junior Front-End Developer",
           "modal": {
             "text": {
-              "workDescription": "<p>I used to help with the maintenance of <a href='https://tim.com.br/' target='_blank'>TIM Brasil's website</a>. Making updates according to the client's demand and creating new pages when it was needed.</p>",
-              "technicalSkills": "HTML5, CSS, jQuery, JavaScript"
+              "workDescription": "<p>I used to help with the maintenance of <a href='https://tim.com.br/' target='_blank'>TIM Brasil's website</a>. Making updates according to the client's demand and creating new pages when it was needed.</p>"
             }
           }
         }

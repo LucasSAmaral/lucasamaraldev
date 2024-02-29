@@ -3,7 +3,10 @@ import { CompanyOption } from '../page';
 import config from '../../../../generated-config.json';
 
 const {
-  locale,
+  locale: {
+    commonLocale: { workExperience: commonWorkExperienceLocale },
+    ...locale
+  },
   appConfig: {
     workExperiencePage: { companiesUrls },
   },
@@ -44,7 +47,7 @@ const CompanyModalComponent: React.FC<{ companyOption: CompanyOption }> = ({ com
 
       <p>
         <strong>{workExperienceLocale.modalCommonTitle.technicalSkills}</strong>{' '}
-        {workExperienceLocale[companyOption].modal.text.technicalSkills}
+        {commonWorkExperienceLocale[companyOption].modal.text.technicalSkills}
       </p>
     </CompanyModalWrapper>
   );
