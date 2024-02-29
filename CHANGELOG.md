@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.27](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.26...v0.1.27) (2024-02-29)
+
+
+### Features
+
+* cria locale em inglês ([d775f32](https://github.com/LucasSAmaral/lucasamaraldev/commit/d775f32e3dcd0aa62f7477e48a9a3436fdcc9e70))
+
 ### [0.1.26](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.25...v0.1.26) (2024-02-28)
 
 ### [0.1.25](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.24...v0.1.25) (2024-02-28)
