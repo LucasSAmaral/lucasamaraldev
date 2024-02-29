@@ -31,7 +31,6 @@ jobs:
   Deploy-Production:
     needs: Docker-Image
     runs-on: ubuntu-latest
-    environment: Production
 
     steps:
       - uses: actions/checkout@v3
