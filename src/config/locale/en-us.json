@@ -1,6 +1,69 @@
 {
   "locale": {
     "en-us": {
+      "home": {
+        "name": "Lucas Amaral",
+        "profission": "Front-End Developer",
+        "alt": "My selfie at the bottom of Eiffel Tower"
+      },
+      "aboutMe": {
+        "paragraph1": "My name is Lucas Amaral. I am 32 years old. I live in Rio de Janeiro and I am a front-end developer.",
+        "paragraph2": "I like to talk about pop culture, more specifically about movies. I like to watch movies and tv series, I like to play video games and read books and comic books on my free time.",
+        "paragraph3": "I graduated in information systems in 2014 and I work as a front-end developer since 2015."
+      },
+      "workExperience": {
+        "modalCommonTitle": {
+          "companyName": "Company's name: ",
+          "periodWorked": "Worked period: ",
+          "function": "Function performed: ",
+          "workDescription": "Work description: ",
+          "technicalSkills": "Technical skills: "
+        },
+        "company1": {
+          "companyName": "Americanas S.A.",
+          "periodWorked": "April 2019 - Nowadays",
+          "function": "Mid-level Front-End Developer",
+          "modal": {
+            "text": {
+              "workDescription": "<p>I help with the maintenance and development of the applications of the payment and my account (order tracking and user data) fluxes.</p> <p>Each of these projects has a front-end application, which we use react, typescript, styled-components and cypress. And a backend application (BFF - back-end - for - front-end) which we use nestjs and typescript for the payment application and fastify with functional programming and typescript for my account application.</p> <p>We also have a legacy project using nextjs for the front-end and expressJs for the BFF.</p>",
+              "technicalSkills": "React, Typescript, NestJS, NextJS, Git, HTML5, Styled-Components, Cypress, Express.js, Responsive Web Design"
+            }
+          }
+        },
+        "company2": {
+          "companyName": "MJV Technology & Innovation",
+          "periodWorked": "December 2018 - April 2019",
+          "function": "Front-End Developer",
+          "modal": {
+            "text": {
+              "workDescription": "<p>I used css to make visual updates on an internal application for Bradesco Bank.</p>",
+              "technicalSkills": "React, Git, HTML5, CSS, SCSS"
+            }
+          }
+        },
+        "company3": {
+          "companyName": "GRITO.cc",
+          "periodWorked": "November 2016 - November 2018",
+          "function": "Mid-level Front-End Developer",
+          "modal": {
+            "text": {
+              "workDescription": "<p>At the end of 2016, the company TIM stopped being a client of Amo agency and started a new contract with Grito agency. Due to this fact, all developers involved with the TIM account were transferred from one agency to another. So I continued helping with the maintenance of <a href='https://tim.com.br/' target='_blank'>TIM Brasil's website</a> being part of a project to add responsivity to the site.</p><p>I also was part of the implementation of pages with user interactivity using Vue.js.</p>",
+              "technicalSkills": "HTML5, CSS, jQuery, JavaScript, Vue.js, Git, Gulp, SCSS, Responsive Web Design"
+            }
+          }
+        },
+        "company4": {
+          "companyName": "Agência Amo",
+          "periodWorked": "January 2015 - October 2016",
+          "function": "Junior Front-End Developer",
+          "modal": {
+            "text": {
+              "workDescription": "<p>I used to help with the maintenance of <a href='https://tim.com.br/' target='_blank'>TIM Brasil's website</a>. Making updates according to the client's demand and creating new pages when it was needed.</p>",
+              "technicalSkills": "HTML5, CSS, jQuery, JavaScript"
+            }
+          }
+        }
+      },
       "footer": {
         "socialNetworks": {
           "text": "Social Networks:",
