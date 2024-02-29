@@ -1,4 +1,7 @@
 name: CI/CD Pipeline
+env:
+  VERCEL_ORG_ID: ${{secrets.VERCEL_ORG_ID}}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
@@ -31,13 +34,25 @@ jobs:
     environment: Production
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: SSH into EC2 and Pull Docker Image
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.EC2_HOST}}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
-          script: docker pull lucassamaral/lucasamaraldev:${{github.ref_name}} && docker stop lucasamaraldev && docker rm lucasamaraldev && docker run -d -p 80:3000 --name lucasamaraldev lucassamaral/lucasamaraldev:${{github.ref_name}}
+    # Caso algum dia seja viável colocar no AWS EC2
+    # steps:
+    #   - name: Checkout Repository
+    #     uses: actions/checkout@v3
+
+    #   - name: SSH into EC2 and Pull Docker Image
+    #     uses: appleboy/ssh-action@master
+    #     with:
+    #       host: ${{secrets.EC2_HOST}}
+    #       username: ${{ secrets.EC2_USERNAME }}
+    #       key: ${{ secrets.EC2_PRIVATE_KEY }}
+    #       script: docker pull lucassamaral/lucasamaraldev:${{github.ref_name}} && docker stop lucasamaraldev && docker rm lucasamaraldev && docker run -d -p 80:3000 --name lucasamaraldev lucassamaral/lucasamaraldev:${{github.ref_name}}
