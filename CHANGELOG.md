@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.33](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.32...v0.1.33) (2024-03-01)
+
+
+### Features
+
+* adiciona github às rede sociais ([33f306f](https://github.com/LucasSAmaral/lucasamaraldev/commit/33f306f830e52900c3aabb93002269a99625fc0a))
+
 ### [0.1.32](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.31...v0.1.32) (2024-02-29)
 
 ### [0.1.31](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.30...v0.1.31) (2024-02-29)
