@@ -2,9 +2,13 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import LinkeInLogo from '../../assets/linkedin_logo_icon.svg';
 import InstagramLogo from '../../assets/instagram_logo_icon.svg';
+import GitHubLogo from '../../assets/github_logo_icon.svg';
 import config from '../../../generated-config.json';
 
-const { appConfig, locale } = config;
+const {
+  appConfig: { linkedInProfileUrl, gitHubProfileUrl, instagramProfileUrl },
+  locale,
+} = config;
 
 const FooterComponent: React.FC = () => {
   const footerLocale = locale['pt-br'].footer;
@@ -14,13 +18,14 @@ const FooterComponent: React.FC = () => {
       text: socialNetworksText,
       instagram: { alt: instagramAlt, title: instagramTitle },
       linkedIn: { alt: linkedInAlt, title: linkedInTitle },
+      gitHub: { alt: gitHubAlt, title: gitHubTitle },
     },
   } = footerLocale;
 
   return (
     <Footer>
       {socialNetworksText}{' '}
-      <a href={appConfig.linkedInProfileUrl} target="_blank">
+      <a href={linkedInProfileUrl} target="_blank">
         <Image
           src={LinkeInLogo}
           priority={true}
@@ -29,7 +34,10 @@ const FooterComponent: React.FC = () => {
           title={linkedInTitle}
         />{' '}
       </a>
-      <a href={appConfig.instagramProfileUrl} target="_blank">
+      <a href={gitHubProfileUrl} target="_blank">
+        <Image src={GitHubLogo} priority={true} width={25} alt={gitHubAlt} title={gitHubTitle} />{' '}
+      </a>
+      <a href={instagramProfileUrl} target="_blank">
         <Image
           src={InstagramLogo}
           priority={true}
@@ -53,6 +61,12 @@ const Footer = styled.footer`
 
   a {
     height: 25px;
+
+    img {
+      background-color: #ffffff;
+      border-radius: 50%;
+      border: 1px solid #ffffff;
+    }
   }
 `;
 

@@ -64,6 +64,7 @@
         "socialNetworks": {
           "text": "Social Networks:",
           "linkedIn": { "alt": "LinkedIn's Logo", "title": "Find me on LinkedIn" },
+          "gitHub": { "alt": "Logo do GitHub", "title": "Follow me on GitHub" },
           "instagram": { "alt": "Instagram's Logo", "title": "Follow me on Instagram" }
         }
       }
