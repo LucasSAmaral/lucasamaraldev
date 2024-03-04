@@ -1,11 +1,12 @@
-import { TransitionStateType } from "@/app/template";
-import { Inter } from "next/font/google";
-import styled from "styled-components";
-import { usePathname } from "next/navigation";
-import { ActualRoute, MenuState } from "./Menu.context";
-import { useEffect } from "react";
+import { TransitionStateType } from '@/app/template';
+import { Inter } from 'next/font/google';
+import styled from 'styled-components';
+import { usePathname } from 'next/navigation';
+import { ActualRoute, MenuState } from './Menu.context';
+import { useEffect } from 'react';
+import { MenuMobileStatus } from './Menu.component';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 const exitingObject = { exiting: true };
 
@@ -14,6 +15,7 @@ type MenuOptionComponentProps = {
   nextRoute: string;
   updateMenuState: (value: React.SetStateAction<MenuState>) => void;
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
+  updateMenuMobileStatus: React.Dispatch<React.SetStateAction<MenuMobileStatus>>;
 };
 
 const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
@@ -21,6 +23,7 @@ const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
   nextRoute,
   updateMenuState,
   setTransitionState,
+  updateMenuMobileStatus,
 }) => {
   const actualRoute = usePathname();
 
@@ -35,6 +38,9 @@ const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
       onClick={() => {
         if (actualRoute != nextRoute) {
           setTransitionState({ ...exitingObject, nextRoute });
+        }
+        if (window.innerWidth <= 672) {
+          updateMenuMobileStatus('CLOSING');
         }
       }}
     >

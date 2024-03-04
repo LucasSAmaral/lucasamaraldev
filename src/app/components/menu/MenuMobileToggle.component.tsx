@@ -2,6 +2,9 @@ import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { MenuMobileStatus } from './Menu.component';
 
+const shouldCheckMenuMobile = (menuMobileStatus: MenuMobileStatus) =>
+  menuMobileStatus === 'OPENED' || menuMobileStatus === 'OPENING';
+
 const MenuMobileToggle: React.FC<{
   menuMobileStatus: MenuMobileStatus;
   updateMenuMobileStatus: Dispatch<SetStateAction<MenuMobileStatus>>;
@@ -11,6 +14,7 @@ const MenuMobileToggle: React.FC<{
       <MenuMobileCheckbox
         type="checkbox"
         id="menu-mobile"
+        checked={shouldCheckMenuMobile(menuMobileStatus)}
         onClick={() => {
           switch (menuMobileStatus) {
             case 'CLOSED':

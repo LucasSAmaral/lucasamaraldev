@@ -42,9 +42,10 @@ const MenuComponent: React.FC<MenuComponentProps> = ({ setTransitionState }) => 
         {config.menu.menuOptionList.map((menuOption, index) => (
           <MenuOption
             key={`${menuOption.optionName['pt-br']}-${index}`}
+            nextRoute={menuOption.nextRoute}
             updateMenuState={updateMenuState}
             setTransitionState={setTransitionState}
-            nextRoute={menuOption.nextRoute}
+            updateMenuMobileStatus={updateMenuMobileStatus}
           >
             {menuOption.optionName['pt-br']}
           </MenuOption>
