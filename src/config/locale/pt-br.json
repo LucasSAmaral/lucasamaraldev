@@ -63,9 +63,23 @@
       "footer": {
         "socialNetworks": {
           "text": "Redes sociais:",
-          "linkedIn": { "alt": "Logo do LinkedIn", "title": "Me encontre no LinkedIn" },
-          "gitHub": { "alt": "Logo do GitHub", "title": "Me siga no GitHub" },
-          "instagram": { "alt": "Logo do Instagram", "title": "Me siga no Instagram" }
+          "list": [
+            {
+              "socialNetworkName": "LinkedIn",
+              "alt": "Logo do LinkedIn",
+              "title": "Me encontre no LinkedIn"
+            },
+            {
+              "socialNetworkName": "GitHub",
+              "alt": "Logo do GitHub",
+              "title": "Me siga no GitHub"
+            },
+            {
+              "socialNetworkName": "Instagram",
+              "alt": "Logo do Instagram",
+              "title": "Me siga no Instagram"
+            }
+          ]
         }
       }
     }

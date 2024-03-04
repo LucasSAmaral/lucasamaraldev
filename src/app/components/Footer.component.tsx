@@ -5,47 +5,43 @@ import InstagramLogo from '../../assets/instagram_logo_icon.svg';
 import GitHubLogo from '../../assets/github_logo_icon.svg';
 import config from '../../../generated-config.json';
 
+type SocialNetworkName = 'LinkedIn' | 'GitHub' | 'Instagram';
+
 const {
   appConfig: { linkedInProfileUrl, gitHubProfileUrl, instagramProfileUrl },
   locale,
 } = config;
 
+const socialNetworkObj = {
+  LinkedIn: { logo: LinkeInLogo, url: linkedInProfileUrl },
+  GitHub: { logo: GitHubLogo, url: gitHubProfileUrl },
+  Instagram: { logo: InstagramLogo, url: instagramProfileUrl },
+};
+
 const FooterComponent: React.FC = () => {
   const footerLocale = locale['pt-br'].footer;
 
   const {
-    socialNetworks: {
-      text: socialNetworksText,
-      instagram: { alt: instagramAlt, title: instagramTitle },
-      linkedIn: { alt: linkedInAlt, title: linkedInTitle },
-      gitHub: { alt: gitHubAlt, title: gitHubTitle },
-    },
+    socialNetworks: { text: socialNetworksText, list: socialNetworksList },
   } = footerLocale;
 
   return (
     <Footer>
       {socialNetworksText}{' '}
-      <a href={linkedInProfileUrl} target="_blank">
-        <Image
-          src={LinkeInLogo}
-          priority={true}
-          width={25}
-          alt={linkedInAlt}
-          title={linkedInTitle}
-        />{' '}
-      </a>
-      <a href={gitHubProfileUrl} target="_blank">
-        <Image src={GitHubLogo} priority={true} width={25} alt={gitHubAlt} title={gitHubTitle} />{' '}
-      </a>
-      <a href={instagramProfileUrl} target="_blank">
-        <Image
-          src={InstagramLogo}
-          priority={true}
-          width={25}
-          alt={instagramAlt}
-          title={instagramTitle}
-        />
-      </a>
+      {socialNetworksList.map(socialNetwork => {
+        const socialNetworkName = socialNetwork.socialNetworkName as SocialNetworkName;
+        return (
+          <a href={socialNetworkObj[socialNetworkName].url} target="_blank">
+            <Image
+              src={socialNetworkObj[socialNetworkName].logo}
+              priority={true}
+              width={25}
+              alt={socialNetwork.alt}
+              title={socialNetwork.title}
+            />{' '}
+          </a>
+        );
+      })}
     </Footer>
   );
 };
