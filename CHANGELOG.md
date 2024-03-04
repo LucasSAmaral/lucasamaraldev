@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.35](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.34...v0.1.35) (2024-03-04)
+
+
+### Bug Fixes
+
+* adiciona key na interação dos links das redes sociais ([a0f2b1b](https://github.com/LucasSAmaral/lucasamaraldev/commit/a0f2b1b35649401bcc6c50a6c0c9a971b8139ee2))
+
 ### [0.1.34](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.33...v0.1.34) (2024-03-04)
 
 
