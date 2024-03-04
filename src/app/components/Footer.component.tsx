@@ -28,10 +28,14 @@ const FooterComponent: React.FC = () => {
   return (
     <Footer>
       {socialNetworksText}{' '}
-      {socialNetworksList.map(socialNetwork => {
+      {socialNetworksList.map((socialNetwork, index) => {
         const socialNetworkName = socialNetwork.socialNetworkName as SocialNetworkName;
         return (
-          <a href={socialNetworkObj[socialNetworkName].url} target="_blank">
+          <a
+            key={`${socialNetworkName}_${index}`}
+            href={socialNetworkObj[socialNetworkName].url}
+            target="_blank"
+          >
             <Image
               src={socialNetworkObj[socialNetworkName].logo}
               priority={true}
