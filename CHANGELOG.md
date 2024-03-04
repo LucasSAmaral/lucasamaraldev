@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.34](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.33...v0.1.34) (2024-03-04)
+
+
+### Bug Fixes
+
+* ajusta comportamento do menu mobile ([6d4deed](https://github.com/LucasSAmaral/lucasamaraldev/commit/6d4deed62f436352aac69c4e5b3d3022997fc681))
+
 ### [0.1.33](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.32...v0.1.33) (2024-03-01)
 
 
