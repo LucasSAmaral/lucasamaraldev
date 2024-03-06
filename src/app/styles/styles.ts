@@ -31,7 +31,7 @@ export const Container = styled.div`
     border-radius: 50%;
     width: 100%;
     max-width: 300px;
-    height: 300px;
+    height: auto;
     margin-bottom: 20px;
   }
 `;
