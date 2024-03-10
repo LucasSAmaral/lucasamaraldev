@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.36](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.35...v0.1.36) (2024-03-10)
+
+
+### Bug Fixes
+
+* fecha modal ao trocar de rota se o status estiver como OPENED ([7ec1bcc](https://github.com/LucasSAmaral/lucasamaraldev/commit/7ec1bcc51589e32794f9d4660c0b58f42681ca05))
+
 ### [0.1.35](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.34...v0.1.35) (2024-03-04)
 
 
