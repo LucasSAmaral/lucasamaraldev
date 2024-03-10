@@ -7,6 +7,7 @@ import { Container, Main, Section } from './styles/styles';
 import styled, { keyframes } from 'styled-components';
 import FooterComponent from './components/Footer.component';
 import { Inter } from 'next/font/google';
+import { useModal } from './components/modal/Modal.context';
 
 export type TransitionStateType = {
   exiting: boolean;
@@ -22,10 +23,17 @@ const initialTransitionState = {
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const {
+    modalState: { modalStatus },
+    closeModal,
+  } = useModal();
   const [transitionState, setTransitionState] =
     useState<TransitionStateType>(initialTransitionState);
 
   useEffect(() => {
+    if (modalStatus === 'OPENED') {
+      closeModal();
+    }
     setTransitionState({ ...transitionState, exiting: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
