@@ -7,7 +7,9 @@ import config from '../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './components/language-options/LanguageOptions.context';
 
-const { locale } = config;
+const {
+  locale: { commonLocale, ...locale },
+} = config;
 
 export default function Home() {
   const { languageOptionsState } = useContext(LanguageOptionsContext);
@@ -19,7 +21,7 @@ export default function Home() {
   return (
     <>
       <Image src={Photo} alt={homeLocale.alt} priority={true} />
-      <Title>{homeLocale.name}</Title>
+      <Title>{commonLocale.name}</Title>
       <Subtitle>{homeLocale.profission}</Subtitle>
     </>
   );
