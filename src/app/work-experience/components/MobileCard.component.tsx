@@ -4,6 +4,8 @@ import { CompanyOption } from '../page';
 import styled from 'styled-components';
 import InfoCardComponent from '@/app/components/InfoCard.component';
 import CompanyModalComponent from './CompanyModal.component';
+import { useContext } from 'react';
+import { LanguageOptionsContext } from '@/app/components/language-options/LanguageOptions.context';
 
 const {
   locale,
@@ -13,7 +15,11 @@ const {
 } = config;
 
 const MobileCardComponent = () => {
-  const workExperienceLocale = locale['pt-br'].workExperience;
+  const { languageOptionsState } = useContext(LanguageOptionsContext);
+
+  const { selectedLanguage } = languageOptionsState;
+
+  const workExperienceLocale = locale[selectedLanguage].workExperience;
 
   const { openModal } = useModal();
   return (

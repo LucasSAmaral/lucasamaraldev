@@ -5,6 +5,10 @@ import MenuOption from './MenuOption.component';
 import { ActualRoute, MenuContext } from './Menu.context';
 import config from '../../../../generated-config.json';
 import MenuMobileToggle from './MenuMobileToggle.component';
+import {
+  LanguageOptionsContext,
+  SelectedLanguage,
+} from '../language-options/LanguageOptions.context';
 
 type MenuComponentProps = {
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
@@ -13,6 +17,10 @@ type MenuComponentProps = {
 export type MenuMobileStatus = 'CLOSED' | 'CLOSING' | 'OPENED' | 'OPENING';
 
 const MenuComponent: React.FC<MenuComponentProps> = ({ setTransitionState }) => {
+  const { languageOptionsState } = useContext(LanguageOptionsContext);
+
+  const { selectedLanguage } = languageOptionsState;
+
   const {
     menuState: { actualRouteState },
     updateMenuState,
@@ -41,18 +49,18 @@ const MenuComponent: React.FC<MenuComponentProps> = ({ setTransitionState }) => 
       >
         {config.menu.menuOptionList.map((menuOption, index) => (
           <MenuOption
-            key={`${menuOption.optionName['pt-br']}-${index}`}
+            key={`${menuOption.optionName[selectedLanguage]}-${index}`}
             nextRoute={menuOption.nextRoute}
             updateMenuState={updateMenuState}
             setTransitionState={setTransitionState}
             updateMenuMobileStatus={updateMenuMobileStatus}
           >
-            {menuOption.optionName['pt-br']}
+            {menuOption.optionName[selectedLanguage]}
           </MenuOption>
         ))}
       </Menu>
-      <ActiveBarWrapper>
-        <ActiveBar $actualRoute={actualRouteState} />
+      <ActiveBarWrapper $selectedLanguage={selectedLanguage}>
+        <ActiveBar $actualRoute={actualRouteState} $selectedLanguage={selectedLanguage} />
       </ActiveBarWrapper>
     </MenuWrapper>
   );
@@ -133,10 +141,12 @@ const Menu = styled.menu.attrs<{ $menuMobileStatus: MenuMobileStatus }>(props =>
   }
 `;
 
-const ActiveBarWrapper = styled.div`
+const ActiveBarWrapper = styled.div.attrs<{ $selectedLanguage: SelectedLanguage }>(props => ({
+  $selectedLanguage: props.$selectedLanguage,
+}))`
   height: 2px;
   width: 100%;
-  max-width: 357.47px;
+  max-width: ${({ $selectedLanguage }) => ($selectedLanguage === 'pt-br' ? '357.47px' : '299.7px')};
   position: relative;
 
   @media (max-width: 672px) {
@@ -144,35 +154,65 @@ const ActiveBarWrapper = styled.div`
   }
 `;
 
-const ActiveBar = styled.div.attrs<{ $actualRoute: ActualRoute }>(props => ({
+const ActiveBar = styled.div.attrs<{
+  $actualRoute: ActualRoute;
+  $selectedLanguage: SelectedLanguage;
+}>(props => ({
   $actualRoute: props.$actualRoute,
+  $selectedLanguage: props.$selectedLanguage,
 }))`
   background-color: #fffffe;
   height: 100%;
   transition: 0.3s;
   position: absolute;
-  width: 41.47px;
+  width: ${({ $selectedLanguage }) => ($selectedLanguage === 'pt-br' ? '41.47px' : '45.48px')};
   transform: translateX(0);
-  ${({ $actualRoute }) => TransformActiveBar($actualRoute)}
+  ${({ $actualRoute, $selectedLanguage }) => TransformActiveBar($actualRoute, $selectedLanguage)}
 `;
 
-const TransformActiveBar = (actualRoute: ActualRoute) => {
+const TransformActiveBar = (actualRoute: ActualRoute, selectedLanguage: SelectedLanguage) => {
   switch (actualRoute) {
-    case '/':
+    case '/': {
+      if (selectedLanguage === 'pt-br') {
+        return css`
+          width: 41.47px;
+          transform: translateX(0);
+        `;
+      }
       return css`
-        width: 41.47px;
+        width: 45.48px;
         transform: translateX(0);
       `;
+    }
+
     case '/about-me':
+      {
+        if (selectedLanguage === 'pt-br') {
+          return css`
+            width: 82.87px;
+            transform: translateX(65px);
+          `;
+        }
+      }
       return css`
-        width: 82.87px;
-        transform: translateX(65px);
+        width: 75.17px;
+        transform: translateX(69px);
       `;
+
     case '/work-experience':
+      {
+        if (selectedLanguage === 'pt-br') {
+          return css`
+            width: 185.33px;
+            transform: translateX(173px);
+          `;
+        }
+      }
       return css`
-        width: 185.33px;
-        transform: translateX(173px);
+        width: 131px;
+        transform: translateX(168px);
       `;
+
     case '/contact':
       return css`
         width: 62.38px;
@@ -197,7 +237,7 @@ const MenuMobileAnimation = (menuMobileStatus: MenuMobileStatus) => {
       `;
     case 'CLOSED':
       return css`
-        display: NONE;
+        display: none;
       `;
   }
 };

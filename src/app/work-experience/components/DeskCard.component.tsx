@@ -3,6 +3,8 @@ import config from '../../../../generated-config.json';
 import { InfoCardDesk } from './Desk.component';
 import { CompanyOption } from '../page';
 import CompanyModalComponent from './CompanyModal.component';
+import { useContext } from 'react';
+import { LanguageOptionsContext } from '@/app/components/language-options/LanguageOptions.context';
 
 const {
   locale,
@@ -12,7 +14,11 @@ const {
 } = config;
 
 const DeskCardComponent: React.FC<{ cardPosition: 'left' | 'right' }> = ({ cardPosition }) => {
-  const workExperienceLocale = locale['pt-br'].workExperience;
+  const { languageOptionsState } = useContext(LanguageOptionsContext);
+
+  const { selectedLanguage } = languageOptionsState;
+
+  const workExperienceLocale = locale[selectedLanguage].workExperience;
 
   const { openModal } = useModal();
   return (

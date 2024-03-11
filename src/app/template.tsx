@@ -8,6 +8,7 @@ import styled, { keyframes } from 'styled-components';
 import FooterComponent from './components/Footer.component';
 import { Inter } from 'next/font/google';
 import { useModal } from './components/modal/Modal.context';
+import LanguageOptionsComponent from './components/language-options/LanguageOptions.component';
 
 export type TransitionStateType = {
   exiting: boolean;
@@ -42,7 +43,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   return (
     <Main className={inter.className}>
-      <MenuComponent setTransitionState={setTransitionState} />
+      <div>
+        <MenuComponent setTransitionState={setTransitionState} />
+        <LanguageOptionsComponent />
+      </div>
       <MainSection
         $exiting={exiting}
         onAnimationEnd={() => {

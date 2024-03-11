@@ -1,11 +1,17 @@
 'use client';
 import styled from 'styled-components';
 import config from '../../../generated-config.json';
+import { useContext } from 'react';
+import { LanguageOptionsContext } from '../components/language-options/LanguageOptions.context';
 
 const { locale } = config;
 
 const AboutMe: React.FC = () => {
-  const aboutMeLocale = locale['pt-br'].aboutMe;
+  const { languageOptionsState } = useContext(LanguageOptionsContext);
+
+  const { selectedLanguage } = languageOptionsState;
+
+  const aboutMeLocale = locale[selectedLanguage].aboutMe;
 
   return (
     <AboutMeWrapper>

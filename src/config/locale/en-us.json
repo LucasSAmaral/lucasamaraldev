@@ -2,7 +2,6 @@
   "locale": {
     "en-us": {
       "home": {
-        "name": "Lucas Amaral",
         "profission": "Front-End Developer",
         "alt": "My selfie at the bottom of Eiffel Tower"
       },
@@ -80,6 +79,14 @@
               "title": "Follow me on Instagram"
             }
           ]
+        }
+      },
+      "languageOptions": {
+        "selectLanguage": "Select a language:",
+        "brFlag": { "alt": "Brazil's flag icon", "title": "Brazil's flag" },
+        "usaFlag": {
+          "alt": "USA's flag icon",
+          "title": "USA's flag"
         }
       }
     }
