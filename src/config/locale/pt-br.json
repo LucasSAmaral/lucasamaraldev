@@ -2,7 +2,6 @@
   "locale": {
     "pt-br": {
       "home": {
-        "name": "Lucas Amaral",
         "profission": "Desenvolvedor Front-End",
         "alt": "Minha selfie no pé da torre Eiffel"
       },
@@ -80,6 +79,14 @@
               "title": "Me siga no Instagram"
             }
           ]
+        }
+      },
+      "languageOptions": {
+        "selectLanguage": "Selecione um idioma:",
+        "brFlag": { "alt": "ícone da Bandeira do Brasil", "title": "Bandeira do Brasil" },
+        "usaFlag": {
+          "alt": "ícone da Bandeira dos Estados Unidos",
+          "title": "Bandeira dos Estados Unidos"
         }
       }
     }

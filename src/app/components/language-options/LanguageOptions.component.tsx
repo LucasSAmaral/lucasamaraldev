@@ -2,17 +2,22 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import BrFlag from '../../../assets/br-flag.svg';
 import UsaFlag from '../../../assets/usa-flag.svg';
+import CONFIG from '../../../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './LanguageOptions.context';
+
+const { locale } = CONFIG;
 
 const LanguageOptionsComponent = () => {
   const { languageOptionsState, updateLanguageOptionsState } = useContext(LanguageOptionsContext);
 
   const { selectedLanguage } = languageOptionsState;
 
+  const languageOptionsLocale = locale[selectedLanguage].languageOptions;
+
   return (
     <LanguageOptionsWrapper>
-      Selecione o idioma:
+      {languageOptionsLocale.selectLanguage}
       <LanguageButton
         $shouldSelectImage={selectedLanguage === 'pt-br'}
         onClick={() => updateLanguageOptionsState({ selectedLanguage: 'pt-br' })}
@@ -20,8 +25,8 @@ const LanguageOptionsComponent = () => {
         <Image
           src={BrFlag}
           width={20}
-          alt="ícone da Bandeira do Brasil"
-          title="Bandeira do Brasil"
+          alt={languageOptionsLocale.brFlag.alt}
+          title={languageOptionsLocale.brFlag.title}
         />
       </LanguageButton>
       <LanguageButton
@@ -31,8 +36,8 @@ const LanguageOptionsComponent = () => {
         <Image
           src={UsaFlag}
           width={20}
-          alt="ícone da Bandeira dos Estados Unidos"
-          title="Bandeira dos Estados Unidos"
+          alt={languageOptionsLocale.usaFlag.alt}
+          title={languageOptionsLocale.usaFlag.title}
         />
       </LanguageButton>
     </LanguageOptionsWrapper>
