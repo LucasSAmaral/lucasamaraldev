@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.37](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.36...v0.1.37) (2024-03-11)
+
+
+### Features
+
+* cria contexto para a seleção de linguagem ([018cfea](https://github.com/LucasSAmaral/lucasamaraldev/commit/018cfea15f157986428471ddf2e73d34f37f933e))
+
 ### [0.1.36](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.35...v0.1.36) (2024-03-10)
 
 
