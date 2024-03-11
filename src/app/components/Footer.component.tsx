@@ -4,6 +4,8 @@ import LinkeInLogo from '../../assets/linkedin_logo_icon.svg';
 import InstagramLogo from '../../assets/instagram_logo_icon.svg';
 import GitHubLogo from '../../assets/github_logo_icon.svg';
 import config from '../../../generated-config.json';
+import { useContext } from 'react';
+import { LanguageOptionsContext } from './language-options/LanguageOptions.context';
 
 type SocialNetworkName = 'LinkedIn' | 'GitHub' | 'Instagram';
 
@@ -19,7 +21,11 @@ const socialNetworkObj = {
 };
 
 const FooterComponent: React.FC = () => {
-  const footerLocale = locale['pt-br'].footer;
+  const { languageOptionsState } = useContext(LanguageOptionsContext);
+
+  const { selectedLanguage } = languageOptionsState;
+
+  const footerLocale = locale[selectedLanguage].footer;
 
   const {
     socialNetworks: { text: socialNetworksText, list: socialNetworksList },

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { CompanyOption } from '../page';
 import config from '../../../../generated-config.json';
+import { useContext } from 'react';
+import { LanguageOptionsContext } from '@/app/components/language-options/LanguageOptions.context';
 
 const {
   locale: {
@@ -13,7 +15,11 @@ const {
 } = config;
 
 const CompanyModalComponent: React.FC<{ companyOption: CompanyOption }> = ({ companyOption }) => {
-  const workExperienceLocale = locale['pt-br'].workExperience;
+  const { languageOptionsState } = useContext(LanguageOptionsContext);
+
+  const { selectedLanguage } = languageOptionsState;
+
+  const workExperienceLocale = locale[selectedLanguage].workExperience;
 
   return (
     <CompanyModalWrapper>

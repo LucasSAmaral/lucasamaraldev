@@ -44,4 +44,8 @@ export const Wrapper = styled.div`
 export const Column = styled.div`
   padding: 40px 20px;
   position: relative;
+
+  @media (max-width: 864px) {
+    padding: 20px;
+  }
 `;
