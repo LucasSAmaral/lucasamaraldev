@@ -27,6 +27,9 @@ const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
 }) => {
   const actualRoute = usePathname();
 
+  const nextRouteDataCy =
+    nextRoute.split('/')[1] === '' ? 'home-option' : `${nextRoute.split('/')[1]}-option`;
+
   useEffect(() => {
     updateMenuState({ actualRouteState: actualRoute as ActualRoute });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,6 +37,7 @@ const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
 
   return (
     <MenuOption
+      data-cy={nextRouteDataCy}
       className={inter.className}
       onClick={() => {
         if (actualRoute != nextRoute) {
