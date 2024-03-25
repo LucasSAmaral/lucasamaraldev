@@ -20,9 +20,9 @@ export default function Home() {
 
   return (
     <>
-      <Image src={Photo} alt={homeLocale.alt} priority={true} />
-      <Title>{commonLocale.name}</Title>
-      <Subtitle>{homeLocale.profission}</Subtitle>
+      <Image data-cy="selfie" src={Photo} alt={homeLocale.alt} priority={true} />
+      <Title data-cy="title">{commonLocale.name}</Title>
+      <Subtitle data-cy="subtitle">{homeLocale.profission}</Subtitle>
     </>
   );
 }
