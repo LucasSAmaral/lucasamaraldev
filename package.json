@@ -6,6 +6,7 @@
     "dev": "npm run config && next dev",
     "config": "ts-node src/config/build-config.ts",
     "build": "npm run config && next build",
+    "cy:open": "cypress open",
     "start": "next start",
     "lint": "next lint",
     "release": "standard-version && git push --follow-tags origin main"
@@ -22,6 +23,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cypress": "^13.7.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "merge-options": "^3.0.4",
