@@ -30,6 +30,7 @@ const DeskCardComponent: React.FC<{ cardPosition: 'left' | 'right' }> = ({ cardP
 
         return (
           <InfoCardDesk
+            dataCy="desk-card-component"
             key={`desk-${companyOption}`}
             {...cardPositionObj}
             onClick={() => openModal(<CompanyModalComponent companyOption={companyOption} />)}

@@ -2,13 +2,14 @@ import styled, { css } from 'styled-components';
 
 const InfoCardComponent: React.FC<{
   children: React.ReactNode;
+  dataCy: string;
   onClick?: () => void;
   left?: boolean;
   right?: boolean;
   className?: string;
-}> = ({ children, left, right, onClick = () => {}, className = '' }) => {
+}> = ({ children, left, right, dataCy, onClick = () => {}, className = '' }) => {
   return (
-    <InfoCard className={className} $left={left} $right={right} onClick={onClick}>
+    <InfoCard data-cy={dataCy} className={className} $left={left} $right={right} onClick={onClick}>
       {children}
     </InfoCard>
   );
