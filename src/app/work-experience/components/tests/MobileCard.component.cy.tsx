@@ -6,7 +6,7 @@ describe('<MobileCardComponent />', () => {
   it('should render MobileCardComponent without pseudo elements', () => {
     cy.mount(<MobileCardComponent />);
 
-    cy.get('[data-cy=mobile-card-component]').then(el => {
+    cy.getDataCy('mobile-card-component').then(el => {
       const { after, before, contentValue } = getComponentPseudoValues(el);
 
       const beforeRightPropValue = before?.getPropertyValue('right');

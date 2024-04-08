@@ -6,7 +6,7 @@ describe('<DeskCardComponent />', () => {
   it('should render pseudo elements on left position', () => {
     cy.mount(<DeskCardComponent cardPosition="left" />);
 
-    cy.get('[data-cy=desk-card-component]').then(el => {
+    cy.getDataCy('desk-card-component').then(el => {
       const { after, before, contentValue } = getComponentPseudoValues(el);
 
       const beforeRightPropValue = before?.getPropertyValue('right');
@@ -22,7 +22,7 @@ describe('<DeskCardComponent />', () => {
   it('should render pseudo elements on right position', () => {
     cy.mount(<DeskCardComponent cardPosition="right" />);
 
-    cy.get('[data-cy=desk-card-component]').then(el => {
+    cy.getDataCy('desk-card-component').then(el => {
       const { after, before, contentValue } = getComponentPseudoValues(el);
 
       const beforeLeftPropValue = before?.getPropertyValue('left');
