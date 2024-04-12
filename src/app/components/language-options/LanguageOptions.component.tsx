@@ -19,6 +19,7 @@ const LanguageOptionsComponent = () => {
     <LanguageOptionsWrapper>
       {languageOptionsLocale.selectLanguage}
       <LanguageButton
+        data-cy="pt-br"
         $shouldSelectImage={selectedLanguage === 'pt-br'}
         onClick={() => updateLanguageOptionsState({ selectedLanguage: 'pt-br' })}
       >
@@ -30,6 +31,7 @@ const LanguageOptionsComponent = () => {
         />
       </LanguageButton>
       <LanguageButton
+        data-cy="en-us"
         $shouldSelectImage={selectedLanguage === 'en-us'}
         onClick={() => updateLanguageOptionsState({ selectedLanguage: 'en-us' })}
       >

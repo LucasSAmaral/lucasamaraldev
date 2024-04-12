@@ -31,6 +31,7 @@ const MobileCardComponent = () => {
 
         return (
           <InfoCardMobile
+            dataCy="mobile-card-component"
             key={`mobile-${companyOption}`}
             onClick={() => openModal(<CompanyModalComponent companyOption={companyOption} />)}
           >
