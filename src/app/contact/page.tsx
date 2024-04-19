@@ -1,10 +1,12 @@
 'use client';
 // import type { Metadata } from 'next';
 import { useMutation } from '@tanstack/react-query';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
+import styled from 'styled-components';
+import InputComponent from './components/Input.component';
 
-type FormValues = {
+export type FormValues = {
   name: string;
   email: string;
   subject: string;
@@ -23,8 +25,6 @@ const Contact: React.FC = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  console.log('errors', errors);
-
   const { mutate: sendEmail } = useMutation({
     mutationFn: async (formValues: FormValues) => {
       await axios.post('https://api.emailjs.com/api/v1.0/email/send-form', formValues);
@@ -36,45 +36,35 @@ const Contact: React.FC = () => {
     console.log('valores', formValues);
   });
   return (
-    <form onSubmit={onSubmit}>
-      <Controller
-        name="name"
-        control={control}
-        rules={{ required: 'Obrigatorio' }}
-        render={({ field: { name, onChange, onBlur, value } }) => (
-          <>
-            <input type="text" name={name} onBlur={onBlur} onChange={onChange} value={value} />
-            {errors[name] && <span>{errors[name]?.message}</span>}
-          </>
-        )}
-      />
-      <Controller
-        name="email"
-        control={control}
-        rules={{ required: true }}
-        render={({ field: { name, onChange, onBlur, value } }) => (
-          <input type="text" name={name} onBlur={onBlur} onChange={onChange} value={value} />
-        )}
-      />
-      <Controller
-        name="subject"
-        control={control}
-        rules={{ required: true }}
-        render={({ field: { name, onChange, onBlur, value } }) => (
-          <input type="text" name={name} onBlur={onBlur} onChange={onChange} value={value} />
-        )}
-      />
-      <Controller
-        name="message"
-        control={control}
-        rules={{ required: true }}
-        render={({ field: { name, onChange, onBlur, value } }) => (
-          <input type="text" name={name} onBlur={onBlur} onChange={onChange} value={value} />
-        )}
-      />
-      <button type="submit">CRICA</button>
-    </form>
+    <Form onSubmit={onSubmit}>
+      <InputComponent name="name" control={control} errors={errors} />
+      <InputComponent name="email" control={control} errors={errors} />
+      <InputComponent name="subject" control={control} errors={errors} />
+      <InputComponent name="message" control={control} errors={errors} useTextArea />
+      <Button type="submit">Enviar</Button>
+    </Form>
   );
 };
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 380px;
+  margin: 0 auto;
+  gap: 10px;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  margin-top: 30px;
+  border-radius: 4px;
+  border: 1px solid #fffffe;
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: #363b3f;
+  color: #fffffe;
+`;
 
 export default Contact;
