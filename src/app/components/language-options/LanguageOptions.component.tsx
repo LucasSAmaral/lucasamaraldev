@@ -53,6 +53,10 @@ const LanguageOptionsWrapper = styled.div`
   padding: 10px 0;
   border-top: 1px solid #fffffe;
   border-bottom: 1px solid #fffffe;
+
+  @media (max-width: 672px) {
+    align-items: center;
+  }
 `;
 
 const LanguageButton = styled.button.attrs<{ $shouldSelectImage: boolean }>(props => ({
@@ -68,6 +72,11 @@ const LanguageButton = styled.button.attrs<{ $shouldSelectImage: boolean }>(prop
 
   img {
     border: ${({ $shouldSelectImage }) => ($shouldSelectImage ? '1px solid #fffffe' : 'none')};
+
+    @media (max-width: 672px) {
+      width: 48px;
+      height: 35px;
+    }
   }
 `;
 
