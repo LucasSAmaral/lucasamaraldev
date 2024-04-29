@@ -15,6 +15,10 @@ export type TransitionStateType = {
   nextRoute: string;
 };
 
+export type MenuStatus = 'CLOSED' | 'CLOSING' | 'OPENED' | 'OPENING';
+
+export type UpdateMenuStatus = React.Dispatch<React.SetStateAction<MenuStatus>>;
+
 const inter = Inter({ subsets: ['latin'] });
 
 const initialTransitionState = {
@@ -31,6 +35,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const [transitionState, setTransitionState] =
     useState<TransitionStateType>(initialTransitionState);
 
+  const [menuMobileStatus, updateMenuMobileStatus] = useState<MenuStatus>('CLOSED');
+
+  const [languageMenuStatus, updateLanguageMenuStatus] = useState<MenuStatus>('CLOSED');
+
   useEffect(() => {
     if (modalStatus === 'OPENED') {
       closeModal();
@@ -44,8 +52,19 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <Main className={inter.className}>
       <div>
-        <MenuComponent setTransitionState={setTransitionState} />
-        <LanguageOptionsComponent />
+        <MenuComponent
+          setTransitionState={setTransitionState}
+          menuMobileStatus={menuMobileStatus}
+          languageMenuStatus={languageMenuStatus}
+          updateMenuMobileStatus={updateMenuMobileStatus}
+          updateLanguageMenuStatus={updateLanguageMenuStatus}
+        />
+        <LanguageOptionsComponent
+          languageMenuStatus={languageMenuStatus}
+          menuMobileStatus={menuMobileStatus}
+          updateLanguageMenuStatus={updateLanguageMenuStatus}
+          updateMenuMobileStatus={updateLanguageMenuStatus}
+        />
       </div>
       <MainSection
         $exiting={exiting}

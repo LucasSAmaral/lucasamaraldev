@@ -1,13 +1,13 @@
+import { MenuStatus } from '@/app/template';
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { MenuMobileStatus } from './Menu.component';
 
-const shouldCheckMenuMobile = (menuMobileStatus: MenuMobileStatus) =>
+const shouldCheckMenuMobile = (menuMobileStatus: MenuStatus) =>
   menuMobileStatus === 'OPENED' || menuMobileStatus === 'OPENING';
 
 const MenuMobileToggle: React.FC<{
-  menuMobileStatus: MenuMobileStatus;
-  updateMenuMobileStatus: Dispatch<SetStateAction<MenuMobileStatus>>;
+  menuMobileStatus: MenuStatus;
+  updateMenuMobileStatus: Dispatch<SetStateAction<MenuStatus>>;
 }> = ({ menuMobileStatus, updateMenuMobileStatus }) => {
   return (
     <MenuMobileLabel htmlFor="menu-mobile">

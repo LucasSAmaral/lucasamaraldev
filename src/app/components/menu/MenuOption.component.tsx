@@ -1,10 +1,9 @@
-import { TransitionStateType } from '@/app/template';
+import { MenuStatus, TransitionStateType, UpdateMenuStatus } from '@/app/template';
 import { Inter } from 'next/font/google';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 import { ActualRoute, MenuState } from './Menu.context';
 import { useEffect } from 'react';
-import { MenuMobileStatus } from './Menu.component';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,9 +12,11 @@ const exitingObject = { exiting: true };
 type MenuOptionComponentProps = {
   children: React.ReactNode;
   nextRoute: string;
+  languageMenuStatus: MenuStatus;
   updateMenuState: (value: React.SetStateAction<MenuState>) => void;
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
-  updateMenuMobileStatus: React.Dispatch<React.SetStateAction<MenuMobileStatus>>;
+  updateMenuMobileStatus: UpdateMenuStatus;
+  updateLanguageMenuStatus: UpdateMenuStatus;
 };
 
 const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
