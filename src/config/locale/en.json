@@ -1,6 +1,6 @@
 {
   "locale": {
-    "en-us": {
+    "en": {
       "home": {
         "profission": "Front-End Developer",
         "alt": "My selfie at the bottom of Eiffel Tower"
@@ -82,12 +82,10 @@
         }
       },
       "languageOptions": {
-        "selectLanguage": "Select a language:",
-        "brFlag": { "alt": "Brazil's flag icon", "title": "Brazil's flag" },
-        "usaFlag": {
-          "alt": "USA's flag icon",
-          "title": "USA's flag"
-        }
+        "language": "Language: ",
+        "selectedLanguage": "English",
+        "portugueseOption": "Portuguese",
+        "englishOption": "English"
       }
     }
   }

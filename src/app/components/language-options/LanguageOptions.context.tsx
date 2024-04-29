@@ -1,7 +1,7 @@
 'use client';
 import React, { createContext, useState } from 'react';
 
-export type SelectedLanguage = 'pt-br' | 'en-us';
+export type SelectedLanguage = 'pt' | 'en';
 
 export type LanguageOptionsState = {
   selectedLanguage: SelectedLanguage;
@@ -13,7 +13,7 @@ type LanguageOptionsContext = {
 };
 
 const initialState: LanguageOptionsState = {
-  selectedLanguage: 'pt-br',
+  selectedLanguage: 'pt',
 };
 
 export const LanguageOptionsContext = createContext<LanguageOptionsContext>({

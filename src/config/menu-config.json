@@ -1,11 +1,11 @@
 {
   "menu": {
     "menuOptionList": [
-      { "nextRoute": "/", "optionName": { "pt-br": "Início", "en-us": "Home" } },
-      { "nextRoute": "/about-me", "optionName": { "pt-br": "Sobre Mim", "en-us": "About Me" } },
+      { "nextRoute": "/", "optionName": { "pt": "Início", "en": "Home" } },
+      { "nextRoute": "/about-me", "optionName": { "pt": "Sobre Mim", "en": "About Me" } },
       {
         "nextRoute": "/work-experience",
-        "optionName": { "pt-br": "Experiência Profissional", "en-us": "Work Experience" }
+        "optionName": { "pt": "Experiência Profissional", "en": "Work Experience" }
       }
     ]
   }

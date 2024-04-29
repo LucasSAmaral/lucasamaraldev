@@ -1,6 +1,6 @@
 {
   "locale": {
-    "pt-br": {
+    "pt": {
       "home": {
         "profission": "Desenvolvedor Front-End",
         "alt": "Minha selfie no pé da torre Eiffel"
@@ -82,12 +82,10 @@
         }
       },
       "languageOptions": {
-        "selectLanguage": "Selecione um idioma:",
-        "brFlag": { "alt": "ícone da Bandeira do Brasil", "title": "Bandeira do Brasil" },
-        "usaFlag": {
-          "alt": "ícone da Bandeira dos Estados Unidos",
-          "title": "Bandeira dos Estados Unidos"
-        }
+        "language": "Idioma: ",
+        "selectedLanguage": "Português",
+        "portugueseOption": "Português",
+        "englishOption": "Inglês"
       }
     }
   }

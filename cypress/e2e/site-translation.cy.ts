@@ -6,19 +6,19 @@ describe('Site translation', () => {
   it('should check if all site is translated', () => {
     cy.visit('/');
 
-    cy.getDataCy('en-us').click();
-    cy.getDataCy('subtitle').contains(locale['en-us'].home.profission);
+    cy.getDataCy('en').click();
+    cy.getDataCy('subtitle').contains(locale['en'].home.profission);
 
     cy.getDataCy('about-me-option').click();
-    cy.get('body').contains(locale['en-us'].aboutMe.paragraph1);
+    cy.get('body').contains(locale['en'].aboutMe.paragraph1);
 
     cy.getDataCy('work-experience-option').click();
-    cy.get('body').contains(locale['en-us'].workExperience.company1.periodWorked);
+    cy.get('body').contains(locale['en'].workExperience.company1.periodWorked);
 
     cy.getDataCy('desk-card-component').then(el => {
       el[0].click();
     });
 
-    cy.get('.modal-content').contains(locale['en-us'].workExperience.modalCommonTitle.companyName);
+    cy.get('.modal-content').contains(locale['en'].workExperience.modalCommonTitle.companyName);
   });
 });
