@@ -33,6 +33,7 @@ const LanguageOptionsComponent: React.FC<LanguageOptionComponentProps> = ({
     <LanguageOptionsWrapper className={inter.className}>
       <LanguageButton
         className={inter.className}
+        data-cy="language-button"
         onClick={() => {
           if (menuMobileStatus === 'OPENED') {
             updateMenuMobileStatus('CLOSING');
@@ -65,6 +66,7 @@ const LanguageOptionsComponent: React.FC<LanguageOptionComponentProps> = ({
       >
         <LanguageOption
           className={inter.className}
+          data-cy="pt"
           onClick={() => {
             updateLanguageOptionsState({ selectedLanguage: 'pt' });
             updateLanguageMenuStatus('CLOSING');
@@ -74,6 +76,7 @@ const LanguageOptionsComponent: React.FC<LanguageOptionComponentProps> = ({
         </LanguageOption>
         <LanguageOption
           className={inter.className}
+          data-cy="en"
           onClick={() => {
             updateLanguageOptionsState({ selectedLanguage: 'en' });
             updateLanguageMenuStatus('CLOSING');

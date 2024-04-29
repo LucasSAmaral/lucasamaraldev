@@ -6,6 +6,7 @@ describe('Site translation', () => {
   it('should check if all site is translated', () => {
     cy.visit('/');
 
+    cy.getDataCy('language-button').click();
     cy.getDataCy('en').click();
     cy.getDataCy('subtitle').contains(locale['en'].home.profission);
 
