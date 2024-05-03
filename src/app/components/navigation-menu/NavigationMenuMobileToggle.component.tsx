@@ -1,26 +1,26 @@
+import { MenuStatus } from '../hooks/menu.hook';
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { MenuMobileStatus } from './Menu.component';
 
-const shouldCheckMenuMobile = (menuMobileStatus: MenuMobileStatus) =>
-  menuMobileStatus === 'OPENED' || menuMobileStatus === 'OPENING';
+const shouldCheckNavigationMenuMobile = (navigationMenuMobileStatus: MenuStatus) =>
+  navigationMenuMobileStatus === 'OPENED' || navigationMenuMobileStatus === 'OPENING';
 
-const MenuMobileToggle: React.FC<{
-  menuMobileStatus: MenuMobileStatus;
-  updateMenuMobileStatus: Dispatch<SetStateAction<MenuMobileStatus>>;
-}> = ({ menuMobileStatus, updateMenuMobileStatus }) => {
+const NavigationMenuMobileToggle: React.FC<{
+  navigationMenuMobileStatus: MenuStatus;
+  updateNavigationMenuMobileStatus: Dispatch<SetStateAction<MenuStatus>>;
+}> = ({ navigationMenuMobileStatus, updateNavigationMenuMobileStatus }) => {
   return (
-    <MenuMobileLabel htmlFor="menu-mobile">
-      <MenuMobileCheckbox
+    <Label htmlFor="menu-mobile">
+      <Input
         type="checkbox"
         id="menu-mobile"
-        checked={shouldCheckMenuMobile(menuMobileStatus)}
+        checked={shouldCheckNavigationMenuMobile(navigationMenuMobileStatus)}
         onClick={() => {
-          switch (menuMobileStatus) {
+          switch (navigationMenuMobileStatus) {
             case 'CLOSED':
-              return updateMenuMobileStatus('OPENING');
+              return updateNavigationMenuMobileStatus('OPENING');
             case 'OPENED':
-              return updateMenuMobileStatus('CLOSING');
+              return updateNavigationMenuMobileStatus('CLOSING');
             default:
               return;
           }
@@ -29,7 +29,7 @@ const MenuMobileToggle: React.FC<{
       <FirstLine />
       <SecondLine />
       <ThirdLine />
-    </MenuMobileLabel>
+    </Label>
   );
 };
 
@@ -56,12 +56,12 @@ const ThirdLine = styled(FirstLine)`
   top: 6px;
 `;
 
-const MenuMobileCheckbox = styled.input`
+const Input = styled.input`
   opacity: 0;
   position: absolute;
 `;
 
-const MenuMobileLabel = styled.label`
+const Label = styled.label`
   display: none;
   position: relative;
   input[type='checkbox']:checked ~ ${FirstLine} {
@@ -84,4 +84,4 @@ const MenuMobileLabel = styled.label`
   }
 `;
 
-export default MenuMobileToggle;
+export default NavigationMenuMobileToggle;

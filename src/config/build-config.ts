@@ -2,20 +2,22 @@ import fs from 'fs/promises';
 import mergeOptions from 'merge-options';
 
 const buildConfigObject = async () => {
-  const portugueseLocale = JSON.parse(await fs.readFile('src/config/locale/pt-br.json', 'utf8'));
+  const portugueseLocale = JSON.parse(await fs.readFile('src/config/locale/pt.json', 'utf8'));
 
-  const englishLocale = JSON.parse(await fs.readFile('src/config/locale/en-us.json', 'utf8'));
+  const englishLocale = JSON.parse(await fs.readFile('src/config/locale/en.json', 'utf8'));
 
   const commonLocale = JSON.parse(
     await fs.readFile('src/config/locale/common-locale.json', 'utf8'),
   );
 
-  const menuConfig = JSON.parse(await fs.readFile('src/config/menu-config.json', 'utf8'));
+  const navigationMenuConfig = JSON.parse(
+    await fs.readFile('src/config/navigation-menu-config.json', 'utf8'),
+  );
 
   const appConfig = JSON.parse(await fs.readFile('src/config/app-config.json', 'utf8'));
 
   const configAndLocaleMerged = mergeOptions(
-    menuConfig,
+    navigationMenuConfig,
     appConfig,
     commonLocale,
     portugueseLocale,

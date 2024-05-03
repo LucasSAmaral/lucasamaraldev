@@ -1,47 +1,85 @@
 import styled from 'styled-components';
-import Image from 'next/image';
-import BrFlag from '../../../assets/br-flag.svg';
-import UsaFlag from '../../../assets/usa-flag.svg';
+import { Inter } from 'next/font/google';
 import CONFIG from '../../../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './LanguageOptions.context';
+import { Menu, MenuTooltipStyle } from '../commons/styles';
+import useMenuStatus, { MenuStatus } from '../hooks/menu.hook';
+
+const inter = Inter({ subsets: ['latin'] });
 
 const { locale } = CONFIG;
 
 const LanguageOptionsComponent = () => {
   const { languageOptionsState, updateLanguageOptionsState } = useContext(LanguageOptionsContext);
 
+  const {
+    navigationMenuMobileStatus,
+    updateNavigationMenuMobileStatus,
+    languageMenuStatus,
+    updateLanguageMenuStatus,
+  } = useMenuStatus();
+
   const { selectedLanguage } = languageOptionsState;
 
   const languageOptionsLocale = locale[selectedLanguage].languageOptions;
 
   return (
-    <LanguageOptionsWrapper>
-      {languageOptionsLocale.selectLanguage}
+    <LanguageOptionsWrapper className={inter.className}>
       <LanguageButton
-        data-cy="pt-br"
-        $shouldSelectImage={selectedLanguage === 'pt-br'}
-        onClick={() => updateLanguageOptionsState({ selectedLanguage: 'pt-br' })}
+        className={inter.className}
+        data-cy="language-button"
+        onClick={() => {
+          if (navigationMenuMobileStatus === 'OPENED') {
+            updateNavigationMenuMobileStatus('CLOSING');
+          }
+          switch (languageMenuStatus) {
+            case 'CLOSED':
+              return updateLanguageMenuStatus('OPENING');
+            case 'OPENED':
+              return updateLanguageMenuStatus('CLOSING');
+            default:
+              return;
+          }
+        }}
       >
-        <Image
-          src={BrFlag}
-          width={20}
-          alt={languageOptionsLocale.brFlag.alt}
-          title={languageOptionsLocale.brFlag.title}
-        />
+        {languageOptionsLocale.language}
+        {languageOptionsLocale.selectedLanguage}
       </LanguageButton>
-      <LanguageButton
-        data-cy="en-us"
-        $shouldSelectImage={selectedLanguage === 'en-us'}
-        onClick={() => updateLanguageOptionsState({ selectedLanguage: 'en-us' })}
+      <LanguageMenu
+        $menuStatus={languageMenuStatus}
+        onAnimationEnd={() => {
+          switch (languageMenuStatus) {
+            case 'OPENING':
+              return updateLanguageMenuStatus('OPENED');
+            case 'CLOSING':
+              return updateLanguageMenuStatus('CLOSED');
+            default:
+              return;
+          }
+        }}
       >
-        <Image
-          src={UsaFlag}
-          width={20}
-          alt={languageOptionsLocale.usaFlag.alt}
-          title={languageOptionsLocale.usaFlag.title}
-        />
-      </LanguageButton>
+        <LanguageOption
+          className={inter.className}
+          data-cy="pt"
+          onClick={() => {
+            updateLanguageOptionsState({ selectedLanguage: 'pt' });
+            updateLanguageMenuStatus('CLOSING');
+          }}
+        >
+          {languageOptionsLocale.portugueseOption}
+        </LanguageOption>
+        <LanguageOption
+          className={inter.className}
+          data-cy="en"
+          onClick={() => {
+            updateLanguageOptionsState({ selectedLanguage: 'en' });
+            updateLanguageMenuStatus('CLOSING');
+          }}
+        >
+          {languageOptionsLocale.englishOption}
+        </LanguageOption>
+      </LanguageMenu>
     </LanguageOptionsWrapper>
   );
 };
@@ -49,26 +87,40 @@ const LanguageOptionsComponent = () => {
 const LanguageOptionsWrapper = styled.div`
   display: flex;
   justify-content: center;
+  position: relative;
   gap: 5px;
   padding: 10px 0;
   border-top: 1px solid #fffffe;
   border-bottom: 1px solid #fffffe;
+
+  @media (max-width: 672px) {
+    align-items: center;
+  }
 `;
 
-const LanguageButton = styled.button.attrs<{ $shouldSelectImage: boolean }>(props => ({
-  $shouldSelectImage: props.$shouldSelectImage,
-}))`
-  background-color: transparent;
-  border: 0;
+const LanguageButton = styled.button`
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 10px 25px;
+  border: 1px solid #fffffe;
+  border-radius: 5px;
+  background-color: #363b3f;
+  font-size: 16px;
+  color: #fffffe;
+  font-weight: 600;
+`;
 
-  img {
-    border: ${({ $shouldSelectImage }) => ($shouldSelectImage ? '1px solid #fffffe' : 'none')};
-  }
+const LanguageMenu = styled(Menu)`
+  top: 70px;
+  ${({ $menuStatus }) => MenuTooltipStyle($menuStatus)};
+`;
+
+const LanguageOption = styled.button`
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 16px;
+  color: #fffffe;
+  font-weight: 600;
 `;
 
 export default LanguageOptionsComponent;
