@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.41](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.40...v0.1.41) (2024-05-03)
+
+
+### Bug Fixes
+
+* ajusta path do import do tipo MenuStatus no arquivo de commons style ([c798622](https://github.com/LucasSAmaral/lucasamaraldev/commit/c7986225ba42d491280cbecb8441ef2dcd0a26da))
+
 ### [0.1.40](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.39...v0.1.40) (2024-04-29)
 
 ### [0.1.39](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.38...v0.1.39) (2024-04-24)
