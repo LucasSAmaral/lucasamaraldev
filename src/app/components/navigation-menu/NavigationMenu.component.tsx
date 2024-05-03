@@ -1,75 +1,81 @@
 import { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { TransitionStateType } from '../../template';
-import MenuOption from './MenuOption.component';
-import { ActualRoute, MenuContext } from './Menu.context';
+import NavigationMenuOptionComponent from './NavigationMenuOption.component';
+import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
 import config from '../../../../generated-config.json';
-import MenuMobileToggle from './MenuMobileToggle.component';
+import NavigationMenuMobileToggle from './NavigationMenuMobileToggle.component';
 import {
   LanguageOptionsContext,
   SelectedLanguage,
 } from '../language-options/LanguageOptions.context';
-import { MenuTooltipStyle } from '../commons/styles';
+import { Menu, MenuTooltipStyle } from '../commons/styles';
 import useMenuStatus, { MenuStatus } from '../hooks/menu.hook';
 
-type MenuComponentProps = {
+type NavigationMenuComponentProps = {
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
 };
 
-const MenuComponent: React.FC<MenuComponentProps> = ({ setTransitionState }) => {
+const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
+  setTransitionState,
+}) => {
   const {
     languageOptionsState: { selectedLanguage },
   } = useContext(LanguageOptionsContext);
 
-  const { menuMobileStatus, updateMenuMobileStatus, languageMenuStatus, updateLanguageMenuStatus } =
-    useMenuStatus();
+  const {
+    navigationMenuMobileStatus,
+    updateNavigationMenuMobileStatus,
+    languageMenuStatus,
+    updateLanguageMenuStatus,
+  } = useMenuStatus();
 
   const {
-    menuState: { actualRouteState },
-    updateMenuState,
-  } = useContext(MenuContext);
+    navigationMenuState: { actualRouteState },
+    updateNavigationMenuState,
+  } = useContext(NavigationMenuContext);
 
   return (
-    <MenuWrapper>
-      <MenuMobileToggle
-        menuMobileStatus={menuMobileStatus}
-        updateMenuMobileStatus={updateMenuMobileStatus}
+    <NavigationMenuWrapper>
+      <NavigationMenuMobileToggle
+        navigationMenuMobileStatus={navigationMenuMobileStatus}
+        updateNavigationMenuMobileStatus={updateNavigationMenuMobileStatus}
       />
-      <Menu
-        $menuStatus={menuMobileStatus}
+      <NavigationMenu
+        $menuStatus={navigationMenuMobileStatus}
         onAnimationEnd={() => {
           if (languageMenuStatus === 'OPENED') {
             updateLanguageMenuStatus('CLOSING');
           }
-          switch (menuMobileStatus) {
+          switch (navigationMenuMobileStatus) {
             case 'OPENING':
-              return updateMenuMobileStatus('OPENED');
+              return updateNavigationMenuMobileStatus('OPENED');
             case 'CLOSING':
-              return updateMenuMobileStatus('CLOSED');
+              return updateNavigationMenuMobileStatus('CLOSED');
             default:
               return;
           }
         }}
       >
         {config.menu.menuOptionList.map((menuOption, index) => (
-          <MenuOption
+          <NavigationMenuOptionComponent
             key={`${menuOption.optionName[selectedLanguage]}-${index}`}
             nextRoute={menuOption.nextRoute}
-            updateMenuState={updateMenuState}
+            updateNavigationMenuState={updateNavigationMenuState}
             setTransitionState={setTransitionState}
           >
             {menuOption.optionName[selectedLanguage]}
-          </MenuOption>
+          </NavigationMenuOptionComponent>
         ))}
-      </Menu>
+      </NavigationMenu>
       <ActiveBarWrapper $selectedLanguage={selectedLanguage}>
         <ActiveBar $actualRoute={actualRouteState} $selectedLanguage={selectedLanguage} />
       </ActiveBarWrapper>
-    </MenuWrapper>
+    </NavigationMenuWrapper>
   );
 };
 
-const MenuWrapper = styled.div`
+const NavigationMenuWrapper = styled.div`
   background-color: #363b3f;
   display: flex;
   flex-direction: column;
@@ -84,14 +90,10 @@ const MenuWrapper = styled.div`
   }
 `;
 
-const Menu = styled.menu.attrs<{ $menuStatus: MenuStatus }>(props => ({
-  $menuStatus: props.$menuStatus,
-}))`
+const NavigationMenu = styled(Menu)`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 24px;
-  padding: 20px;
   padding-bottom: 0;
 
   @media (max-width: 672px) {
@@ -180,4 +182,4 @@ const TransformActiveBar = (actualRoute: ActualRoute, selectedLanguage: Selected
   }
 };
 
-export default MenuComponent;
+export default NavigationMenuComponent;

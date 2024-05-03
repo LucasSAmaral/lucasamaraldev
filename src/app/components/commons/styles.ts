@@ -1,6 +1,6 @@
 'use client';
 import { MenuStatus } from '../hooks/menu.hook';
-import { css, keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const FadeInAnimation = keyframes`
   0% {
@@ -72,3 +72,10 @@ export const MenuTooltipStyle = (menuStatus: MenuStatus) => {
     }
   `;
 };
+
+export const Menu = styled.menu.attrs<{ $menuStatus: MenuStatus }>(props => ({
+  $menuStatus: props.$menuStatus,
+}))`
+  gap: 24px;
+  padding: 20px;
+`;

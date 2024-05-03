@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import CONFIG from '../../../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './LanguageOptions.context';
-import { MenuTooltipStyle } from '../commons/styles';
+import { Menu, MenuTooltipStyle } from '../commons/styles';
 import useMenuStatus, { MenuStatus } from '../hooks/menu.hook';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -13,8 +13,12 @@ const { locale } = CONFIG;
 const LanguageOptionsComponent = () => {
   const { languageOptionsState, updateLanguageOptionsState } = useContext(LanguageOptionsContext);
 
-  const { menuMobileStatus, updateMenuMobileStatus, languageMenuStatus, updateLanguageMenuStatus } =
-    useMenuStatus();
+  const {
+    navigationMenuMobileStatus,
+    updateNavigationMenuMobileStatus,
+    languageMenuStatus,
+    updateLanguageMenuStatus,
+  } = useMenuStatus();
 
   const { selectedLanguage } = languageOptionsState;
 
@@ -26,8 +30,8 @@ const LanguageOptionsComponent = () => {
         className={inter.className}
         data-cy="language-button"
         onClick={() => {
-          if (menuMobileStatus === 'OPENED') {
-            updateMenuMobileStatus('CLOSING');
+          if (navigationMenuMobileStatus === 'OPENED') {
+            updateNavigationMenuMobileStatus('CLOSING');
           }
           switch (languageMenuStatus) {
             case 'CLOSED':
@@ -105,13 +109,9 @@ const LanguageButton = styled.button`
   font-weight: 600;
 `;
 
-const LanguageMenu = styled.menu.attrs<{ $menuStatus: MenuStatus }>(props => ({
-  $menuStatus: props.$menuStatus,
-}))`
+const LanguageMenu = styled(Menu)`
   top: 70px;
-  padding: 20px;
   ${({ $menuStatus }) => MenuTooltipStyle($menuStatus)};
-  gap: 24px;
 `;
 
 const LanguageOption = styled.button`

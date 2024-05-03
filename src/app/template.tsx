@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import MenuComponent from './components/menu/Menu.component';
+import NavigationMenuComponent from './components/navigation-menu/NavigationMenu.component';
 import { Container, Main, Section } from './styles/styles';
 import styled, { keyframes } from 'styled-components';
 import FooterComponent from './components/Footer.component';
@@ -44,7 +44,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <Main className={inter.className}>
       <div>
-        <MenuComponent setTransitionState={setTransitionState} />
+        <NavigationMenuComponent setTransitionState={setTransitionState} />
         <LanguageOptionsComponent />
       </div>
       <MainSection
