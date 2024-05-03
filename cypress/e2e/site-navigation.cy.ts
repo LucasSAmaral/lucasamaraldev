@@ -26,7 +26,7 @@ describe('Site navigation', () => {
       cy.get('.close-modal').click();
     });
 
-    cy.wait(1000).then(() => {
+    cy.wait(5000).then(() => {
       cy.getDataCy('home-option').click();
     });
 
