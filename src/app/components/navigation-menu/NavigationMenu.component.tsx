@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { TransitionStateType } from '../../template';
-import NavigationMenuOptionComponent from './NavigationMenuOption.component';
+import NavigationMenuOption from './NavigationMenuOption.component';
 import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
 import config from '../../../../generated-config.json';
 import NavigationMenuMobileToggle from './NavigationMenuMobileToggle.component';
@@ -57,15 +57,15 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
           }
         }}
       >
-        {config.menu.menuOptionList.map((menuOption, index) => (
-          <NavigationMenuOptionComponent
-            key={`${menuOption.optionName[selectedLanguage]}-${index}`}
-            nextRoute={menuOption.nextRoute}
+        {config.navigationMenu.navigationMenuOptionList.map((navigationMenuOption, index) => (
+          <NavigationMenuOption
+            key={`${navigationMenuOption.optionName[selectedLanguage]}-${index}`}
+            nextRoute={navigationMenuOption.nextRoute}
             updateNavigationMenuState={updateNavigationMenuState}
             setTransitionState={setTransitionState}
           >
-            {menuOption.optionName[selectedLanguage]}
-          </NavigationMenuOptionComponent>
+            {navigationMenuOption.optionName[selectedLanguage]}
+          </NavigationMenuOption>
         ))}
       </NavigationMenu>
       <ActiveBarWrapper $selectedLanguage={selectedLanguage}>

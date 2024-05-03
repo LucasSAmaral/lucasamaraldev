@@ -1,6 +1,6 @@
 {
-  "menu": {
-    "menuOptionList": [
+  "navigationMenu": {
+    "navigationMenuOptionList": [
       { "nextRoute": "/", "optionName": { "pt": "Início", "en": "Home" } },
       { "nextRoute": "/about-me", "optionName": { "pt": "Sobre Mim", "en": "About Me" } },
       {
