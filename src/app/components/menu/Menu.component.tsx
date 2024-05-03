@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styled, { css } from 'styled-components';
-import { MenuStatus, TransitionStateType, UpdateMenuStatus } from '../../template';
+import { TransitionStateType } from '../../template';
 import MenuOption from './MenuOption.component';
 import { ActualRoute, MenuContext } from './Menu.context';
 import config from '../../../../generated-config.json';
@@ -10,25 +10,19 @@ import {
   SelectedLanguage,
 } from '../language-options/LanguageOptions.context';
 import { MenuTooltipStyle } from '../commons/styles';
+import useMenuStatus, { MenuStatus } from '../hooks/menu.hook';
 
 type MenuComponentProps = {
-  menuMobileStatus: MenuStatus;
-  languageMenuStatus: MenuStatus;
-  updateMenuMobileStatus: UpdateMenuStatus;
-  updateLanguageMenuStatus: UpdateMenuStatus;
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
 };
 
-const MenuComponent: React.FC<MenuComponentProps> = ({
-  menuMobileStatus,
-  languageMenuStatus,
-  updateMenuMobileStatus,
-  updateLanguageMenuStatus,
-  setTransitionState,
-}) => {
-  const { languageOptionsState } = useContext(LanguageOptionsContext);
+const MenuComponent: React.FC<MenuComponentProps> = ({ setTransitionState }) => {
+  const {
+    languageOptionsState: { selectedLanguage },
+  } = useContext(LanguageOptionsContext);
 
-  const { selectedLanguage } = languageOptionsState;
+  const { menuMobileStatus, updateMenuMobileStatus, languageMenuStatus, updateLanguageMenuStatus } =
+    useMenuStatus();
 
   const {
     menuState: { actualRouteState },
@@ -61,11 +55,8 @@ const MenuComponent: React.FC<MenuComponentProps> = ({
           <MenuOption
             key={`${menuOption.optionName[selectedLanguage]}-${index}`}
             nextRoute={menuOption.nextRoute}
-            languageMenuStatus={languageMenuStatus}
             updateMenuState={updateMenuState}
             setTransitionState={setTransitionState}
-            updateMenuMobileStatus={updateMenuMobileStatus}
-            updateLanguageMenuStatus={updateLanguageMenuStatus}
           >
             {menuOption.optionName[selectedLanguage]}
           </MenuOption>

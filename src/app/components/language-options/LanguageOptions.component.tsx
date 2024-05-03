@@ -4,26 +4,17 @@ import CONFIG from '../../../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './LanguageOptions.context';
 import { MenuTooltipStyle } from '../commons/styles';
-import { MenuStatus, UpdateMenuStatus } from '@/app/template';
+import useMenuStatus, { MenuStatus } from '../hooks/menu.hook';
 
 const inter = Inter({ subsets: ['latin'] });
 
 const { locale } = CONFIG;
 
-type LanguageOptionComponentProps = {
-  menuMobileStatus: MenuStatus;
-  languageMenuStatus: MenuStatus;
-  updateMenuMobileStatus: UpdateMenuStatus;
-  updateLanguageMenuStatus: UpdateMenuStatus;
-};
-
-const LanguageOptionsComponent: React.FC<LanguageOptionComponentProps> = ({
-  menuMobileStatus,
-  languageMenuStatus,
-  updateMenuMobileStatus,
-  updateLanguageMenuStatus,
-}) => {
+const LanguageOptionsComponent = () => {
   const { languageOptionsState, updateLanguageOptionsState } = useContext(LanguageOptionsContext);
+
+  const { menuMobileStatus, updateMenuMobileStatus, languageMenuStatus, updateLanguageMenuStatus } =
+    useMenuStatus();
 
   const { selectedLanguage } = languageOptionsState;
 
