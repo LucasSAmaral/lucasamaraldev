@@ -1,5 +1,5 @@
 'use client';
-import { MenuStatus } from '@/app/template';
+import { MenuStatus } from '../hooks/menu.hook';
 import { css, keyframes } from 'styled-components';
 
 const FadeInAnimation = keyframes`
