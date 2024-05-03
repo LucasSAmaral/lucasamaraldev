@@ -26,7 +26,10 @@ describe('Site navigation', () => {
       cy.get('.close-modal').click();
     });
 
-    cy.getDataCy('home-option').click();
+    cy.wait(1000).then(() => {
+      cy.getDataCy('home-option').click();
+    });
+
     cy.getDataCy('selfie').should('exist');
   });
 });
