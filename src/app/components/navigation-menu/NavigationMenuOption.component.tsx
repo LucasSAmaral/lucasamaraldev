@@ -2,7 +2,7 @@ import { TransitionStateType } from '@/app/template';
 import { Inter } from 'next/font/google';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
-import { ActualRoute, MenuState } from './Menu.context';
+import { ActualRoute, NavigationMenuState } from './NavigationMenu.context';
 import { useEffect } from 'react';
 import useMenuStatus from '../hooks/menu.hook';
 
@@ -10,33 +10,33 @@ const inter = Inter({ subsets: ['latin'] });
 
 const exitingObject = { exiting: true };
 
-type MenuOptionComponentProps = {
+type NavigationMenuOptionComponentProps = {
   children: React.ReactNode;
   nextRoute: string;
-  updateMenuState: (value: React.SetStateAction<MenuState>) => void;
+  updateNavigationMenuState: (value: React.SetStateAction<NavigationMenuState>) => void;
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
 };
 
-const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
+const NavigationMenuOptionComponent: React.FC<NavigationMenuOptionComponentProps> = ({
   children,
   nextRoute,
-  updateMenuState,
+  updateNavigationMenuState,
   setTransitionState,
 }) => {
   const actualRoute = usePathname();
 
-  const { updateMenuMobileStatus } = useMenuStatus();
+  const { updateNavigationMenuMobileStatus } = useMenuStatus();
 
   const nextRouteDataCy =
     nextRoute.split('/')[1] === '' ? 'home-option' : `${nextRoute.split('/')[1]}-option`;
 
   useEffect(() => {
-    updateMenuState({ actualRouteState: actualRoute as ActualRoute });
+    updateNavigationMenuState({ actualRouteState: actualRoute as ActualRoute });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <MenuOption
+    <NavigationMenuOption
       data-cy={nextRouteDataCy}
       className={inter.className}
       onClick={() => {
@@ -44,16 +44,16 @@ const MenuOptionComponent: React.FC<MenuOptionComponentProps> = ({
           setTransitionState({ ...exitingObject, nextRoute });
         }
         if (window.innerWidth <= 672) {
-          updateMenuMobileStatus('CLOSING');
+          updateNavigationMenuMobileStatus('CLOSING');
         }
       }}
     >
       {children}
-    </MenuOption>
+    </NavigationMenuOption>
   );
 };
 
-const MenuOption = styled.button`
+const NavigationMenuOption = styled.button`
   text-decoration: none;
   color: #fffffe;
   font-size: 16px;
@@ -71,4 +71,4 @@ const MenuOption = styled.button`
   }
 `;
 
-export default MenuOptionComponent;
+export default NavigationMenuOptionComponent;
