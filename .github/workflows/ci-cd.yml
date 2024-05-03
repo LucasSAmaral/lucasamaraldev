@@ -9,7 +9,32 @@ on:
       - '*'
 
 jobs:
+  cypress-component-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
+          component: true
+
+  cypress-e2e-run:
+    needs: cypress-component-run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
+
   Docker-Image:
+    needs: cypress-e2e-run
     runs-on: ubuntu-latest
 
     steps:
