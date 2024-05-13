@@ -4,6 +4,9 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import styled from 'styled-components';
 import InputComponent from './components/Input.component';
+import CONFIG from '../../../generated-config.json';
+import { useContext } from 'react';
+import { LanguageOptionsContext } from '../components/language-options/LanguageOptions.context';
 
 export type FormValues = {
   fromName: string;
@@ -19,6 +22,13 @@ type EmailValues = {
   template_params: FormValues;
 };
 
+const {
+  appConfig: {
+    contactPage: { emailJsUrl },
+  },
+  locale: LOCALE,
+} = CONFIG;
+
 const Contact: React.FC = () => {
   const {
     control,
@@ -26,9 +36,19 @@ const Contact: React.FC = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const { mutate: sendEmail, status } = useMutation({
+  const {
+    languageOptionsState: { selectedLanguage },
+  } = useContext(LanguageOptionsContext);
+
+  const {
+    contact: {
+      form: { labels, sendButtonText },
+    },
+  } = LOCALE[selectedLanguage];
+
+  const { mutate: sendEmail, status: sendEmailStatus } = useMutation({
     mutationFn: async (emailValues: EmailValues) => {
-      await axios.post('https://api.emailjs.com/api/v1.0/email/send', emailValues);
+      await axios.post(emailJsUrl, emailValues);
     },
     onSuccess: () => {
       alert('E-mail enviado.');
@@ -40,6 +60,7 @@ const Contact: React.FC = () => {
 
   const onSubmit = handleSubmit((formValues: FormValues) => {
     const { fromName, replyTo, subject, message } = formValues;
+
     const emailValues = {
       service_id: process.env.NEXT_PUBLIC_SERVICE_ID ?? '',
       template_id: process.env.NEXT_PUBLIC_TEMPLATE_ID ?? '',
@@ -51,15 +72,23 @@ const Contact: React.FC = () => {
         message,
       },
     };
+
     sendEmail(emailValues);
   });
+
   return (
     <Form onSubmit={onSubmit}>
-      <InputComponent name="fromName" control={control} errors={errors} />
-      <InputComponent name="replyTo" control={control} errors={errors} />
-      <InputComponent name="subject" control={control} errors={errors} />
-      <InputComponent name="message" control={control} errors={errors} useTextArea />
-      <Button type="submit">Enviar</Button>
+      <InputComponent name="fromName" labels={labels} control={control} errors={errors} />
+      <InputComponent name="replyTo" labels={labels} control={control} errors={errors} />
+      <InputComponent name="subject" labels={labels} control={control} errors={errors} />
+      <InputComponent
+        name="message"
+        labels={labels}
+        control={control}
+        errors={errors}
+        useTextArea
+      />
+      <Button type="submit">{sendButtonText}</Button>
     </Form>
   );
 };

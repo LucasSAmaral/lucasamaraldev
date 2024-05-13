@@ -59,6 +59,17 @@
           }
         }
       },
+      "contact": {
+        "form": {
+          "labels": {
+            "fromName": "Nome",
+            "replyTo": "E-mail",
+            "subject": "Assunto",
+            "message": "Mensagem"
+          },
+          "sendButtonText": "Enviar"
+        }
+      },
       "footer": {
         "socialNetworks": {
           "text": "Redes sociais:",
