@@ -1,22 +1,23 @@
 'use client';
-// import type { Metadata } from 'next';
 import { useMutation } from '@tanstack/react-query';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import styled from 'styled-components';
 import InputComponent from './components/Input.component';
 
 export type FormValues = {
-  name: string;
-  email: string;
+  fromName: string;
+  replyTo: string;
   subject: string;
   message: string;
 };
 
-// export const metadata: Metadata = {
-//   title: 'Contato',
-//   description: 'Entre em contato comigo',
-// };
+type EmailValues = {
+  service_id: string;
+  template_id: string;
+  user_id: string;
+  template_params: FormValues;
+};
 
 const Contact: React.FC = () => {
   const {
@@ -25,20 +26,37 @@ const Contact: React.FC = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const { mutate: sendEmail } = useMutation({
-    mutationFn: async (formValues: FormValues) => {
-      await axios.post('https://api.emailjs.com/api/v1.0/email/send-form', formValues);
+  const { mutate: sendEmail, status } = useMutation({
+    mutationFn: async (emailValues: EmailValues) => {
+      await axios.post('https://api.emailjs.com/api/v1.0/email/send', emailValues);
+    },
+    onSuccess: () => {
+      alert('E-mail enviado.');
+    },
+    onError: () => {
+      alert('Ocorreu algum imprevisto. Tente novamente');
     },
   });
 
-  const onSubmit = handleSubmit(formValues => {
-    // sendEmail(formValues);
-    console.log('valores', formValues);
+  const onSubmit = handleSubmit((formValues: FormValues) => {
+    const { fromName, replyTo, subject, message } = formValues;
+    const emailValues = {
+      service_id: process.env.NEXT_PUBLIC_SERVICE_ID ?? '',
+      template_id: process.env.NEXT_PUBLIC_TEMPLATE_ID ?? '',
+      user_id: process.env.NEXT_PUBLIC_USER_ID ?? '',
+      template_params: {
+        fromName,
+        replyTo,
+        subject,
+        message,
+      },
+    };
+    sendEmail(emailValues);
   });
   return (
     <Form onSubmit={onSubmit}>
-      <InputComponent name="name" control={control} errors={errors} />
-      <InputComponent name="email" control={control} errors={errors} />
+      <InputComponent name="fromName" control={control} errors={errors} />
+      <InputComponent name="replyTo" control={control} errors={errors} />
       <InputComponent name="subject" control={control} errors={errors} />
       <InputComponent name="message" control={control} errors={errors} useTextArea />
       <Button type="submit">Enviar</Button>
