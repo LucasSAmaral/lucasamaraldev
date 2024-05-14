@@ -1,12 +1,13 @@
 'use client';
+
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import styled from 'styled-components';
 import InputComponent from './components/Input.component';
 import CONFIG from '../../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from '../components/language-options/LanguageOptions.context';
+import { sendEmailValues } from './actions';
 
 export type FormValues = {
   fromName: string;
@@ -35,9 +36,7 @@ const Contact: React.FC = () => {
   } = LOCALE[selectedLanguage];
 
   const { mutate: sendEmail, status: sendEmailStatus } = useMutation({
-    mutationFn: async (formValues: FormValues) => {
-      await axios.post('/contact/api', formValues);
-    },
+    mutationFn: sendEmailValues,
     onSuccess: () => {
       alert('E-mail enviado.');
     },

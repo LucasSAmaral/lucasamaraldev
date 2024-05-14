@@ -1,6 +1,8 @@
+'use server';
+
 import axios from 'axios';
-import CONFIG from '../../../../generated-config.json';
-import { NextResponse } from 'next/server';
+import CONFIG from '../../../generated-config.json';
+import { FormValues } from './page';
 
 const {
   appConfig: {
@@ -8,8 +10,7 @@ const {
   },
 } = CONFIG;
 
-export async function POST(request: Request) {
-  const formValues = await request.json();
+export async function sendEmailValues(formValues: FormValues) {
   const emailValues = {
     service_id: process.env.SERVICE_ID ?? '',
     template_id: process.env.TEMPLATE_ID ?? '',
@@ -18,7 +19,6 @@ export async function POST(request: Request) {
       ...formValues,
     },
   };
-  await axios.post(emailJsUrl, emailValues);
 
-  return NextResponse.json({});
+  await axios.post(emailJsUrl, emailValues);
 }
