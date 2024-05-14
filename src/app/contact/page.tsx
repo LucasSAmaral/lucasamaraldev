@@ -72,6 +72,10 @@ const Form = styled.form`
   max-width: 380px;
   margin: 0 auto;
   gap: 10px;
+
+  #message-wrapper {
+    margin-bottom: 0;
+  }
 `;
 
 const Button = styled.button`
