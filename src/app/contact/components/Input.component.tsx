@@ -69,7 +69,7 @@ const Wrapper = styled.div.attrs<{ $fieldError?: FieldError }>(props => ({
   }
 
   span {
-    color: red;
+    color: #ff6262;
     font-size: 14px;
   }
 `;
