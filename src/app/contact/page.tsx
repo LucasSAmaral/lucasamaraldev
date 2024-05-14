@@ -15,19 +15,7 @@ export type FormValues = {
   message: string;
 };
 
-type EmailValues = {
-  service_id: string;
-  template_id: string;
-  user_id: string;
-  template_params: FormValues;
-};
-
-const {
-  appConfig: {
-    contactPage: { emailJsUrl },
-  },
-  locale: LOCALE,
-} = CONFIG;
+const { locale: LOCALE } = CONFIG;
 
 const Contact: React.FC = () => {
   const {
@@ -47,8 +35,8 @@ const Contact: React.FC = () => {
   } = LOCALE[selectedLanguage];
 
   const { mutate: sendEmail, status: sendEmailStatus } = useMutation({
-    mutationFn: async (emailValues: EmailValues) => {
-      await axios.post(emailJsUrl, emailValues);
+    mutationFn: async (formValues: FormValues) => {
+      await axios.post('/contact/api', formValues);
     },
     onSuccess: () => {
       alert('E-mail enviado.');
@@ -59,21 +47,7 @@ const Contact: React.FC = () => {
   });
 
   const onSubmit = handleSubmit((formValues: FormValues) => {
-    const { fromName, replyTo, subject, message } = formValues;
-
-    const emailValues = {
-      service_id: process.env.NEXT_PUBLIC_SERVICE_ID ?? '',
-      template_id: process.env.NEXT_PUBLIC_TEMPLATE_ID ?? '',
-      user_id: process.env.NEXT_PUBLIC_USER_ID ?? '',
-      template_params: {
-        fromName,
-        replyTo,
-        subject,
-        message,
-      },
-    };
-
-    sendEmail(emailValues);
+    sendEmail(formValues);
   });
 
   return (
