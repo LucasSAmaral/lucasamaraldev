@@ -1,24 +1,28 @@
-"use client";
+'use client';
 
-import React from "react";
-import ReactDom from "react-dom";
-import styled from "styled-components";
-import { useModal } from "./Modal.context";
-import ModalBackdropComponent from "./ModalBackdrop.component";
+import React from 'react';
+import ReactDom from 'react-dom';
+import styled from 'styled-components';
+import { useModal } from './Modal.context';
+import ModalBackdropComponent from './ModalBackdrop.component';
 
 const ModalContainer: React.FC = () => {
   const {
     closeModal,
     closingHandle,
-    modalState: { modalComponent, modalStatus },
+    modalState: {
+      modalComponent,
+      modalStatus,
+      options: { wrapperClassName },
+    },
     openingHandle,
   } = useModal();
 
   const classRelation = {
-    OPENED: "--opened",
-    OPENING: "--opening",
-    CLOSED: "--closed",
-    CLOSING: "--closing",
+    OPENED: '--opened',
+    OPENING: '--opening',
+    CLOSED: '--closed',
+    CLOSING: '--closing',
   };
 
   const Modal = ({
@@ -38,12 +42,12 @@ const ModalContainer: React.FC = () => {
       <ModalBackdropComponent
         onAnimationEnd={onBackdropAnimationEnd}
         onClick={closeModal}
-        className={classRelation ? classRelation : ""}
+        className={classRelation ? classRelation : ''}
       >
         <ModalContent
           onAnimationEnd={onModalAnimationEnd}
           onClick={(e: React.MouseEvent) => e.stopPropagation()}
-          className="modal-content"
+          className={`modal-content ${wrapperClassName}`}
         >
           <div className="close-modal" onClick={closeModal}>
             X
@@ -51,34 +55,28 @@ const ModalContainer: React.FC = () => {
           {children}
         </ModalContent>
       </ModalBackdropComponent>,
-      document.getElementById("modal") as Element
+      document.getElementById('modal') as Element,
     );
   };
 
   switch (modalStatus) {
-    case "OPENED":
+    case 'OPENED':
       return <Modal closeModal={closeModal}>{modalComponent}</Modal>;
 
-    case "OPENING":
+    case 'OPENING':
       return (
-        <Modal
-          classRelation={classRelation[modalStatus]}
-          onModalAnimationEnd={openingHandle}
-        >
+        <Modal classRelation={classRelation[modalStatus]} onModalAnimationEnd={openingHandle}>
           {modalComponent}
         </Modal>
       );
-    case "CLOSING":
+    case 'CLOSING':
       return (
-        <Modal
-          classRelation={classRelation[modalStatus]}
-          onBackdropAnimationEnd={closingHandle}
-        >
+        <Modal classRelation={classRelation[modalStatus]} onBackdropAnimationEnd={closingHandle}>
           {modalComponent}
         </Modal>
       );
 
-    case "CLOSED":
+    case 'CLOSED':
       return null;
   }
 };
@@ -92,6 +90,15 @@ const ModalContent = styled.div`
   width: 100%;
   padding: 20px 10px;
   z-index: 1042;
+
+  &.sent-message {
+    width: auto;
+    text-align: center;
+
+    .close-modal {
+      display: none;
+    }
+  }
 
   .close-modal {
     display: inline-block;
