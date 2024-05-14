@@ -91,7 +91,8 @@ const ModalContent = styled.div`
   padding: 20px 10px;
   z-index: 1042;
 
-  &.sent-message {
+  &.sent-message,
+  &.error-message {
     width: auto;
     text-align: center;
 

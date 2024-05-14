@@ -2,12 +2,14 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import InputComponent from './components/Input.component';
 import CONFIG from '../../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from '../components/language-options/LanguageOptions.context';
 import { sendEmailValues } from './actions';
+import Link from 'next/link';
+import { useModal } from '../components/modal/Modal.context';
 
 export type FormValues = {
   fromName: string;
@@ -22,6 +24,7 @@ const Contact: React.FC = () => {
   const {
     control,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<FormValues>();
 
@@ -29,19 +32,36 @@ const Contact: React.FC = () => {
     languageOptionsState: { selectedLanguage },
   } = useContext(LanguageOptionsContext);
 
+  const { openModal } = useModal();
+
   const {
     contact: {
       form: { labels, sendButtonText },
     },
   } = LOCALE[selectedLanguage];
 
-  const { mutate: sendEmail, status: sendEmailStatus } = useMutation({
+  const { mutate: sendEmail } = useMutation({
     mutationFn: sendEmailValues,
     onSuccess: () => {
-      alert('E-mail enviado.');
+      openModal(
+        <Wrapper>
+          <h2>Mensagem enviada</h2>
+          <p>Entraremos em contato em breve.</p>
+          <ButtonLink href="/">Ok</ButtonLink>
+        </Wrapper>,
+        { wrapperClassName: 'sent-message' },
+      );
     },
     onError: () => {
-      alert('Ocorreu algum imprevisto. Tente novamente');
+      const formValues = getValues();
+      openModal(
+        <Wrapper>
+          <h2>Erro</h2>
+          <p>Ocorreu um erro ao enviar a mensagem.</p>
+          <Button onClick={() => sendEmail(formValues)}>Tentar novamente</Button>
+        </Wrapper>,
+        { wrapperClassName: 'error-message' },
+      );
     },
   });
 
@@ -66,6 +86,12 @@ const Contact: React.FC = () => {
   );
 };
 
+const Wrapper = styled.div`
+  h2 {
+    margin-bottom: 10px;
+  }
+`;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -78,17 +104,29 @@ const Form = styled.form`
   }
 `;
 
-const Button = styled.button`
-  width: 100%;
-  max-width: 280px;
-  margin: 0 auto;
-  margin-top: 30px;
-  border-radius: 4px;
-  border: 1px solid #fffffe;
-  padding: 8px 12px;
-  cursor: pointer;
-  background-color: #363b3f;
-  color: #fffffe;
+const ButtonLink = styled(Link)`
+  ${() => ButtonStyle()}
+  text-decoration: none;
+  display: inline-block;
 `;
+
+const Button = styled.button`
+  ${() => ButtonStyle()}
+`;
+
+const ButtonStyle = () => {
+  return css`
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 4px;
+    border: 1px solid #fffffe;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: #363b3f;
+    color: #fffffe;
+  `;
+};
 
 export default Contact;
