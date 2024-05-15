@@ -67,7 +67,21 @@
             "subject": "Subject",
             "message": "Message"
           },
-          "sendButtonText": "Send Message"
+          "sendButtonText": "Send Message",
+          "error": {
+            "message": "The field {fieldName} is mandatory"
+          },
+          "modal": {
+            "success": {
+              "title": "Message sent",
+              "text": "We will contact you soon"
+            },
+            "error": {
+              "title": "Woops...",
+              "text": "An error occurred while sending message",
+              "buttonText": "Try again"
+            }
+          }
         }
       },
       "footer": {
