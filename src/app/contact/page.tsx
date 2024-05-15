@@ -113,8 +113,9 @@ const Contact: React.FC = () => {
 
   return (
     <Form onSubmit={onSubmit}>
-      {fieldList.map(Field => (
+      {fieldList.map((Field, index) => (
         <InputComponent
+          key={`${Field}-${index}`}
           name={Field as keyof FormValues}
           type={Field === 'replyTo' ? 'email' : undefined}
           labels={labels}
