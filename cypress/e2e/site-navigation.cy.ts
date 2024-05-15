@@ -16,6 +16,19 @@ describe('Site navigation', () => {
     cy.getDataCy('work-experience-option').click();
     cy.get('body').contains(locale['pt'].workExperience.company1.periodWorked);
 
+    cy.getDataCy('contact-option').click();
+    cy.get('#fromName').should('exist');
+    cy.get('#replyTo').should('exist');
+    cy.get('#subject').should('exist');
+    cy.get('#message').should('exist');
+
+    cy.getDataCy('home-option').click();
+    cy.getDataCy('selfie').should('exist');
+  });
+
+  it('should interact with modal', () => {
+    cy.visit('/work-experience');
+
     cy.getDataCy('desk-card-component').then(el => {
       el[0].click();
     });
@@ -25,11 +38,8 @@ describe('Site navigation', () => {
     cy.wait(1000).then(() => {
       cy.get('.close-modal').click();
     });
-
-    cy.wait(5000).then(() => {
-      cy.getDataCy('home-option').click();
+    cy.wait(1000).then(() => {
+      cy.get('.modal-content').should('not.exist');
     });
-
-    cy.getDataCy('selfie').should('exist');
   });
 });

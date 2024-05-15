@@ -21,5 +21,16 @@ describe('Site translation', () => {
     });
 
     cy.get('.modal-content').contains(locale['en'].workExperience.modalCommonTitle.companyName);
+
+    cy.wait(1000).then(() => {
+      cy.get('.close-modal').click();
+    });
+
+    cy.getDataCy('contact-option').click();
+    cy.get('body').contains(locale['en'].contact.form.labels.fromName);
+    cy.get('body').contains(locale['en'].contact.form.labels.replyTo);
+    cy.get('body').contains(locale['en'].contact.form.labels.subject);
+    cy.get('body').contains(locale['en'].contact.form.labels.message);
+    cy.get('body').contains(locale['en'].contact.form.sendButtonText);
   });
 });
