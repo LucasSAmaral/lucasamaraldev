@@ -1,17 +1,24 @@
 'use client';
 
 import styled from 'styled-components';
-import { Control, Controller, FieldError, FieldErrors } from 'react-hook-form';
+import { Control, Controller, FieldError, FieldErrors, RegisterOptions } from 'react-hook-form';
 import { FormValues } from '../page';
-import { useState } from 'react';
+import { HTMLInputTypeAttribute, useState } from 'react';
 
 type Labels = { [K in keyof FormValues]: string };
+
+export type Rules = Omit<
+  RegisterOptions<FormValues, keyof FormValues>,
+  'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
+>;
 
 type InputComponentProps = {
   name: keyof FormValues;
   labels: Labels;
   control: Control<FormValues, any>;
   errors: FieldErrors<FormValues>;
+  type?: HTMLInputTypeAttribute;
+  rules?: Rules;
   useTextArea?: boolean;
 };
 
@@ -20,6 +27,8 @@ const InputComponent: React.FC<InputComponentProps> = ({
   labels,
   control,
   errors,
+  type = 'text',
+  rules,
   useTextArea = false,
 }) => {
   const [isInputFocused, updateInputFocused] = useState(false);
@@ -27,7 +36,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
     <Controller
       name={name}
       control={control}
-      rules={{ required: `O campo ${labels[name]} é obrigatório` }}
+      rules={rules}
       render={({ field: { name, onChange, onBlur, value } }) => (
         <Wrapper id={`${name}-wrapper`} $fieldError={errors[name]}>
           <Label htmlFor={name} $isInputFocused={isInputFocused}>
@@ -49,7 +58,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
             />
           ) : (
             <Input
-              type={name === 'replyTo' ? 'email' : 'text'}
+              type={type}
               name={name}
               id={name}
               onBlur={e => {
