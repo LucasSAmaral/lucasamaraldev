@@ -5,11 +5,12 @@ import { useForm } from 'react-hook-form';
 import styled, { css } from 'styled-components';
 import InputComponent from './components/Input.component';
 import CONFIG from '../../../generated-config.json';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { LanguageOptionsContext } from '../components/language-options/LanguageOptions.context';
 import { sendEmailValues } from './actions';
 import Link from 'next/link';
 import { useModal } from '../components/modal/Modal.context';
+import { buildContactFormRules } from './helpers';
 
 export type FormValues = {
   fromName: string;
@@ -18,13 +19,32 @@ export type FormValues = {
   message: string;
 };
 
-const { locale: LOCALE } = CONFIG;
+type Field = keyof FormValues | 'root.${string}' | 'root';
+
+type FieldList = Field[];
+
+const fieldList: FieldList = ['fromName', 'replyTo', 'subject', 'message'];
+
+const {
+  locale: {
+    commonLocale: {
+      contact: {
+        form: {
+          success: { buttonText: successButtonText },
+        },
+      },
+    },
+    ...LOCALE
+  },
+} = CONFIG;
 
 const Contact: React.FC = () => {
   const {
     control,
     handleSubmit,
     getValues,
+    setError,
+    getFieldState,
     formState: { errors },
   } = useForm<FormValues>();
 
@@ -36,18 +56,39 @@ const Contact: React.FC = () => {
 
   const {
     contact: {
-      form: { labels, sendButtonText },
+      form: {
+        labels,
+        sendButtonText,
+        error: { message: errorMessage },
+        modal: {
+          success: { title: successTitle, text: successText },
+          error: { title: errorTitle, text: errorText, buttonText: errorButtonText },
+        },
+      },
     },
   } = LOCALE[selectedLanguage];
+
+  useEffect(() => {
+    fieldList.map(field => {
+      const { error } = getFieldState(field as keyof FormValues);
+
+      if (error && Object.keys(error).length > 0) {
+        setError(field, {
+          message: buildContactFormRules(labels[field as keyof FormValues], errorMessage)
+            .required as string,
+        });
+      }
+    });
+  }, [selectedLanguage]);
 
   const { mutate: sendEmail } = useMutation({
     mutationFn: sendEmailValues,
     onSuccess: () => {
       openModal(
         <Wrapper>
-          <h2>Mensagem enviada</h2>
-          <p>Entraremos em contato em breve.</p>
-          <ButtonLink href="/">Ok</ButtonLink>
+          <h2>{successTitle}</h2>
+          <p>{successText}</p>
+          <ButtonLink href="/">{successButtonText}</ButtonLink>
         </Wrapper>,
         { wrapperClassName: 'sent-message' },
       );
@@ -56,9 +97,9 @@ const Contact: React.FC = () => {
       const formValues = getValues();
       openModal(
         <Wrapper>
-          <h2>Erro</h2>
-          <p>Ocorreu um erro ao enviar a mensagem.</p>
-          <Button onClick={() => sendEmail(formValues)}>Tentar novamente</Button>
+          <h2>{errorTitle}</h2>
+          <p>{errorText}</p>
+          <Button onClick={() => sendEmail(formValues)}>{errorButtonText}</Button>
         </Wrapper>,
         { wrapperClassName: 'error-message' },
       );
@@ -71,16 +112,17 @@ const Contact: React.FC = () => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <InputComponent name="fromName" labels={labels} control={control} errors={errors} />
-      <InputComponent name="replyTo" labels={labels} control={control} errors={errors} />
-      <InputComponent name="subject" labels={labels} control={control} errors={errors} />
-      <InputComponent
-        name="message"
-        labels={labels}
-        control={control}
-        errors={errors}
-        useTextArea
-      />
+      {fieldList.map(Field => (
+        <InputComponent
+          name={Field as keyof FormValues}
+          type={Field === 'replyTo' ? 'email' : undefined}
+          labels={labels}
+          control={control}
+          errors={errors}
+          rules={buildContactFormRules(labels[Field as keyof FormValues], errorMessage)}
+          useTextArea={Field === 'message'}
+        />
+      ))}
       <Button type="submit">{sendButtonText}</Button>
     </Form>
   );
