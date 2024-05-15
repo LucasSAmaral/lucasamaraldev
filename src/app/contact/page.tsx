@@ -125,7 +125,9 @@ const Contact: React.FC = () => {
           useTextArea={Field === 'message'}
         />
       ))}
-      <Button type="submit">{sendButtonText}</Button>
+      <Button data-cy="send-button" type="submit">
+        {sendButtonText}
+      </Button>
     </Form>
   );
 };
