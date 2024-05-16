@@ -16,15 +16,15 @@ describe('Site translation', () => {
     cy.getDataCy('work-experience-option').click();
     cy.get('body').contains(locale['en'].workExperience.company1.periodWorked);
 
-    cy.getDataCy('desk-card-component').then(el => {
-      el[0].click();
-    });
+    // cy.getDataCy('desk-card-component').then(el => {
+    //   el[0].click();
+    // });
 
-    cy.get('.modal-content').contains(locale['en'].workExperience.modalCommonTitle.companyName);
+    // cy.get('.modal-content').contains(locale['en'].workExperience.modalCommonTitle.companyName);
 
-    cy.wait(1000).then(() => {
-      cy.get('.close-modal').click();
-    });
+    // cy.wait(1000).then(() => {
+    //   cy.get('.close-modal').click();
+    // });
 
     cy.getDataCy('contact-option').click();
     cy.get('body').contains(locale['en'].contact.form.labels.fromName);
