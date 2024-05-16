@@ -6,6 +6,10 @@
       {
         "nextRoute": "/work-experience",
         "optionName": { "pt": "Experiência Profissional", "en": "Work Experience" }
+      },
+      {
+        "nextRoute": "/contact",
+        "optionName": { "pt": "Contato", "en": "Contact" }
       }
     ]
   }

@@ -59,6 +59,31 @@
           }
         }
       },
+      "contact": {
+        "form": {
+          "labels": {
+            "fromName": "Nome",
+            "replyTo": "E-mail",
+            "subject": "Assunto",
+            "message": "Mensagem"
+          },
+          "sendButtonText": "Enviar mensagem",
+          "error": {
+            "message": "O campo {fieldName} é obrigatório"
+          },
+          "modal": {
+            "success": {
+              "title": "Mensagem enviada",
+              "text": "Entraremos em contato em breve."
+            },
+            "error": {
+              "title": "Opa...",
+              "text": "Ocorreu um erro ao enviar a mensagem.",
+              "buttonText": "Tentar novamente"
+            }
+          }
+        }
+      },
       "footer": {
         "socialNetworks": {
           "text": "Redes sociais:",
