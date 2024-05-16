@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.42](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.41...v0.1.42) (2024-05-16)
+
+
+### Features
+
+* abre modais com mensagens de sucesso ou error ao enviar os dados do form ([316c529](https://github.com/LucasSAmaral/lucasamaraldev/commit/316c52982c7915f3c93acfffde936d7c204eec07))
+* adiciona a opção de contato no menu de navegação ([bb59e9a](https://github.com/LucasSAmaral/lucasamaraldev/commit/bb59e9a0f47b5ccf8dfe329bc645358081438599))
+* configura form de email com o emailJS ([233de7f](https://github.com/LucasSAmaral/lucasamaraldev/commit/233de7fdb0e8690b64fdc2130b0f4c767b0df190))
+* cria componente de input ([688d095](https://github.com/LucasSAmaral/lucasamaraldev/commit/688d0956444c860870b76cbfc808e2c184a6f169))
+* cria helper para montar as mensagens de erro ([04f5a1d](https://github.com/LucasSAmaral/lucasamaraldev/commit/04f5a1d10cc2830c4f9d93e36920a1f9aab9014e))
+
+
+### Bug Fixes
+
+* adiciona comentário para desabilitar o lint do array de depencências do useEffect da página de contato ([e63f8a1](https://github.com/LucasSAmaral/lucasamaraldev/commit/e63f8a14f90e7f082886398dc3d9a1063aae8bd7))
+* adiciona key no componente iterado pelo map ([f28c5df](https://github.com/LucasSAmaral/lucasamaraldev/commit/f28c5dfc374d8cadfebcd219ad905b0a81acf3ff))
+
 ### [0.1.41](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.40...v0.1.41) (2024-05-03)
 
 
