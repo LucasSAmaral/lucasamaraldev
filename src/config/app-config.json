@@ -28,6 +28,9 @@
           { "option": "company4" }
         ]
       }
+    },
+    "contactPage": {
+      "emailJsUrl": "https://api.emailjs.com/api/v1.0/email/send"
     }
   }
 }

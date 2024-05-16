@@ -14,9 +14,9 @@ const {
 } = config;
 
 const DeskCardComponent: React.FC<{ cardPosition: 'left' | 'right' }> = ({ cardPosition }) => {
-  const { languageOptionsState } = useContext(LanguageOptionsContext);
-
-  const { selectedLanguage } = languageOptionsState;
+  const {
+    languageOptionsState: { selectedLanguage },
+  } = useContext(LanguageOptionsContext);
 
   const workExperienceLocale = locale[selectedLanguage].workExperience;
 

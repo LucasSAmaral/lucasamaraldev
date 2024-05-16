@@ -107,7 +107,7 @@ const ActiveBarWrapper = styled.div.attrs<{ $selectedLanguage: SelectedLanguage 
 }))`
   height: 2px;
   width: 100%;
-  max-width: ${({ $selectedLanguage }) => ($selectedLanguage === 'pt' ? '357.47px' : '299.7px')};
+  max-width: ${({ $selectedLanguage }) => ($selectedLanguage === 'pt' ? '443px' : '385.69px')};
   position: relative;
 
   @media (max-width: 672px) {
@@ -126,8 +126,6 @@ const ActiveBar = styled.div.attrs<{
   height: 100%;
   transition: 0.3s;
   position: absolute;
-  width: ${({ $selectedLanguage }) => ($selectedLanguage === 'pt' ? '41.47px' : '45.48px')};
-  transform: translateX(0);
   ${({ $actualRoute, $selectedLanguage }) => TransformActiveBar($actualRoute, $selectedLanguage)}
 `;
 
@@ -174,11 +172,18 @@ const TransformActiveBar = (actualRoute: ActualRoute, selectedLanguage: Selected
         transform: translateX(168px);
       `;
 
-    case '/contact':
+    case '/contact': {
+      if (selectedLanguage === 'pt') {
+        return css`
+          width: 62.38px;
+          transform: translateX(382px);
+        `;
+      }
       return css`
         width: 62.38px;
-        transform: translateX(571px);
+        transform: translateX(323px);
       `;
+    }
   }
 };
 
