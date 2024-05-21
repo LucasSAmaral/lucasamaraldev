@@ -68,6 +68,7 @@
             "message": "Message"
           },
           "sendButtonText": "Send Message",
+          "sendingButtonText": "Sending Message",
           "error": {
             "message": "The field {fieldName} is mandatory"
           },

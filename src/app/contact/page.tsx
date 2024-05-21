@@ -11,6 +11,8 @@ import { sendEmailValues } from './actions';
 import Link from 'next/link';
 import { useModal } from '../components/modal/Modal.context';
 import { buildContactFormRules } from './helpers';
+import Image from 'next/image';
+import LoadingIcon from '../../assets/loading-icon.gif';
 
 export type FormValues = {
   fromName: string;
@@ -59,6 +61,7 @@ const Contact: React.FC = () => {
       form: {
         labels,
         sendButtonText,
+        sendingButtonText,
         error: { message: errorMessage },
         modal: {
           success: { title: successTitle, text: successText },
@@ -82,7 +85,7 @@ const Contact: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLanguage]);
 
-  const { mutate: sendEmail } = useMutation({
+  const { mutate: sendEmail, status } = useMutation({
     mutationFn: sendEmailValues,
     onSuccess: () => {
       openModal(
@@ -126,7 +129,13 @@ const Contact: React.FC = () => {
         />
       ))}
       <Button data-cy="send-button" type="submit">
-        {sendButtonText}
+        {status === 'pending' ? (
+          <LoadingWrapper>
+            {sendingButtonText} <Image src={LoadingIcon} alt="" />
+          </LoadingWrapper>
+        ) : (
+          sendButtonText
+        )}
       </Button>
     </Form>
   );
@@ -154,6 +163,14 @@ const ButtonLink = styled(Link)`
   ${() => ButtonStyle()}
   text-decoration: none;
   display: inline-block;
+`;
+
+const LoadingWrapper = styled.div`
+  img {
+    width: 10px;
+    margin-bottom: 0;
+    margin-left: 5px;
+  }
 `;
 
 const Button = styled.button`
