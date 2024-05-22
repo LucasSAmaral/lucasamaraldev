@@ -112,7 +112,8 @@
         "selectedLanguage": "English",
         "portugueseOption": "Portuguese",
         "englishOption": "English"
-      }
+      },
+      "loading": "Loading..."
     }
   }
 }

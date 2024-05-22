@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import NavigationMenuComponent from './components/navigation-menu/NavigationMenu.component';
 import { Container, Main, Section } from './styles/styles';
@@ -9,6 +9,7 @@ import FooterComponent from './components/Footer.component';
 import { Inter } from 'next/font/google';
 import { useModal } from './components/modal/Modal.context';
 import LanguageOptionsComponent from './components/language-options/LanguageOptions.component';
+import Loading from './loading';
 
 export type TransitionStateType = {
   exiting: boolean;
@@ -57,7 +58,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
         }}
       >
         <MainSectionContent>
-          <Container>{children}</Container>
+          <Suspense fallback={<Loading />}>
+            <Container>{children}</Container>
+          </Suspense>
         </MainSectionContent>
       </MainSection>
       <FooterComponent />
