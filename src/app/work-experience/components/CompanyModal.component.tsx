@@ -15,9 +15,9 @@ const {
 } = config;
 
 const CompanyModalComponent: React.FC<{ companyOption: CompanyOption }> = ({ companyOption }) => {
-  const { languageOptionsState } = useContext(LanguageOptionsContext);
-
-  const { selectedLanguage } = languageOptionsState;
+  const {
+    languageOptionsState: { selectedLanguage },
+  } = useContext(LanguageOptionsContext);
 
   const workExperienceLocale = locale[selectedLanguage].workExperience;
 

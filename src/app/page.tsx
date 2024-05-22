@@ -12,9 +12,9 @@ const {
 } = config;
 
 export default function Home() {
-  const { languageOptionsState } = useContext(LanguageOptionsContext);
-
-  const { selectedLanguage } = languageOptionsState;
+  const {
+    languageOptionsState: { selectedLanguage },
+  } = useContext(LanguageOptionsContext);
 
   const homeLocale = locale[selectedLanguage].home;
 

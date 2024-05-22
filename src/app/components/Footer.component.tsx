@@ -21,9 +21,9 @@ const socialNetworkObj = {
 };
 
 const FooterComponent: React.FC = () => {
-  const { languageOptionsState } = useContext(LanguageOptionsContext);
-
-  const { selectedLanguage } = languageOptionsState;
+  const {
+    languageOptionsState: { selectedLanguage },
+  } = useContext(LanguageOptionsContext);
 
   const footerLocale = locale[selectedLanguage].footer;
 

@@ -7,9 +7,9 @@ import { LanguageOptionsContext } from '../components/language-options/LanguageO
 const { locale } = config;
 
 const AboutMe: React.FC = () => {
-  const { languageOptionsState } = useContext(LanguageOptionsContext);
-
-  const { selectedLanguage } = languageOptionsState;
+  const {
+    languageOptionsState: { selectedLanguage },
+  } = useContext(LanguageOptionsContext);
 
   const aboutMeLocale = locale[selectedLanguage].aboutMe;
 
