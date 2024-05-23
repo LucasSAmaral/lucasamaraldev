@@ -11,7 +11,10 @@ const inter = Inter({ subsets: ['latin'] });
 const { locale } = CONFIG;
 
 const LanguageOptionsComponent = () => {
-  const { languageOptionsState, updateLanguageOptionsState } = useContext(LanguageOptionsContext);
+  const {
+    languageOptionsState: { selectedLanguage },
+    updateLanguageOptionsState,
+  } = useContext(LanguageOptionsContext);
 
   const {
     navigationMenuMobileStatus,
@@ -19,8 +22,6 @@ const LanguageOptionsComponent = () => {
     languageMenuStatus,
     updateLanguageMenuStatus,
   } = useMenuStatus();
-
-  const { selectedLanguage } = languageOptionsState;
 
   const languageOptionsLocale = locale[selectedLanguage].languageOptions;
 
