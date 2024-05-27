@@ -11,14 +11,20 @@ const {
 } = CONFIG;
 
 export async function sendEmailValues(formValues: FormValues) {
-  const emailValues = {
-    service_id: process.env.SERVICE_ID ?? '',
-    template_id: process.env.TEMPLATE_ID ?? '',
-    user_id: process.env.USER_ID ?? '',
-    template_params: {
-      ...formValues,
-    },
-  };
+  try {
+    const emailValues = {
+      service_id: process.env.SERVICE_ID ?? '',
+      template_id: process.env.TEMPLATE_ID ?? '',
+      user_id: process.env.USER_ID ?? '',
+      template_params: {
+        ...formValues,
+      },
+    };
+    
+    await axios.post(emailJsUrl, emailValues);
 
-  await axios.post(emailJsUrl, emailValues);
+  } catch (error) {
+    console.error(error);
+  }
+
 }
