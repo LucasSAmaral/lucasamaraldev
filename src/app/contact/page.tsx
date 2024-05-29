@@ -54,7 +54,11 @@ const Contact: React.FC = () => {
     languageOptionsState: { selectedLanguage },
   } = useContext(LanguageOptionsContext);
 
-  const { openModal } = useModal();
+  const {
+    openModal,
+    closeModal,
+    modalState: { modalStatus },
+  } = useModal();
 
   const {
     contact: {
@@ -85,9 +89,23 @@ const Contact: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLanguage]);
 
-  const { mutate: sendEmail, status } = useMutation({
+  const { mutate: sendEmail } = useMutation({
     mutationFn: sendEmailValues,
+    onMutate: () => {
+      openModal(
+        <Wrapper>
+          <h2>Enviando mansagem</h2>
+          {/* <p>{successText}</p> */}
+          {/* <ButtonLink href="/">{successButtonText}</ButtonLink> */}
+          <Image src={LoadingIcon} alt="ícone de loading" />
+        </Wrapper>,
+        { wrapperClassName: 'sent-message' },
+      );
+    },
     onSuccess: () => {
+      if (modalStatus === 'OPENED') {
+        closeModal();
+      }
       openModal(
         <Wrapper>
           <h2>{successTitle}</h2>
@@ -98,6 +116,9 @@ const Contact: React.FC = () => {
       );
     },
     onError: () => {
+      if (modalStatus === 'OPENED') {
+        closeModal();
+      }
       const formValues = getValues();
       openModal(
         <Wrapper>
@@ -129,13 +150,7 @@ const Contact: React.FC = () => {
         />
       ))}
       <Button data-cy="send-button" type="submit">
-        {status === 'pending' ? (
-          <LoadingWrapper>
-            {sendingButtonText} <Image src={LoadingIcon} alt="" />
-          </LoadingWrapper>
-        ) : (
-          sendButtonText
-        )}
+        {sendButtonText}
       </Button>
     </Form>
   );
