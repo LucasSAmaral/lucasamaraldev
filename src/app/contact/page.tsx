@@ -94,12 +94,10 @@ const Contact: React.FC = () => {
     onMutate: () => {
       openModal(
         <Wrapper>
-          <h2>Enviando mansagem</h2>
-          {/* <p>{successText}</p> */}
-          {/* <ButtonLink href="/">{successButtonText}</ButtonLink> */}
-          <Image src={LoadingIcon} alt="ícone de loading" />
+          <Image src={LoadingIcon} width={30} alt="ícone de loading" loading='lazy'/>
+          <h2>{sendingButtonText}</h2>
         </Wrapper>,
-        { wrapperClassName: 'sent-message' },
+        { wrapperClassName: 'sending-message' },
       );
     },
     onSuccess: () => {
