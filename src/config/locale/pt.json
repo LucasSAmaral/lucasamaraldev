@@ -68,7 +68,6 @@
             "message": "Mensagem"
           },
           "sendButtonText": "Enviar mensagem",
-          "sendingButtonText": "Enviando mensagem",
           "error": {
             "message": "O campo {fieldName} é obrigatório"
           },
@@ -81,6 +80,10 @@
               "title": "Opa...",
               "text": "Ocorreu um erro ao enviar a mensagem.",
               "buttonText": "Tentar novamente"
+            },
+            "loading": {
+              "title": "Enviando mensagem...",
+              "loadingImgAlt": "ícone de loading"
             }
           }
         }

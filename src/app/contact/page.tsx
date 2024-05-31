@@ -65,11 +65,11 @@ const Contact: React.FC = () => {
       form: {
         labels,
         sendButtonText,
-        sendingButtonText,
         error: { message: errorMessage },
         modal: {
           success: { title: successTitle, text: successText },
           error: { title: errorTitle, text: errorText, buttonText: errorButtonText },
+          loading: { title: loadingTitle, loadingImgAlt },
         },
       },
     },
@@ -94,8 +94,8 @@ const Contact: React.FC = () => {
     onMutate: () => {
       openModal(
         <Wrapper>
-          <Image src={LoadingIcon} width={30} alt="ícone de loading" loading='lazy'/>
-          <h2>{sendingButtonText}</h2>
+          <Image src={LoadingIcon} width={30} alt={loadingImgAlt} loading="eager" />
+          <h2>{loadingTitle}</h2>
         </Wrapper>,
         { wrapperClassName: 'sending-message' },
       );
@@ -155,6 +155,10 @@ const Contact: React.FC = () => {
 };
 
 const Wrapper = styled.div`
+  img {
+    margin-bottom: 10px;
+  }
+
   h2 {
     margin-bottom: 10px;
   }
@@ -176,14 +180,6 @@ const ButtonLink = styled(Link)`
   ${() => ButtonStyle()}
   text-decoration: none;
   display: inline-block;
-`;
-
-const LoadingWrapper = styled.div`
-  img {
-    width: 10px;
-    margin-bottom: 0;
-    margin-left: 5px;
-  }
 `;
 
 const Button = styled.button`
