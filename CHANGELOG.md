@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.44](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.43...v0.1.44) (2024-05-31)
+
+
+### Features
+
+* cria loading para exibir no fallback do template ([f188800](https://github.com/LucasSAmaral/lucasamaraldev/commit/f18880044fc12d6683098b1c63e69c2ec2ccb3f9))
+
 ### [0.1.43](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.42...v0.1.43) (2024-05-21)
 
 ### [0.1.42](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.41...v0.1.42) (2024-05-16)
