@@ -54,18 +54,22 @@ const Contact: React.FC = () => {
     languageOptionsState: { selectedLanguage },
   } = useContext(LanguageOptionsContext);
 
-  const { openModal } = useModal();
+  const {
+    openModal,
+    closeModal,
+    modalState: { modalStatus },
+  } = useModal();
 
   const {
     contact: {
       form: {
         labels,
         sendButtonText,
-        sendingButtonText,
         error: { message: errorMessage },
         modal: {
           success: { title: successTitle, text: successText },
           error: { title: errorTitle, text: errorText, buttonText: errorButtonText },
+          loading: { title: loadingTitle, loadingImgAlt },
         },
       },
     },
@@ -85,9 +89,21 @@ const Contact: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLanguage]);
 
-  const { mutate: sendEmail, status } = useMutation({
+  const { mutate: sendEmail } = useMutation({
     mutationFn: sendEmailValues,
+    onMutate: () => {
+      openModal(
+        <Wrapper>
+          <Image src={LoadingIcon} width={30} alt={loadingImgAlt} unoptimized />
+          <h2>{loadingTitle}</h2>
+        </Wrapper>,
+        { wrapperClassName: 'sending-message' },
+      );
+    },
     onSuccess: () => {
+      if (modalStatus === 'OPENED') {
+        closeModal();
+      }
       openModal(
         <Wrapper>
           <h2>{successTitle}</h2>
@@ -98,6 +114,9 @@ const Contact: React.FC = () => {
       );
     },
     onError: () => {
+      if (modalStatus === 'OPENED') {
+        closeModal();
+      }
       const formValues = getValues();
       openModal(
         <Wrapper>
@@ -129,19 +148,17 @@ const Contact: React.FC = () => {
         />
       ))}
       <Button data-cy="send-button" type="submit">
-        {status === 'pending' ? (
-          <LoadingWrapper>
-            {sendingButtonText} <Image src={LoadingIcon} alt="" />
-          </LoadingWrapper>
-        ) : (
-          sendButtonText
-        )}
+        {sendButtonText}
       </Button>
     </Form>
   );
 };
 
 const Wrapper = styled.div`
+  img {
+    margin-bottom: 10px;
+  }
+
   h2 {
     margin-bottom: 10px;
   }
@@ -163,14 +180,6 @@ const ButtonLink = styled(Link)`
   ${() => ButtonStyle()}
   text-decoration: none;
   display: inline-block;
-`;
-
-const LoadingWrapper = styled.div`
-  img {
-    width: 10px;
-    margin-bottom: 0;
-    margin-left: 5px;
-  }
 `;
 
 const Button = styled.button`

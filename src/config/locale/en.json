@@ -68,7 +68,6 @@
             "message": "Message"
           },
           "sendButtonText": "Send Message",
-          "sendingButtonText": "Sending Message",
           "error": {
             "message": "The field {fieldName} is mandatory"
           },
@@ -81,6 +80,10 @@
               "title": "Woops...",
               "text": "An error occurred while sending message",
               "buttonText": "Try again"
+            },
+            "loading": {
+              "title": "Sending Message...",
+              "loadingImgAlt": "loading icon"
             }
           }
         }
