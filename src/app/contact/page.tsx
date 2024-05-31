@@ -94,7 +94,7 @@ const Contact: React.FC = () => {
     onMutate: () => {
       openModal(
         <Wrapper>
-          <Image src={LoadingIcon} width={30} alt={loadingImgAlt} loading="eager" />
+          <Image src={LoadingIcon} width={30} alt={loadingImgAlt} unoptimized />
           <h2>{loadingTitle}</h2>
         </Wrapper>,
         { wrapperClassName: 'sending-message' },
