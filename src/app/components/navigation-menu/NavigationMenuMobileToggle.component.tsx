@@ -1,14 +1,18 @@
-import { MenuStatus } from '../hooks/menu.hook';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { MenuStatus } from './NavigationMenu.component';
+import { LanguageOptionsContext } from '../language-options/LanguageOptions.context';
+import { NavigationMenuContext } from './NavigationMenu.context';
 
 const shouldCheckNavigationMenuMobile = (navigationMenuMobileStatus: MenuStatus) =>
   navigationMenuMobileStatus === 'OPENED' || navigationMenuMobileStatus === 'OPENING';
 
-const NavigationMenuMobileToggle: React.FC<{
-  navigationMenuMobileStatus: MenuStatus;
-  updateNavigationMenuMobileStatus: Dispatch<SetStateAction<MenuStatus>>;
-}> = ({ navigationMenuMobileStatus, updateNavigationMenuMobileStatus }) => {
+const NavigationMenuMobileToggle: React.FC = () => {
+  const { languageMenuStatus, updateLanguageMenuStatus } = useContext(LanguageOptionsContext);
+
+  const { navigationMenuMobileStatus, updateNavigationMenuMobileStatus } =
+    useContext(NavigationMenuContext);
+
   return (
     <Label htmlFor="menu-mobile">
       <Input
@@ -16,6 +20,9 @@ const NavigationMenuMobileToggle: React.FC<{
         id="menu-mobile"
         checked={shouldCheckNavigationMenuMobile(navigationMenuMobileStatus)}
         onClick={() => {
+          if (languageMenuStatus === 'OPENED') {
+            updateLanguageMenuStatus('CLOSING');
+          }
           switch (navigationMenuMobileStatus) {
             case 'CLOSED':
               return updateNavigationMenuMobileStatus('OPENING');
