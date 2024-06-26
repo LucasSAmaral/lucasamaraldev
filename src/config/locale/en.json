@@ -3,7 +3,8 @@
     "en": {
       "home": {
         "profission": "Front-End Developer",
-        "alt": "My selfie at the bottom of Eiffel Tower"
+        "alt": "My selfie at the bottom of Eiffel Tower",
+        "title": "My selfie"
       },
       "aboutMe": {
         "paragraph1": "My name is Lucas Amaral. I am 32 years old. I live in Rio de Janeiro and I am a front-end developer.",

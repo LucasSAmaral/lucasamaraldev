@@ -4,7 +4,7 @@ import CONFIG from '../../../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './LanguageOptions.context';
 import { Menu, MenuTooltipStyle } from '../commons/styles';
-import useMenuStatus, { MenuStatus } from '../hooks/menu.hook';
+import { NavigationMenuContext } from '../navigation-menu/NavigationMenu.context';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,15 +13,13 @@ const { locale } = CONFIG;
 const LanguageOptionsComponent = () => {
   const {
     languageOptionsState: { selectedLanguage },
+    languageMenuStatus,
     updateLanguageOptionsState,
+    updateLanguageMenuStatus,
   } = useContext(LanguageOptionsContext);
 
-  const {
-    navigationMenuMobileStatus,
-    updateNavigationMenuMobileStatus,
-    languageMenuStatus,
-    updateLanguageMenuStatus,
-  } = useMenuStatus();
+  const { navigationMenuMobileStatus, updateNavigationMenuMobileStatus } =
+    useContext(NavigationMenuContext);
 
   const languageOptionsLocale = locale[selectedLanguage].languageOptions;
 

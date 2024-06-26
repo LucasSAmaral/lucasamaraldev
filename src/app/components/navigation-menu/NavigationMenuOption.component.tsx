@@ -2,9 +2,8 @@ import { TransitionStateType } from '@/app/template';
 import { Inter } from 'next/font/google';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
-import { ActualRoute, NavigationMenuState } from './NavigationMenu.context';
-import { useEffect } from 'react';
-import useMenuStatus from '../hooks/menu.hook';
+import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
+import { useContext, useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,19 +12,18 @@ const exitingObject = { exiting: true };
 type NavigationMenuOptionComponentProps = {
   children: React.ReactNode;
   nextRoute: string;
-  updateNavigationMenuState: (value: React.SetStateAction<NavigationMenuState>) => void;
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
 };
 
 const NavigationMenuOptionComponent: React.FC<NavigationMenuOptionComponentProps> = ({
   children,
   nextRoute,
-  updateNavigationMenuState,
   setTransitionState,
 }) => {
   const actualRoute = usePathname();
 
-  const { updateNavigationMenuMobileStatus } = useMenuStatus();
+  const { updateNavigationMenuState, updateNavigationMenuMobileStatus } =
+    useContext(NavigationMenuContext);
 
   const nextRouteDataCy =
     nextRoute.split('/')[1] === '' ? 'home-option' : `${nextRoute.split('/')[1]}-option`;

@@ -20,7 +20,13 @@ export default function Home() {
 
   return (
     <>
-      <Image data-cy="selfie" src={Photo} alt={homeLocale.alt} priority={true} />
+      <Image
+        data-cy="selfie"
+        src={Photo}
+        alt={homeLocale.alt}
+        title={homeLocale.title}
+        priority={true}
+      />
       <Title data-cy="title">{commonLocale.name}</Title>
       <Subtitle data-cy="subtitle">{homeLocale.profission}</Subtitle>
     </>

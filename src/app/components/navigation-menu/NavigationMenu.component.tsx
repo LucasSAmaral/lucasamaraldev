@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { TransitionStateType } from '../../template';
 import NavigationMenuOption from './NavigationMenuOption.component';
@@ -10,37 +10,33 @@ import {
   SelectedLanguage,
 } from '../language-options/LanguageOptions.context';
 import { Menu, MenuTooltipStyle } from '../commons/styles';
-import useMenuStatus, { MenuStatus } from '../hooks/menu.hook';
 
 type NavigationMenuComponentProps = {
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
 };
+
+export type MenuStatus = 'CLOSED' | 'CLOSING' | 'OPENED' | 'OPENING';
+
+export type UpdateMenuStatus = Dispatch<SetStateAction<MenuStatus>>;
 
 const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
   setTransitionState,
 }) => {
   const {
     languageOptionsState: { selectedLanguage },
+    languageMenuStatus,
+    updateLanguageMenuStatus,
   } = useContext(LanguageOptionsContext);
 
   const {
+    navigationMenuState: { actualRouteState },
     navigationMenuMobileStatus,
     updateNavigationMenuMobileStatus,
-    languageMenuStatus,
-    updateLanguageMenuStatus,
-  } = useMenuStatus();
-
-  const {
-    navigationMenuState: { actualRouteState },
-    updateNavigationMenuState,
   } = useContext(NavigationMenuContext);
 
   return (
     <NavigationMenuWrapper>
-      <NavigationMenuMobileToggle
-        navigationMenuMobileStatus={navigationMenuMobileStatus}
-        updateNavigationMenuMobileStatus={updateNavigationMenuMobileStatus}
-      />
+      <NavigationMenuMobileToggle />
       <NavigationMenu
         $menuStatus={navigationMenuMobileStatus}
         onAnimationEnd={() => {
@@ -61,7 +57,6 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
           <NavigationMenuOption
             key={`${navigationMenuOption.optionName[selectedLanguage]}-${index}`}
             nextRoute={navigationMenuOption.nextRoute}
-            updateNavigationMenuState={updateNavigationMenuState}
             setTransitionState={setTransitionState}
           >
             {navigationMenuOption.optionName[selectedLanguage]}
