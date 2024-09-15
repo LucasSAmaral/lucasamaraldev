@@ -26,7 +26,6 @@ const FooterComponent: React.FC = () => {
   };
   
   const footerLocale = locale[selectedLanguage].footer;
-
   const {
     socialNetworks: { text: socialNetworksText, list: socialNetworksList },
   } = footerLocale;
