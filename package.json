@@ -9,7 +9,7 @@
     "cy:open": "cypress open",
     "start": "next start",
     "lint": "next lint",
-    "release": "standard-version && git push --follow-tags origin main"
+    "release": "release-please github-release --token=$GITHUB_TOKEN --release-type=node --repo-url=https://github.com/LucasSAmaral/lucasamaraldev"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.29.2",
@@ -19,8 +19,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.3",
-    "sharp": "^0.33.2",
-    "standard-version": "^9.5.0"
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -30,6 +29,7 @@
     "eslint": "^8",
     "eslint-config-next": "^14.2.4",
     "merge-options": "^3.0.4",
+    "release-please": "^16.12.2",
     "styled-components": "^6.1.6",
     "ts-node": "^10.9.2",
     "typescript": "^5"
