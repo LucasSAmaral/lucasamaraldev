@@ -9,7 +9,7 @@
     "cy:open": "cypress open",
     "start": "next start",
     "lint": "next lint",
-    "release": "release-please github-release --token=$GITHUB_TOKEN --release-type=node --repo-url=https://github.com/LucasSAmaral/lucasamaraldev"
+    "release": "release-please github-release --token=$GITHUB_TOKEN --release-type=node --repo-url=https://github.com/LucasSAmaral/lucasamaraldev --bump-patch"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.29.2",
