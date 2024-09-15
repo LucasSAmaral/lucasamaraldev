@@ -14,18 +14,18 @@ const {
   locale,
 } = config;
 
-const socialNetworkObj = {
-  LinkedIn: { logo: LinkeInLogo, url: linkedInProfileUrl },
-  GitHub: { logo: GitHubLogo, url: gitHubProfileUrl },
-  Instagram: { logo: InstagramLogo, url: instagramProfileUrl },
-};
-
 const FooterComponent: React.FC = () => {
   const {
     languageOptionsState: { selectedLanguage },
   } = useContext(LanguageOptionsContext);
 
   const footerLocale = locale[selectedLanguage].footer;
+
+  const socialNetworkObj = {
+    LinkedIn: { logo: LinkeInLogo, url: `${linkedInProfileUrl}${selectedLanguage === 'en' ? '?locale=en_US' : ''}` },
+    GitHub: { logo: GitHubLogo, url: gitHubProfileUrl },
+    Instagram: { logo: InstagramLogo, url: instagramProfileUrl },
+  };
 
   const {
     socialNetworks: { text: socialNetworksText, list: socialNetworksList },
