@@ -19,13 +19,13 @@ const FooterComponent: React.FC = () => {
     languageOptionsState: { selectedLanguage },
   } = useContext(LanguageOptionsContext);
 
-  const footerLocale = locale[selectedLanguage].footer;
-
   const socialNetworkObj = {
     LinkedIn: { logo: LinkeInLogo, url: `${linkedInProfileUrl}${selectedLanguage === 'en' ? '?locale=en_US' : ''}` },
     GitHub: { logo: GitHubLogo, url: gitHubProfileUrl },
     Instagram: { logo: InstagramLogo, url: instagramProfileUrl },
   };
+  
+  const footerLocale = locale[selectedLanguage].footer;
 
   const {
     socialNetworks: { text: socialNetworksText, list: socialNetworksList },
