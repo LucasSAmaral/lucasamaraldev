@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.45...v0.2.0) (2024-09-15)
+
+
+### Features
+
+* ajusta queryParam da url do linkedIn ([0f47d3f](https://github.com/LucasSAmaral/lucasamaraldev/commit/0f47d3f318414f14598df8aaccca24a9bd84bf24))
+* ajusta script release ([3422d69](https://github.com/LucasSAmaral/lucasamaraldev/commit/3422d69cdffb9d3918d2ee07d45e3cc91508a229))
+
 ### [0.1.45](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.44...v0.1.45) (2024-06-26)
 
 ### [0.1.44](https://github.com/LucasSAmaral/lucasamaraldev/compare/v0.1.43...v0.1.44) (2024-05-31)
