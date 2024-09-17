@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { NavigationMenuProvider } from './components/navigation-menu/NavigationMenu.context';
 import { ModalProvider } from './components/modal/Modal.context';
 import GlobalStyle from './styles/globalStyle';
@@ -11,14 +11,16 @@ const queryClient = new QueryClient();
 const Providers: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageOptionsProvider>
-        <ModalProvider>
-          <NavigationMenuProvider>
-            <GlobalStyle />
-            {children}
-          </NavigationMenuProvider>
-        </ModalProvider>
-      </LanguageOptionsProvider>
+      <Suspense>
+        <LanguageOptionsProvider>
+          <ModalProvider>
+            <NavigationMenuProvider>
+              <GlobalStyle />
+              {children}
+            </NavigationMenuProvider>
+          </ModalProvider>
+        </LanguageOptionsProvider>
+      </Suspense>
     </QueryClientProvider>
   );
 };
