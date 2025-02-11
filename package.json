@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "private": true,
   "scripts": {
-    "dev": "npm run config && next dev",
+    "dev": "npm run config && next dev --turbopack",
     "config": "ts-node src/config/build-config.ts",
     "build": "npm run config && next build",
     "cy:open": "cypress open",
@@ -15,19 +15,19 @@
     "@tanstack/react-query": "^5.29.2",
     "@vercel/speed-insights": "^1.0.8",
     "axios": "^1.6.8",
-    "next": "^14.2.23",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "15.1.7",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-hook-form": "^7.51.3",
     "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
     "cypress": "^13.7.1",
     "eslint": "^8",
-    "eslint-config-next": "^14.2.4",
+    "eslint-config-next": "15.1.7",
     "install": "^0.13.0",
     "merge-options": "^3.0.4",
     "npm": "^10.8.3",
@@ -35,5 +35,9 @@
     "styled-components": "^6.1.6",
     "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3"
   }
 }
