@@ -18,7 +18,7 @@ const NavigationMenuMobileToggle: React.FC = () => {
       <Input
         type="checkbox"
         id="menu-mobile"
-        checked={shouldCheckNavigationMenuMobile(navigationMenuMobileStatus)}
+        defaultChecked={shouldCheckNavigationMenuMobile(navigationMenuMobileStatus)}
         onClick={() => {
           if (languageMenuStatus === 'OPENED') {
             updateLanguageMenuStatus('CLOSING');
