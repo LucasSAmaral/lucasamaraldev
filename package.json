@@ -1,6 +1,6 @@
 {
   "name": "lucasamaraldev",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "dev": "npm run config && next dev --turbopack",
