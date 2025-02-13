@@ -9,18 +9,12 @@ describe('Contact form', () => {
   it('should test label animation', () => {
     cy.visit('/contact');
 
-    cy.get('#fromName-wrapper label').then(el => {
-      const top = el[0].ownerDocument.defaultView?.getComputedStyle(el[0]).top;
-      expect(top).to.eq('7px');
-    });
+    cy.get('#fromName-wrapper label').should('have.css', 'top', '7px');
 
     cy.get('#fromName').click();
 
     cy.wait(1000).then(() => {
-      cy.get('#fromName-wrapper label').then(el => {
-        const top = el[0].ownerDocument.defaultView?.getComputedStyle(el[0]).top;
-        expect(top).to.eq('-27px');
-      });
+      cy.get('#fromName-wrapper label').should('have.css', 'top', '-27px');
     });
   });
 
