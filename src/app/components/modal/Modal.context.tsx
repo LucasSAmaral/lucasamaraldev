@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useReducer, useContext } from 'react';
+import React, { createContext, useReducer, useContext, JSX } from 'react';
 
 type ModalStatus = 'OPENED' | 'OPENING' | 'CLOSING' | 'CLOSED';
 
