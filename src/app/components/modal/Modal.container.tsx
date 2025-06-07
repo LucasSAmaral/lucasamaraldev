@@ -28,7 +28,7 @@ const ModalContainer: React.FC = () => {
   const Modal = ({
     children,
     closeModal = () => {},
-    classRelation,
+    classRelation = '',
     onBackdropAnimationEnd = () => {},
     onModalAnimationEnd,
   }: {
@@ -42,7 +42,7 @@ const ModalContainer: React.FC = () => {
       <ModalBackdropComponent
         onAnimationEnd={onBackdropAnimationEnd}
         onClick={closeModal}
-        className={classRelation ? classRelation : ''}
+        className={classRelation}
       >
         <ModalContent
           onAnimationEnd={onModalAnimationEnd}
