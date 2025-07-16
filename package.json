@@ -14,25 +14,25 @@
   "dependencies": {
     "@tanstack/react-query": "^5.29.2",
     "@vercel/speed-insights": "^1.0.8",
-    "axios": "^1.6.8",
-    "next": "15.1.7",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "react-hook-form": "^7.51.3",
-    "sharp": "^0.33.2"
+    "axios": "^1.10.0",
+    "next": "15.4.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.60.0",
+    "sharp": "^0.34.3"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
-    "cypress": "^14.0.3",
+    "cypress": "^14.5.2",
     "eslint": "^8",
     "eslint-config-next": "15.1.7",
     "install": "^0.13.0",
     "merge-options": "^3.0.4",
     "npm": "^10.8.3",
     "release-it": "^17.6.0",
-    "styled-components": "^6.1.6",
+    "styled-components": "^6.1.19",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   },
