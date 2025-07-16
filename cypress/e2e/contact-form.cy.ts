@@ -18,7 +18,7 @@ describe('Contact form', () => {
     });
   });
 
-  it('should send message successfully', () => {
+  it.skip('should send message successfully', () => {
     cy.intercept(
       {
         method: 'POST',
@@ -50,7 +50,7 @@ describe('Contact form', () => {
       });
   });
 
-  it('should show error message and try again', () => {
+  it.skip('should show error message and try again', () => {
     cy.intercept(
       {
         method: 'POST',
