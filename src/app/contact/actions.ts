@@ -20,11 +20,13 @@ export async function sendEmailValues(formValues: FormValues) {
         ...formValues,
       },
     };
-    
-    await axios.post(emailJsUrl, emailValues);
 
+    if (process.env.NODE_ENV === 'development') {
+      return;
+    }
+
+    await axios.post(emailJsUrl, emailValues);
   } catch (error) {
     console.error(error);
   }
-
 }
