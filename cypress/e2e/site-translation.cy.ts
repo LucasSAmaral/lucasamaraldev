@@ -34,7 +34,7 @@ describe('Site translation', () => {
     cy.get('body').contains(locale['en'].contact.form.sendButtonText);
   });
 
-  it.skip('should check if all site is translated after loading with lang queryParam', () => {
+  it('should check if all site is translated after loading with lang queryParam', () => {
     cy.visit('/?lang=en');
 
     cy.getDataCy('subtitle').contains(locale['en'].home.profission);

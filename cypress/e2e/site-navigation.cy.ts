@@ -26,7 +26,7 @@ describe('Site navigation', () => {
     cy.getDataCy('selfie').should('exist');
   });
 
-  it.skip('should interact with modal', () => {
+  it('should interact with modal', () => {
     cy.visit('/work-experience');
 
     cy.getDataCy('desk-card-component').then(el => {
