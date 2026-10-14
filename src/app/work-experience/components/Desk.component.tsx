@@ -2,6 +2,7 @@ import InfoCardComponent from '@/app/components/InfoCard.component';
 import styled from 'styled-components';
 import { Column, Wrapper } from '@/app/styles/styles';
 import DeskCardComponent from './DeskCard.component';
+import { colors } from '@/app/styles/theme';
 
 const DeskWorkExperience = () => {
   return (
@@ -26,7 +27,7 @@ export const InfoCardDesk = styled(InfoCardComponent)``;
 
 const DeskColumn = styled(Column)`
   &:first-child {
-    border-right: 5px solid #843235;
+    border-right: 5px solid ${colors.accentLine};
   }
 
   ${InfoCardDesk}:last-child {

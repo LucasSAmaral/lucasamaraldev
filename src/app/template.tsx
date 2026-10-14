@@ -6,7 +6,6 @@ import NavigationMenuComponent from './components/navigation-menu/NavigationMenu
 import { Container, Main, Section } from './styles/styles';
 import styled, { keyframes } from 'styled-components';
 import FooterComponent from './components/Footer.component';
-import { Inter } from 'next/font/google';
 import { useModal } from './components/modal/Modal.context';
 import LanguageOptionsComponent from './components/language-options/LanguageOptions.component';
 
@@ -14,8 +13,6 @@ export type TransitionStateType = {
   exiting: boolean;
   nextRoute: string;
 };
-
-const inter = Inter({ subsets: ['latin'] });
 
 const initialTransitionState = {
   exiting: false,
@@ -42,7 +39,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const { exiting, nextRoute } = transitionState;
 
   return (
-    <Main className={inter.className}>
+    <Main>
       <div>
         <NavigationMenuComponent setTransitionState={setTransitionState} />
         <LanguageOptionsComponent />

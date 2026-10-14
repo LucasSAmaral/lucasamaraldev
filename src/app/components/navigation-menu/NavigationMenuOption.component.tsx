@@ -1,11 +1,9 @@
 import { TransitionStateType } from '@/app/template';
-import { Inter } from 'next/font/google';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
 import { useContext, useEffect } from 'react';
-
-const inter = Inter({ subsets: ['latin'] });
+import { colors } from '@/app/styles/theme';
 
 const exitingObject = { exiting: true };
 
@@ -36,7 +34,6 @@ const NavigationMenuOptionComponent: React.FC<NavigationMenuOptionComponentProps
   return (
     <NavigationMenuOption
       data-cy={nextRouteDataCy}
-      className={inter.className}
       onClick={() => {
         if (actualRoute != nextRoute) {
           setTransitionState({ ...exitingObject, nextRoute });
@@ -53,7 +50,7 @@ const NavigationMenuOptionComponent: React.FC<NavigationMenuOptionComponentProps
 
 const NavigationMenuOption = styled.button`
   text-decoration: none;
-  color: #fffffe;
+  color: ${colors.text};
   font-size: 16px;
   font-weight: 600;
   transition: 200ms;

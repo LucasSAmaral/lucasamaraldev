@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useContext } from 'react';
 import styled, { css } from 'styled-components';
+import { colors } from '@/app/styles/theme';
 import { TransitionStateType } from '../../template';
 import NavigationMenuOption from './NavigationMenuOption.component';
 import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
@@ -71,7 +72,7 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
 };
 
 const NavigationMenuWrapper = styled.div`
-  background-color: #363b3f;
+  background-color: ${colors.surface};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,7 +118,7 @@ const ActiveBar = styled.div.attrs<{
   $actualRoute: props.$actualRoute,
   $selectedLanguage: props.$selectedLanguage,
 }))`
-  background-color: #fffffe;
+  background-color: ${colors.accent};
   height: 100%;
   transition: 0.3s;
   position: absolute;

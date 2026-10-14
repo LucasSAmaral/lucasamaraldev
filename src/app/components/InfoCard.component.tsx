@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { colors } from '@/app/styles/theme';
 
 const InfoCardComponent: React.FC<{
   children: React.ReactNode;
@@ -19,7 +20,7 @@ const InfoCard = styled.div.attrs<{ $left?: boolean; $right?: boolean }>(props =
   $left: props.$left || false,
   $right: props.$right || false,
 }))`
-  background-color: #363c3f;
+  background-color: ${colors.surface};
   padding: 20px;
   width: 300px;
   text-align: left;
@@ -43,7 +44,8 @@ const InfoCard = styled.div.attrs<{ $left?: boolean; $right?: boolean }>(props =
             content: '+';
             width: 20px;
             height: 20px;
-            background-color: #843235;
+            background-color: ${colors.accent};
+            color: ${colors.onAccent};
             position: absolute;
             display: flex;
             flex-direction: column;
@@ -51,7 +53,7 @@ const InfoCard = styled.div.attrs<{ $left?: boolean; $right?: boolean }>(props =
             border-radius: 20px;
             line-height: 1.2;
             font-weight: 500;
-            box-shadow: 0px 0px 2px 7px rgb(255, 255, 254, 0.2);
+            box-shadow: 0px 0px 2px 7px ${colors.accentSoft};
             top: 15px;
             ${$left &&
             css`
@@ -68,7 +70,7 @@ const InfoCard = styled.div.attrs<{ $left?: boolean; $right?: boolean }>(props =
             content: ' ';
             width: 10px;
             height: 10px;
-            background-color: #363c3f;
+            background-color: ${colors.surface};
             display: block;
             position: absolute;
             transform: rotate(45deg);

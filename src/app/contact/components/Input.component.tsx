@@ -1,6 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
+import { colors } from '@/app/styles/theme';
 import { Control, Controller, FieldError, FieldErrors, RegisterOptions } from 'react-hook-form';
 import { FormValues } from '../page';
 import { HTMLInputTypeAttribute, useState } from 'react';
@@ -98,16 +99,15 @@ const Wrapper = styled.div.attrs<{ $fieldError?: FieldError }>(props => ({
 
   ${Input}, ${TextArea} {
     ${({ $fieldError }) => (!$fieldError ? 'margin-bottom: 27px;' : 'margin-bottom: 10px;')}
-    color: #fffffe;
+    color: ${colors.text};
     border-radius: 4px;
     padding: 8px 15px;
     border: none;
-    outline: none;
-    background-color: #363b3f;
+    background-color: ${colors.surface};
   }
 
   span {
-    color: #ff6262;
+    color: ${colors.errorText};
     font-size: 14px;
     margin-left: 15px;
   }

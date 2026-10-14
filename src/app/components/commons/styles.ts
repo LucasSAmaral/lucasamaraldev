@@ -1,6 +1,7 @@
 'use client';
 import { MenuStatus } from '../navigation-menu/NavigationMenu.component';
 import styled, { css, keyframes } from 'styled-components';
+import { colors } from '@/app/styles/theme';
 
 const FadeInAnimation = keyframes`
   0% {
@@ -50,25 +51,25 @@ export const MenuTooltipStyle = (menuStatus: MenuStatus) => {
     display: flex;
     flex-direction: column;
     position: absolute;
-    background-color: #363b3f;
+    background-color: ${colors.surface};
     padding-bottom: 20px;
     border-radius: 4px;
     z-index: 10000;
-    border: 1px solid #fffffe;
+    border: 1px solid ${colors.borderStrong};
     ${() => MenuAnimation(menuStatus)}
 
     &:before {
       content: ' ';
       width: 20px;
       height: 20px;
-      background-color: #363b3f;
+      background-color: ${colors.surface};
       position: absolute;
       display: block;
       top: -11px;
       right: calc(50% - 10px);
       transform: rotate(45deg);
-      border-top: 1px solid #fffffe;
-      border-left: 1px solid #fffffe;
+      border-top: 1px solid ${colors.borderStrong};
+      border-left: 1px solid ${colors.borderStrong};
     }
   `;
 };

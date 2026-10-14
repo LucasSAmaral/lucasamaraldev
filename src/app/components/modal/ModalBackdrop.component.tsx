@@ -1,6 +1,7 @@
 "use client";
 
 import styled, { keyframes } from "styled-components";
+import { colors } from '@/app/styles/theme';
 
 export default function ModalBackdropComponent({
   children,
@@ -66,7 +67,7 @@ const ModalFadeOutBottom = keyframes`
 const Backdrop = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0, 0.8);
+  background-color: ${colors.overlay};
   position: fixed;
   z-index: 1000;
   display: flex;

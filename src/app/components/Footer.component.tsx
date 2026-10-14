@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '@/app/styles/theme';
 import Image from 'next/image';
 import LinkeInLogo from '../../assets/linkedin_logo_icon.svg';
 import InstagramLogo from '../../assets/instagram_logo_icon.svg';
@@ -57,7 +58,7 @@ const FooterComponent: React.FC = () => {
 
 const Footer = styled.footer`
   width: 100%;
-  background-color: #363b3f;
+  background-color: ${colors.surface};
   height: 60px;
   display: flex;
   justify-content: center;
@@ -68,9 +69,9 @@ const Footer = styled.footer`
     height: 25px;
 
     img {
-      background-color: #ffffff;
+      background-color: ${colors.text};
       border-radius: 50%;
-      border: 1px solid #ffffff;
+      border: 1px solid ${colors.text};
     }
   }
 `;

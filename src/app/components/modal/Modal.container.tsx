@@ -5,6 +5,7 @@ import ReactDom from 'react-dom';
 import styled from 'styled-components';
 import { useModal } from './Modal.context';
 import ModalBackdropComponent from './ModalBackdrop.component';
+import { colors } from '@/app/styles/theme';
 
 const ModalContainer: React.FC = () => {
   const {
@@ -83,10 +84,10 @@ const ModalContainer: React.FC = () => {
 
 const ModalContent = styled.div`
   position: fixed;
-  background-color: #363b3f;
+  background-color: ${colors.surface};
   max-width: 800px;
   border-radius: 5px;
-  color: #f0f5f9;
+  color: ${colors.text};
   width: 100%;
   padding: 20px 10px;
   z-index: 1042;

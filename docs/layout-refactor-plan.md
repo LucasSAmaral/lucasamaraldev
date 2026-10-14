@@ -23,12 +23,12 @@ O canvas tem 8 telas: Início, Sobre mim, Experiência e Contato (desktop), o mo
 
 ## Fase 1 — Fundação (tokens e estilos globais)
 
-- [ ] 1.1 Criar `src/app/styles/theme.ts` com os tokens (cores, fontes, raios, espaçamentos) e registrar um `ThemeProvider` do styled-components em `Providers.tsx`.
-- [ ] 1.2 Carregar Space Grotesk via `next/font/google` (junto da Inter) e expor como variáveis CSS.
-- [ ] 1.3 Atualizar `globalStyle.ts`: novo fundo/cor de texto, `button, input, textarea { font: inherit; }`, foco visível (`:focus-visible`) na cor de destaque, `prefers-reduced-motion`.
-- [ ] 1.4 Revisar `body { overflow: hidden }` + `Main` com `100dvh`: permitir rolagem vertical (`overflow-x: hidden` apenas) para telas baixas.
-- [ ] 1.5 Trocar `<html lang="en">` por `pt-BR` no `layout.tsx` (idealmente refletindo o idioma selecionado).
-- [ ] 1.6 Substituir cores hardcoded (`#363b3f`, `#4c5665`, `#fffffe`…) pelos tokens nos arquivos existentes.
+- [x] 1.1 Criar `src/app/styles/theme.ts` com os tokens (cores, fontes, raios, espaçamentos, transições). Exportados como constantes em vez de `ThemeProvider`, para os component tests do Cypress (que montam sem providers) continuarem funcionando.
+- [x] 1.2 Carregar Space Grotesk via `next/font/google` junto da Inter (`src/app/styles/fonts.ts`), expostas como `--font-inter` e `--font-space-grotesk` no `<html>`. Removidas as instâncias duplicadas da Inter nos componentes.
+- [x] 1.3 Atualizar `globalStyle.ts`: novo fundo/cor de texto, `button, input, textarea, select { font: inherit; }`, foco visível (`:focus-visible`) na cor de destaque, `prefers-reduced-motion`.
+- [x] 1.4 `body` com `overflow-x: hidden` (rolagem vertical liberada) e `Main` com `min-height: 100dvh`.
+- [x] 1.5 `<html lang="pt-BR">` no `layout.tsx`, sincronizado com o idioma selecionado pelo `LanguageOptionsProvider`.
+- [x] 1.6 Substituir cores hardcoded pelos tokens nos arquivos existentes (inclui remover o `outline: none` dos inputs do contato).
 
 ## Fase 2 — Header e navegação
 

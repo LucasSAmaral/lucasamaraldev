@@ -13,6 +13,7 @@ import { useModal } from '../components/modal/Modal.context';
 import { buildContactFormRules } from './helpers';
 import Image from 'next/image';
 import LoadingIcon from '../../assets/loading-icon.gif';
+import { colors } from '@/app/styles/theme';
 
 export type FormValues = {
   fromName: string;
@@ -193,11 +194,11 @@ const ButtonStyle = () => {
     margin: 0 auto;
     margin-top: 30px;
     border-radius: 4px;
-    border: 1px solid #fffffe;
+    border: 1px solid ${colors.borderStrong};
     padding: 8px 12px;
     cursor: pointer;
-    background-color: #363b3f;
-    color: #fffffe;
+    background-color: ${colors.surface};
+    color: ${colors.text};
   `;
 };
 

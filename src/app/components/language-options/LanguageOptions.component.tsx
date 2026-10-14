@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import { Inter } from 'next/font/google';
 import CONFIG from '../../../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './LanguageOptions.context';
 import { Menu, MenuTooltipStyle } from '../commons/styles';
 import { NavigationMenuContext } from '../navigation-menu/NavigationMenu.context';
-
-const inter = Inter({ subsets: ['latin'] });
+import { colors } from '@/app/styles/theme';
 
 const { locale } = CONFIG;
 
@@ -24,9 +22,8 @@ const LanguageOptionsComponent = () => {
   const languageOptionsLocale = locale[selectedLanguage].languageOptions;
 
   return (
-    <LanguageOptionsWrapper className={inter.className}>
+    <LanguageOptionsWrapper>
       <LanguageButton
-        className={inter.className}
         data-cy="language-button"
         onClick={() => {
           if (navigationMenuMobileStatus === 'OPENED') {
@@ -59,7 +56,6 @@ const LanguageOptionsComponent = () => {
         }}
       >
         <LanguageOption
-          className={inter.className}
           data-cy="pt"
           onClick={() => {
             updateLanguageOptionsState({ selectedLanguage: 'pt' });
@@ -69,7 +65,6 @@ const LanguageOptionsComponent = () => {
           {languageOptionsLocale.portugueseOption}
         </LanguageOption>
         <LanguageOption
-          className={inter.className}
           data-cy="en"
           onClick={() => {
             updateLanguageOptionsState({ selectedLanguage: 'en' });
@@ -89,8 +84,8 @@ const LanguageOptionsWrapper = styled.div`
   position: relative;
   gap: 5px;
   padding: 10px 0;
-  border-top: 1px solid #fffffe;
-  border-bottom: 1px solid #fffffe;
+  border-top: 1px solid ${colors.border};
+  border-bottom: 1px solid ${colors.border};
 
   @media (max-width: 672px) {
     align-items: center;
@@ -100,11 +95,11 @@ const LanguageOptionsWrapper = styled.div`
 const LanguageButton = styled.button`
   cursor: pointer;
   padding: 10px 25px;
-  border: 1px solid #fffffe;
+  border: 1px solid ${colors.borderStrong};
   border-radius: 5px;
-  background-color: #363b3f;
+  background-color: ${colors.surface};
   font-size: 16px;
-  color: #fffffe;
+  color: ${colors.text};
   font-weight: 600;
 `;
 
@@ -118,7 +113,7 @@ const LanguageOption = styled.button`
   cursor: pointer;
   background-color: transparent;
   font-size: 16px;
-  color: #fffffe;
+  color: ${colors.text};
   font-weight: 600;
 `;
 
