@@ -2,6 +2,9 @@
   "locale": {
     "en": {
       "home": {
+        "greeting": "Hi, I'm",
+        "intro": "I have been building interfaces with React, TypeScript and Next.js since 2015. Today I work on the payment and “my account” flows at Americanas S.A.",
+        "location": "Rio de Janeiro, Brazil",
         "profission": "Front-End Developer",
         "alt": "My selfie at the bottom of Eiffel Tower",
         "title": "My selfie"

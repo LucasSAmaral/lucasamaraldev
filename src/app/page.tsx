@@ -6,7 +6,7 @@ import Photo from '../assets/selfie.jpg';
 import config from '../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './components/language-options/LanguageOptions.context';
-import { breakpoints, colors, fonts } from './styles/theme';
+import { breakpoints, colors, fonts, radii } from './styles/theme';
 
 const {
   locale: { commonLocale, ...locale },
@@ -22,8 +22,10 @@ export default function Home() {
   return (
     <Hero>
       <HeroText>
+        <Greeting>{homeLocale.greeting}</Greeting>
         <Title data-cy="title">{commonLocale.name}</Title>
         <Subtitle data-cy="subtitle">{homeLocale.profission}</Subtitle>
+        <Intro>{homeLocale.intro}</Intro>
       </HeroText>
       <HeroPhoto>
         <Selfie
@@ -34,6 +36,23 @@ export default function Home() {
           sizes={`(max-width: ${breakpoints.homeColumns}px) 96px, 360px`}
           priority={true}
         />
+        <LocationBadge>
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          {homeLocale.location}
+        </LocationBadge>
       </HeroPhoto>
     </Hero>
   );
@@ -71,6 +90,17 @@ const HeroText = styled.div`
   }
 `;
 
+const Greeting = styled.span`
+  color: ${colors.accent};
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+
+  @media (max-width: ${breakpoints.homeColumns}px) {
+    font-size: 14px;
+  }
+`;
+
 const Title = styled.h1`
   font-family: ${fonts.heading};
   font-size: clamp(44px, 6vw + 8px, 72px);
@@ -84,6 +114,18 @@ const Subtitle = styled.p`
   font-size: clamp(21px, 1.2vw + 16px, 28px);
   font-weight: 500;
   color: ${colors.textSecondary};
+`;
+
+const Intro = styled.p`
+  max-width: 520px;
+  color: ${colors.textMuted};
+  font-size: 17px;
+  line-height: 1.65;
+
+  @media (max-width: ${breakpoints.homeColumns}px) {
+    font-size: 16px;
+    line-height: 1.6;
+  }
 `;
 
 const HeroPhoto = styled.div`
@@ -112,5 +154,28 @@ const Selfie = styled(Image)`
 
   @media (max-width: ${breakpoints.homeColumns}px) {
     width: 96px;
+  }
+`;
+
+const LocationBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: ${radii.pill};
+  background-color: ${colors.surface};
+  color: ${colors.textSecondary};
+  font-size: 14px;
+
+  svg {
+    flex-shrink: 0;
+    color: ${colors.accent};
+  }
+
+  @media (max-width: ${breakpoints.homeColumns}px) {
+    gap: 6px;
+    padding: 7px 12px;
+    font-size: 13px;
   }
 `;
