@@ -1,14 +1,11 @@
 import { Dispatch, SetStateAction, useContext } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { breakpoints, colors } from '@/app/styles/theme';
 import { TransitionStateType } from '../../template';
 import NavigationMenuOption from './NavigationMenuOption.component';
-import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
+import { NavigationMenuContext } from './NavigationMenu.context';
 import config from '../../../../generated-config.json';
-import {
-  LanguageOptionsContext,
-  SelectedLanguage,
-} from '../language-options/LanguageOptions.context';
+import { LanguageOptionsContext } from '../language-options/LanguageOptions.context';
 import { Menu, MenuTooltipStyle } from '../commons/styles';
 
 type NavigationMenuComponentProps = {
@@ -28,11 +25,8 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
     updateLanguageMenuStatus,
   } = useContext(LanguageOptionsContext);
 
-  const {
-    navigationMenuState: { actualRouteState },
-    navigationMenuMobileStatus,
-    updateNavigationMenuMobileStatus,
-  } = useContext(NavigationMenuContext);
+  const { navigationMenuMobileStatus, updateNavigationMenuMobileStatus } =
+    useContext(NavigationMenuContext);
 
   return (
     <NavigationMenuWrapper>
@@ -62,9 +56,6 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
           </NavigationMenuOption>
         ))}
       </NavigationMenu>
-      <ActiveBarWrapper $selectedLanguage={selectedLanguage}>
-        <ActiveBar $actualRoute={actualRouteState} $selectedLanguage={selectedLanguage} />
-      </ActiveBarWrapper>
     </NavigationMenuWrapper>
   );
 };
@@ -79,6 +70,7 @@ const NavigationMenu = styled(Menu)`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  gap: 4px;
   padding: 0;
 
   @media (max-width: ${breakpoints.navigationMenu}px) {
@@ -88,90 +80,5 @@ const NavigationMenu = styled(Menu)`
     ${({ $menuStatus }) => MenuTooltipStyle($menuStatus)}
   }
 `;
-
-const ActiveBarWrapper = styled.div.attrs<{ $selectedLanguage: SelectedLanguage }>(props => ({
-  $selectedLanguage: props.$selectedLanguage,
-}))`
-  height: 2px;
-  width: 100%;
-  max-width: ${({ $selectedLanguage }) => ($selectedLanguage === 'pt' ? '443px' : '385.69px')};
-  position: relative;
-
-  @media (max-width: ${breakpoints.navigationMenu}px) {
-    display: none;
-  }
-`;
-
-const ActiveBar = styled.div.attrs<{
-  $actualRoute: ActualRoute;
-  $selectedLanguage: SelectedLanguage;
-}>(props => ({
-  $actualRoute: props.$actualRoute,
-  $selectedLanguage: props.$selectedLanguage,
-}))`
-  background-color: ${colors.accent};
-  height: 100%;
-  transition: 0.3s;
-  position: absolute;
-  ${({ $actualRoute, $selectedLanguage }) => TransformActiveBar($actualRoute, $selectedLanguage)}
-`;
-
-const TransformActiveBar = (actualRoute: ActualRoute, selectedLanguage: SelectedLanguage) => {
-  switch (actualRoute) {
-    case '/': {
-      if (selectedLanguage === 'pt') {
-        return css`
-          width: 41.47px;
-          transform: translateX(0);
-        `;
-      }
-      return css`
-        width: 45.48px;
-        transform: translateX(0);
-      `;
-    }
-
-    case '/about-me':
-      {
-        if (selectedLanguage === 'pt') {
-          return css`
-            width: 82.87px;
-            transform: translateX(65px);
-          `;
-        }
-      }
-      return css`
-        width: 75.17px;
-        transform: translateX(69px);
-      `;
-
-    case '/work-experience':
-      {
-        if (selectedLanguage === 'pt') {
-          return css`
-            width: 185.33px;
-            transform: translateX(173px);
-          `;
-        }
-      }
-      return css`
-        width: 131px;
-        transform: translateX(168px);
-      `;
-
-    case '/contact': {
-      if (selectedLanguage === 'pt') {
-        return css`
-          width: 62.38px;
-          transform: translateX(382px);
-        `;
-      }
-      return css`
-        width: 62.38px;
-        transform: translateX(323px);
-      `;
-    }
-  }
-};
 
 export default NavigationMenuComponent;

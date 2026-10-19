@@ -1,9 +1,10 @@
 import { TransitionStateType } from '@/app/template';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
-import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
-import { useContext, useEffect } from 'react';
-import { breakpoints, colors } from '@/app/styles/theme';
+import { NavigationMenuContext } from './NavigationMenu.context';
+import { useContext } from 'react';
+import { breakpoints, colors, radii, transitions } from '@/app/styles/theme';
 
 const exitingObject = { exiting: true };
 
@@ -20,22 +21,21 @@ const NavigationMenuOptionComponent: React.FC<NavigationMenuOptionComponentProps
 }) => {
   const actualRoute = usePathname();
 
-  const { updateNavigationMenuState, updateNavigationMenuMobileStatus } =
-    useContext(NavigationMenuContext);
+  const { updateNavigationMenuMobileStatus } = useContext(NavigationMenuContext);
 
   const nextRouteDataCy =
     nextRoute.split('/')[1] === '' ? 'home-option' : `${nextRoute.split('/')[1]}-option`;
 
-  useEffect(() => {
-    updateNavigationMenuState({ actualRouteState: actualRoute as ActualRoute });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const isActive = actualRoute === nextRoute;
 
   return (
     <NavigationMenuOption
+      href={nextRoute}
       data-cy={nextRouteDataCy}
-      onClick={() => {
-        if (actualRoute != nextRoute) {
+      aria-current={isActive ? 'page' : undefined}
+      onClick={event => {
+        event.preventDefault();
+        if (!isActive) {
           setTransitionState({ ...exitingObject, nextRoute });
         }
         if (window.innerWidth <= breakpoints.navigationMenu) {
@@ -48,21 +48,25 @@ const NavigationMenuOptionComponent: React.FC<NavigationMenuOptionComponentProps
   );
 };
 
-const NavigationMenuOption = styled.button`
+const NavigationMenuOption = styled(Link)`
+  padding: 9px 16px;
+  border-radius: ${radii.pill};
+  color: ${colors.textMuted};
+  font-size: 15px;
+  font-weight: 500;
   text-decoration: none;
-  color: ${colors.text};
-  font-size: 16px;
-  font-weight: 600;
-  transition: 200ms;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color ${transitions.fast},
+    background-color ${transitions.fast};
 
   &:hover {
-    scale: 1.02;
+    color: ${colors.text};
   }
-  &:active {
-    scale: 0.98;
+
+  &[aria-current='page'] {
+    color: ${colors.accent};
+    background-color: ${colors.accentSoft};
   }
 `;
 
