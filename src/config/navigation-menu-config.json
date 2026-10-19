@@ -2,10 +2,10 @@
   "navigationMenu": {
     "navigationMenuOptionList": [
       { "nextRoute": "/", "optionName": { "pt": "Início", "en": "Home" } },
-      { "nextRoute": "/about-me", "optionName": { "pt": "Sobre Mim", "en": "About Me" } },
+      { "nextRoute": "/about-me", "optionName": { "pt": "Sobre mim", "en": "About me" } },
       {
         "nextRoute": "/work-experience",
-        "optionName": { "pt": "Experiência Profissional", "en": "Work Experience" }
+        "optionName": { "pt": "Experiência", "en": "Experience" }
       },
       {
         "nextRoute": "/contact",

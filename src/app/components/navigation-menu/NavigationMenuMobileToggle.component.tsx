@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { breakpoints } from '@/app/styles/theme';
 import { MenuStatus } from './NavigationMenu.component';
 import { LanguageOptionsContext } from '../language-options/LanguageOptions.context';
 import { NavigationMenuContext } from './NavigationMenu.context';
@@ -50,17 +51,17 @@ const FirstLine = styled.div`
   transform: rotate(0deg);
   position: absolute;
   right: calc(50% - 15px);
-  top: -12px;
+  top: 10px;
 `;
 
 const SecondLine = styled(FirstLine)`
   opacity: 1;
-  top: -3px;
+  top: 19px;
 `;
 
 const ThirdLine = styled(FirstLine)`
   margin: 0;
-  top: 6px;
+  top: 28px;
 `;
 
 const Input = styled.input`
@@ -71,22 +72,24 @@ const Input = styled.input`
 const Label = styled.label`
   display: none;
   position: relative;
+  width: 44px;
+  height: 44px;
   input[type='checkbox']:checked ~ ${FirstLine} {
     transform: rotate(-45deg);
-    top: 0;
+    top: 19px;
   }
 
   input[type='checkbox']:checked ~ ${SecondLine} {
     opacity: 0;
-    top: 0;
+    top: 19px;
   }
 
   input[type='checkbox']:checked ~ ${ThirdLine} {
     transform: rotate(45deg);
-    top: 0;
+    top: 19px;
   }
 
-  @media (max-width: 672px) {
+  @media (max-width: ${breakpoints.navigationMenu}px) {
     display: block;
   }
 `;

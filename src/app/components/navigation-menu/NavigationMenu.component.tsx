@@ -1,11 +1,10 @@
 import { Dispatch, SetStateAction, useContext } from 'react';
 import styled, { css } from 'styled-components';
-import { colors } from '@/app/styles/theme';
+import { breakpoints, colors } from '@/app/styles/theme';
 import { TransitionStateType } from '../../template';
 import NavigationMenuOption from './NavigationMenuOption.component';
 import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
 import config from '../../../../generated-config.json';
-import NavigationMenuMobileToggle from './NavigationMenuMobileToggle.component';
 import {
   LanguageOptionsContext,
   SelectedLanguage,
@@ -37,7 +36,6 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
 
   return (
     <NavigationMenuWrapper>
-      <NavigationMenuMobileToggle />
       <NavigationMenu
         $menuStatus={navigationMenuMobileStatus}
         onAnimationEnd={() => {
@@ -72,28 +70,21 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
 };
 
 const NavigationMenuWrapper = styled.div`
-  background-color: ${colors.surface};
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px;
-
-  @media (max-width: 672px) {
-    padding: 0;
-    height: 62px;
-    position: relative;
-    justify-content: center;
-  }
 `;
 
 const NavigationMenu = styled(Menu)`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-bottom: 0;
+  padding: 0;
 
-  @media (max-width: 672px) {
-    top: 80px;
+  @media (max-width: ${breakpoints.navigationMenu}px) {
+    top: calc(100% + 12px);
+    right: 20px;
+    padding: 20px;
     ${({ $menuStatus }) => MenuTooltipStyle($menuStatus)}
   }
 `;
@@ -106,7 +97,7 @@ const ActiveBarWrapper = styled.div.attrs<{ $selectedLanguage: SelectedLanguage 
   max-width: ${({ $selectedLanguage }) => ($selectedLanguage === 'pt' ? '443px' : '385.69px')};
   position: relative;
 
-  @media (max-width: 672px) {
+  @media (max-width: ${breakpoints.navigationMenu}px) {
     display: none;
   }
 `;

@@ -2,12 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import NavigationMenuComponent from './components/navigation-menu/NavigationMenu.component';
+import HeaderComponent from './components/Header.component';
 import { Container, Main, Section } from './styles/styles';
 import styled, { keyframes } from 'styled-components';
 import FooterComponent from './components/Footer.component';
 import { useModal } from './components/modal/Modal.context';
-import LanguageOptionsComponent from './components/language-options/LanguageOptions.component';
 
 export type TransitionStateType = {
   exiting: boolean;
@@ -40,10 +39,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   return (
     <Main>
-      <div>
-        <NavigationMenuComponent setTransitionState={setTransitionState} />
-        <LanguageOptionsComponent />
-      </div>
+      <HeaderComponent setTransitionState={setTransitionState} />
       <MainSection
         $exiting={exiting}
         onAnimationEnd={() => {

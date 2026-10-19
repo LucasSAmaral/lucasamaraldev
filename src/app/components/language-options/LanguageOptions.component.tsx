@@ -82,29 +82,24 @@ const LanguageOptionsWrapper = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  align-items: center;
   gap: 5px;
-  padding: 10px 0;
-  border-top: 1px solid ${colors.border};
-  border-bottom: 1px solid ${colors.border};
-
-  @media (max-width: 672px) {
-    align-items: center;
-  }
 `;
 
 const LanguageButton = styled.button`
   cursor: pointer;
-  padding: 10px 25px;
+  padding: 8px 16px;
   border: 1px solid ${colors.borderStrong};
-  border-radius: 5px;
+  border-radius: 999px;
   background-color: ${colors.surface};
-  font-size: 16px;
+  font-size: 14px;
   color: ${colors.text};
   font-weight: 600;
 `;
 
 const LanguageMenu = styled(Menu)`
-  top: 70px;
+  top: calc(100% + 12px);
+  right: 0;
   ${({ $menuStatus }) => MenuTooltipStyle($menuStatus)};
 `;
 

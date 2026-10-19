@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
 import { useContext, useEffect } from 'react';
-import { colors } from '@/app/styles/theme';
+import { breakpoints, colors } from '@/app/styles/theme';
 
 const exitingObject = { exiting: true };
 
@@ -38,7 +38,7 @@ const NavigationMenuOptionComponent: React.FC<NavigationMenuOptionComponentProps
         if (actualRoute != nextRoute) {
           setTransitionState({ ...exitingObject, nextRoute });
         }
-        if (window.innerWidth <= 672) {
+        if (window.innerWidth <= breakpoints.navigationMenu) {
           updateNavigationMenuMobileStatus('CLOSING');
         }
       }}

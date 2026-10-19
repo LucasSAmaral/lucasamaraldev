@@ -32,7 +32,7 @@ O canvas tem 8 telas: Início, Sobre mim, Experiência e Contato (desktop), o mo
 
 ## Fase 2 — Header e navegação
 
-- [ ] 2.1 Unificar header em uma barra: logo "LA" + nome à esquerda, menu no centro/direita, seletor de idioma à direita (`template.tsx`, `NavigationMenu.component.tsx`).
+- [x] 2.1 Unificar header em uma barra: logo "LA" + nome à esquerda, menu no centro/direita, seletor de idioma à direita (`template.tsx`, `NavigationMenu.component.tsx`).
 - [ ] 2.2 Item ativo como pílula na cor de destaque (fundo suave) em `NavigationMenuOption.component.tsx`.
 - [ ] 2.3 Trocar o botão/tooltip de idioma por um seletor segmentado PT | EN (`LanguageOptions.component.tsx`), mantendo `data-cy` `language-button`/`pt`/`en` (ajustar o e2e de tradução se o fluxo de clique mudar).
 - [ ] 2.4 Menu mobile: trocar o checkbox sem rótulo por `<button aria-label aria-expanded>` (`NavigationMenuMobileToggle.component.tsx`) e redesenhar o painel aberto.

@@ -36,7 +36,12 @@ export const radii = {
   pill: '999px',
 } as const;
 
-export const space = (multiplier: number) => `${multiplier * 4}px`;
+// Larguras (px) em que o layout muda. Números para servir tanto ao CSS quanto ao matchMedia.
+export const breakpoints = {
+  navigationMenu: 864,
+} as const;
+
+export const space =(multiplier: number) => `${multiplier * 4}px`;
 
 export const transitions = {
   fast: '200ms',
