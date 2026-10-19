@@ -1,90 +1,86 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { breakpoints } from '@/app/styles/theme';
-import { MenuStatus } from './NavigationMenu.component';
+import { breakpoints, colors, radii } from '@/app/styles/theme';
 import { NavigationMenuContext } from './NavigationMenu.context';
+import { LanguageOptionsContext } from '../language-options/LanguageOptions.context';
+import config from '../../../../generated-config.json';
 
-const shouldCheckNavigationMenuMobile = (navigationMenuMobileStatus: MenuStatus) =>
-  navigationMenuMobileStatus === 'OPENED' || navigationMenuMobileStatus === 'OPENING';
+const { locale } = config;
+
+export const NAVIGATION_MENU_ID = 'navigation-menu';
 
 const NavigationMenuMobileToggle: React.FC = () => {
+  const {
+    languageOptionsState: { selectedLanguage },
+  } = useContext(LanguageOptionsContext);
+
   const { navigationMenuMobileStatus, updateNavigationMenuMobileStatus } =
     useContext(NavigationMenuContext);
 
+  const isOpen =
+    navigationMenuMobileStatus === 'OPENED' || navigationMenuMobileStatus === 'OPENING';
+  const headerLocale = locale[selectedLanguage].header;
+
   return (
-    <Label htmlFor="menu-mobile">
-      <Input
-        type="checkbox"
-        id="menu-mobile"
-        defaultChecked={shouldCheckNavigationMenuMobile(navigationMenuMobileStatus)}
-        onClick={() => {
-          switch (navigationMenuMobileStatus) {
-            case 'CLOSED':
-              return updateNavigationMenuMobileStatus('OPENING');
-            case 'OPENED':
-              return updateNavigationMenuMobileStatus('CLOSING');
-            default:
-              return;
-          }
-        }}
-      />
-      <FirstLine />
-      <SecondLine />
-      <ThirdLine />
-    </Label>
+    <ToggleButton
+      type="button"
+      data-cy="navigation-menu-toggle"
+      aria-label={isOpen ? headerLocale.closeMenu : headerLocale.openMenu}
+      aria-expanded={isOpen}
+      aria-controls={NAVIGATION_MENU_ID}
+      onClick={() => {
+        switch (navigationMenuMobileStatus) {
+          case 'CLOSED':
+            return updateNavigationMenuMobileStatus('OPENING');
+          case 'OPENED':
+            return updateNavigationMenuMobileStatus('CLOSING');
+          default:
+            return;
+        }
+      }}
+    >
+      <svg
+        aria-hidden="true"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {isOpen ? (
+          <>
+            <line x1="6" x2="18" y1="6" y2="18" />
+            <line x1="18" x2="6" y1="6" y2="18" />
+          </>
+        ) : (
+          <>
+            <line x1="4" x2="20" y1="7" y2="7" />
+            <line x1="4" x2="20" y1="12" y2="12" />
+            <line x1="4" x2="14" y1="17" y2="17" />
+          </>
+        )}
+      </svg>
+    </ToggleButton>
   );
 };
 
-const FirstLine = styled.div`
-  width: 30px;
-  height: 5px;
-  background-color: white;
-  border-radius: 20px;
-  margin-bottom: 5px;
-  transition: 200ms;
-  transform: rotate(0deg);
-  position: absolute;
-  right: calc(50% - 15px);
-  top: 10px;
-`;
-
-const SecondLine = styled(FirstLine)`
-  opacity: 1;
-  top: 19px;
-`;
-
-const ThirdLine = styled(FirstLine)`
-  margin: 0;
-  top: 28px;
-`;
-
-const Input = styled.input`
-  opacity: 0;
-  position: absolute;
-`;
-
-const Label = styled.label`
+const ToggleButton = styled.button`
   display: none;
-  position: relative;
   width: 44px;
   height: 44px;
-  input[type='checkbox']:checked ~ ${FirstLine} {
-    transform: rotate(-45deg);
-    top: 19px;
-  }
-
-  input[type='checkbox']:checked ~ ${SecondLine} {
-    opacity: 0;
-    top: 19px;
-  }
-
-  input[type='checkbox']:checked ~ ${ThirdLine} {
-    transform: rotate(45deg);
-    top: 19px;
-  }
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: ${radii.md};
+  background-color: transparent;
+  color: ${colors.text};
+  cursor: pointer;
 
   @media (max-width: ${breakpoints.navigationMenu}px) {
-    display: block;
+    display: flex;
   }
 `;
 

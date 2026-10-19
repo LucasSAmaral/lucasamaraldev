@@ -68,6 +68,14 @@ const NavigationMenuOption = styled(Link)`
     color: ${colors.accent};
     background-color: ${colors.accentSoft};
   }
+
+  @media (max-width: ${breakpoints.navigationMenu}px) {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    border-radius: ${radii.md};
+    font-size: 17px;
+  }
 `;
 
 export default NavigationMenuOptionComponent;

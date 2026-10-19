@@ -111,6 +111,11 @@
           ]
         }
       },
+      "header": {
+        "navigationLabel": "Principal",
+        "openMenu": "Abrir menu",
+        "closeMenu": "Fechar menu"
+      },
       "languageOptions": {
         "groupLabel": "Idioma"
       },
