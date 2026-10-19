@@ -7,6 +7,7 @@ import Photo from '../assets/selfie.jpg';
 import config from '../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './components/language-options/LanguageOptions.context';
+import SocialLinksComponent from './components/SocialLinks.component';
 import { breakpoints, colors, fonts, radii, transitions } from './styles/theme';
 
 const {
@@ -70,16 +71,21 @@ export default function Home() {
           </ActionLink>
           */}
         </Actions>
+        <SocialLinks>
+          <SocialLinksComponent />
+        </SocialLinks>
       </HeroText>
       <HeroPhoto>
-        <Selfie
-          data-cy="selfie"
-          src={Photo}
-          alt={homeLocale.alt}
-          title={homeLocale.title}
-          sizes={`(max-width: ${breakpoints.homeColumns}px) 96px, 360px`}
-          priority={true}
-        />
+        <PhotoRing>
+          <Selfie
+            data-cy="selfie"
+            src={Photo}
+            alt={homeLocale.alt}
+            title={homeLocale.title}
+            sizes={`(max-width: ${breakpoints.homeColumns}px) 96px, 360px`}
+            priority={true}
+          />
+        </PhotoRing>
         <LocationBadge>
           <svg
             aria-hidden="true"
@@ -236,6 +242,10 @@ const ActionLink = styled(Link)<{ $variant: ActionVariant }>`
   }
 `;
 
+const SocialLinks = styled.div`
+  margin-top: 8px;
+`;
+
 const HeroPhoto = styled.div`
   flex: 0 1 400px;
   display: flex;
@@ -248,6 +258,17 @@ const HeroPhoto = styled.div`
     flex-basis: auto;
     flex-direction: row;
     gap: 16px;
+  }
+`;
+
+const PhotoRing = styled.div`
+  padding: 10px;
+  border: 2px solid ${colors.accentLine};
+  border-radius: 50%;
+
+  @media (max-width: ${breakpoints.homeColumns}px) {
+    flex-shrink: 0;
+    padding: 5px;
   }
 `;
 
