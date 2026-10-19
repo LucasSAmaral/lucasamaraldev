@@ -112,10 +112,7 @@
         }
       },
       "languageOptions": {
-        "language": "Idioma: ",
-        "selectedLanguage": "Português",
-        "portugueseOption": "Português",
-        "englishOption": "Inglês"
+        "groupLabel": "Idioma"
       },
       "loading": "Carregando..."
     }

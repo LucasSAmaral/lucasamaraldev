@@ -1,115 +1,75 @@
 import styled from 'styled-components';
 import CONFIG from '../../../../generated-config.json';
 import { useContext } from 'react';
-import { LanguageOptionsContext } from './LanguageOptions.context';
-import { Menu, MenuTooltipStyle } from '../commons/styles';
-import { NavigationMenuContext } from '../navigation-menu/NavigationMenu.context';
-import { colors } from '@/app/styles/theme';
+import { LanguageOptionsContext, SelectedLanguage } from './LanguageOptions.context';
+import { breakpoints, colors, radii, transitions } from '@/app/styles/theme';
 
 const { locale } = CONFIG;
+
+const languageList: SelectedLanguage[] = ['pt', 'en'];
 
 const LanguageOptionsComponent = () => {
   const {
     languageOptionsState: { selectedLanguage },
-    languageMenuStatus,
     updateLanguageOptionsState,
-    updateLanguageMenuStatus,
   } = useContext(LanguageOptionsContext);
 
-  const { navigationMenuMobileStatus, updateNavigationMenuMobileStatus } =
-    useContext(NavigationMenuContext);
-
-  const languageOptionsLocale = locale[selectedLanguage].languageOptions;
-
   return (
-    <LanguageOptionsWrapper>
-      <LanguageButton
-        data-cy="language-button"
-        onClick={() => {
-          if (navigationMenuMobileStatus === 'OPENED') {
-            updateNavigationMenuMobileStatus('CLOSING');
-          }
-          switch (languageMenuStatus) {
-            case 'CLOSED':
-              return updateLanguageMenuStatus('OPENING');
-            case 'OPENED':
-              return updateLanguageMenuStatus('CLOSING');
-            default:
-              return;
-          }
-        }}
-      >
-        {languageOptionsLocale.language}
-        {languageOptionsLocale.selectedLanguage}
-      </LanguageButton>
-      <LanguageMenu
-        $menuStatus={languageMenuStatus}
-        onAnimationEnd={() => {
-          switch (languageMenuStatus) {
-            case 'OPENING':
-              return updateLanguageMenuStatus('OPENED');
-            case 'CLOSING':
-              return updateLanguageMenuStatus('CLOSED');
-            default:
-              return;
-          }
-        }}
-      >
+    <LanguageOptionsWrapper
+      role="group"
+      aria-label={locale[selectedLanguage].languageOptions.groupLabel}
+      data-cy="language-button"
+    >
+      {languageList.map(language => (
         <LanguageOption
-          data-cy="pt"
-          onClick={() => {
-            updateLanguageOptionsState({ selectedLanguage: 'pt' });
-            updateLanguageMenuStatus('CLOSING');
-          }}
+          key={language}
+          type="button"
+          data-cy={language}
+          lang={language === 'en' ? 'en' : 'pt-BR'}
+          aria-label={`${locale.commonLocale.languageOptions[language]} (${language.toUpperCase()})`}
+          aria-pressed={selectedLanguage === language}
+          onClick={() => updateLanguageOptionsState({ selectedLanguage: language })}
         >
-          {languageOptionsLocale.portugueseOption}
+          {language.toUpperCase()}
         </LanguageOption>
-        <LanguageOption
-          data-cy="en"
-          onClick={() => {
-            updateLanguageOptionsState({ selectedLanguage: 'en' });
-            updateLanguageMenuStatus('CLOSING');
-          }}
-        >
-          {languageOptionsLocale.englishOption}
-        </LanguageOption>
-      </LanguageMenu>
+      ))}
     </LanguageOptionsWrapper>
   );
 };
 
 const LanguageOptionsWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  position: relative;
-  align-items: center;
-  gap: 5px;
-`;
-
-const LanguageButton = styled.button`
-  cursor: pointer;
-  padding: 8px 16px;
-  border: 1px solid ${colors.borderStrong};
-  border-radius: 999px;
-  background-color: ${colors.surface};
-  font-size: 14px;
-  color: ${colors.text};
-  font-weight: 600;
-`;
-
-const LanguageMenu = styled(Menu)`
-  top: calc(100% + 12px);
-  right: 0;
-  ${({ $menuStatus }) => MenuTooltipStyle($menuStatus)};
+  padding: 3px;
+  border: 1px solid ${colors.border};
+  border-radius: ${radii.pill};
 `;
 
 const LanguageOption = styled.button`
+  min-height: 32px;
+  padding: 0 12px;
   border: none;
-  cursor: pointer;
+  border-radius: ${radii.pill};
   background-color: transparent;
-  font-size: 16px;
-  color: ${colors.text};
+  color: ${colors.textMuted};
+  font-size: 13px;
   font-weight: 600;
+  cursor: pointer;
+  transition:
+    color ${transitions.fast},
+    background-color ${transitions.fast};
+
+  &:hover {
+    color: ${colors.text};
+  }
+
+  &[aria-pressed='true'] {
+    background-color: ${colors.surfaceRaised};
+    color: ${colors.text};
+  }
+
+  @media (max-width: ${breakpoints.navigationMenu}px) {
+    min-height: 36px;
+  }
 `;
 
 export default LanguageOptionsComponent;

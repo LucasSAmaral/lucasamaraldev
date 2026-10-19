@@ -3,10 +3,9 @@ import CONFIG from '../../generated-config.json';
 const { locale } = CONFIG;
 
 describe('Site translation', () => {
-  it('should check if all site is translated after clicking on language-button', () => {
+  it('should check if all site is translated after clicking on the en language option', () => {
     cy.visit('/');
 
-    cy.getDataCy('language-button').click();
     cy.getDataCy('en').click();
     cy.getDataCy('subtitle').contains(locale['en'].home.profission);
 

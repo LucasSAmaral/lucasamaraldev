@@ -2,6 +2,10 @@
   "locale": {
     "commonLocale": {
       "name": "Lucas Amaral",
+      "languageOptions": {
+        "pt": "Português",
+        "en": "English"
+      },
       "workExperience": {
         "company1": {
           "modal": {

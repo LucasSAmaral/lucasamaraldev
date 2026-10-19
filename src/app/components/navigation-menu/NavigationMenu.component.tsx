@@ -21,8 +21,6 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
 }) => {
   const {
     languageOptionsState: { selectedLanguage },
-    languageMenuStatus,
-    updateLanguageMenuStatus,
   } = useContext(LanguageOptionsContext);
 
   const { navigationMenuMobileStatus, updateNavigationMenuMobileStatus } =
@@ -33,9 +31,6 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
       <NavigationMenu
         $menuStatus={navigationMenuMobileStatus}
         onAnimationEnd={() => {
-          if (languageMenuStatus === 'OPENED') {
-            updateLanguageMenuStatus('CLOSING');
-          }
           switch (navigationMenuMobileStatus) {
             case 'OPENING':
               return updateNavigationMenuMobileStatus('OPENED');

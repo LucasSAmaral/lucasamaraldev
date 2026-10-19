@@ -2,15 +2,12 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { breakpoints } from '@/app/styles/theme';
 import { MenuStatus } from './NavigationMenu.component';
-import { LanguageOptionsContext } from '../language-options/LanguageOptions.context';
 import { NavigationMenuContext } from './NavigationMenu.context';
 
 const shouldCheckNavigationMenuMobile = (navigationMenuMobileStatus: MenuStatus) =>
   navigationMenuMobileStatus === 'OPENED' || navigationMenuMobileStatus === 'OPENING';
 
 const NavigationMenuMobileToggle: React.FC = () => {
-  const { languageMenuStatus, updateLanguageMenuStatus } = useContext(LanguageOptionsContext);
-
   const { navigationMenuMobileStatus, updateNavigationMenuMobileStatus } =
     useContext(NavigationMenuContext);
 
@@ -21,9 +18,6 @@ const NavigationMenuMobileToggle: React.FC = () => {
         id="menu-mobile"
         defaultChecked={shouldCheckNavigationMenuMobile(navigationMenuMobileStatus)}
         onClick={() => {
-          if (languageMenuStatus === 'OPENED') {
-            updateLanguageMenuStatus('CLOSING');
-          }
           switch (navigationMenuMobileStatus) {
             case 'CLOSED':
               return updateNavigationMenuMobileStatus('OPENING');
