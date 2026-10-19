@@ -5,6 +5,11 @@
         "greeting": "Olá, eu sou",
         "intro": "Construo interfaces com React, TypeScript e Next.js desde 2015. Hoje cuido dos fluxos de pagamento e de “minha conta” na Americanas S.A.",
         "location": "Rio de Janeiro, Brasil",
+        "actions": {
+          "seeExperience": "Ver experiência",
+          "contact": "Entrar em contato",
+          "downloadCv": "Baixar CV"
+        },
         "profission": "Desenvolvedor Front-End",
         "alt": "Minha selfie no pé da torre Eiffel",
         "title": "Minha selfie"

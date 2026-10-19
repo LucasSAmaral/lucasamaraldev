@@ -41,7 +41,7 @@ O canvas tem 8 telas: Início, Sobre mim, Experiência e Contato (desktop), o mo
 
 - [x] 3.1 Layout em duas colunas no desktop (texto à esquerda, foto à direita); empilhado no mobile (foto pequena ao lado do selo de localização).
 - [x] 3.2 Adicionar "Olá, eu sou", nome grande (`clamp`), cargo, frase de apresentação e selo "Rio de Janeiro".
-- [ ] 3.3 Botões de ação: "Ver experiência" (primário), "Entrar em contato" (secundário) e "Baixar CV" (definir se haverá arquivo de CV; senão, remover).
+- [x] 3.3 Botões de ação: "Ver experiência" (primário), "Entrar em contato" (secundário) e "Baixar CV" (definir se haverá arquivo de CV; senão, remover). → "Baixar CV" deixado comentado em `page.tsx` até definirmos o arquivo.
 - [ ] 3.4 Ícones sociais monocromáticos perto do hero; anel na cor de destaque em volta da foto.
 - [ ] 3.5 (Opcional) Trocar a selfie por uma foto com melhor iluminação.
 

@@ -1,12 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import styled from 'styled-components';
+import Link from 'next/link';
+import styled, { css } from 'styled-components';
 import Photo from '../assets/selfie.jpg';
 import config from '../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './components/language-options/LanguageOptions.context';
-import { breakpoints, colors, fonts, radii } from './styles/theme';
+import { breakpoints, colors, fonts, radii, transitions } from './styles/theme';
 
 const {
   locale: { commonLocale, ...locale },
@@ -26,6 +27,49 @@ export default function Home() {
         <Title data-cy="title">{commonLocale.name}</Title>
         <Subtitle data-cy="subtitle">{homeLocale.profission}</Subtitle>
         <Intro>{homeLocale.intro}</Intro>
+        <Actions>
+          <ActionLink href="/work-experience" $variant="primary" data-cy="see-experience-button">
+            {homeLocale.actions.seeExperience}
+            <svg
+              aria-hidden="true"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </ActionLink>
+          <ActionLink href="/contact" $variant="secondary" data-cy="contact-button">
+            {homeLocale.actions.contact}
+          </ActionLink>
+          {/* Botão de CV desativado até definirmos o arquivo. Para ativar: colocar o PDF em
+              public/ (ex.: public/cv.pdf), ajustar o href e descomentar.
+          <ActionLink href="/cv.pdf" download $variant="tertiary" data-cy="download-cv-button">
+            <svg
+              aria-hidden="true"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" x2="12" y1="15" y2="3" />
+            </svg>
+            {homeLocale.actions.downloadCv}
+          </ActionLink>
+          */}
+        </Actions>
       </HeroText>
       <HeroPhoto>
         <Selfie
@@ -125,6 +169,70 @@ const Intro = styled.p`
   @media (max-width: ${breakpoints.homeColumns}px) {
     font-size: 16px;
     line-height: 1.6;
+  }
+`;
+
+const Actions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+
+  @media (max-width: ${breakpoints.homeColumns}px) {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+`;
+
+type ActionVariant = 'primary' | 'secondary' | 'tertiary';
+
+const actionVariantStyle = {
+  primary: css`
+    background-color: ${colors.accent};
+    color: ${colors.onAccent};
+
+    &:hover {
+      filter: brightness(1.08);
+    }
+  `,
+  secondary: css`
+    border: 1px solid ${colors.borderStrong};
+    color: ${colors.text};
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.06);
+    }
+  `,
+  tertiary: css`
+    padding: 0 18px;
+    color: ${colors.textSecondary};
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.06);
+    }
+  `,
+};
+
+const ActionLink = styled(Link)<{ $variant: ActionVariant }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: ${radii.md};
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color ${transitions.fast},
+    filter ${transitions.fast};
+  ${({ $variant }) => actionVariantStyle[$variant]}
+
+  @media (max-width: ${breakpoints.homeColumns}px) {
+    min-height: 52px;
+    font-size: 16px;
   }
 `;
 
