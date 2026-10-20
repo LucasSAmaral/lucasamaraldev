@@ -129,7 +129,9 @@ const Contact: React.FC = () => {
         <Wrapper>
           <h2 id={MODAL_TITLE_ID}>{errorTitle}</h2>
           <p>{errorText}</p>
-          <Button onClick={() => sendEmail(formValues)}>{errorButtonText}</Button>
+          <Button type="button" onClick={() => sendEmail(formValues)}>
+            {errorButtonText}
+          </Button>
         </Wrapper>,
         { wrapperClassName: 'error-message' },
       );
@@ -185,13 +187,25 @@ const Contact: React.FC = () => {
   );
 };
 
+// Conteúdo dos avisos de envio (enviando, enviado e erro) abertos no modal.
 const Wrapper = styled.div`
-  img {
-    margin-bottom: 10px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: min(320px, 100%);
 
   h2 {
-    margin-bottom: 10px;
+    font-family: ${fonts.heading};
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  p {
+    color: ${colors.textBody};
+    font-size: 16px;
+    line-height: 1.6;
   }
 `;
 
@@ -264,8 +278,7 @@ const Form = styled.form`
   }
 `;
 
-const SubmitButton = styled.button`
-  grid-column: 1 / -1;
+const accentButtonStyle = css`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -278,6 +291,7 @@ const SubmitButton = styled.button`
   font: inherit;
   font-size: 16px;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   transition: filter ${transitions.fast};
 
@@ -286,29 +300,25 @@ const SubmitButton = styled.button`
   }
 `;
 
+const SubmitButton = styled.button`
+  ${accentButtonStyle}
+  grid-column: 1 / -1;
+`;
+
+// Botões dos avisos no modal ("Ok" e "Tentar novamente").
+const modalButtonStyle = css`
+  ${accentButtonStyle}
+  min-width: 160px;
+  margin-top: 12px;
+  padding: 0 24px;
+`;
+
 const ButtonLink = styled(Link)`
-  ${() => ButtonStyle()}
-  text-decoration: none;
-  display: inline-block;
+  ${modalButtonStyle}
 `;
 
 const Button = styled.button`
-  ${() => ButtonStyle()}
+  ${modalButtonStyle}
 `;
-
-const ButtonStyle = () => {
-  return css`
-    width: 100%;
-    max-width: 280px;
-    margin: 0 auto;
-    margin-top: 30px;
-    border-radius: 4px;
-    border: 1px solid ${colors.borderStrong};
-    padding: 8px 12px;
-    cursor: pointer;
-    background-color: ${colors.surface};
-    color: ${colors.text};
-  `;
-};
 
 export default Contact;
