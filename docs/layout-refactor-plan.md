@@ -77,7 +77,7 @@ O canvas tem 8 telas: Início, Sobre mim, Experiência e Contato (desktop), o mo
 ## Fase 8 — Footer e transições
 
 - [x] 8.1 Footer enxuto: "© ano Lucas Amaral" + `SocialLinks.component.tsx`. **Decidido:** sem footer na Home (lá as redes sociais já aparecem abaixo dos botões do hero); nas demais páginas o footer aparece com o componente de redes sociais. O footer é renderizado no `template.tsx`, então a condição entra lá (ex.: `usePathname() !== '/'`). **Atualizado:** também sem footer no Contato, que já tem os atalhos para as redes sociais.
-- [ ] 8.2 Trocar o slide de 1000px entre páginas (`template.tsx`) por fade + deslocamento curto (~200ms).
+- [x] 8.2 Trocar o slide de 1000px entre páginas (`template.tsx`) por fade + deslocamento curto (~200ms).
 
 ## Fase 9 — Fechamento
 

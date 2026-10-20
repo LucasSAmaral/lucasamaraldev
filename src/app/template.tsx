@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import HeaderComponent from './components/Header.component';
 import { Container, Main, Section } from './styles/styles';
 import styled, { keyframes } from 'styled-components';
+import { transitions } from './styles/theme';
 import FooterComponent from './components/Footer.component';
 import { useModal } from './components/modal/Modal.context';
 
@@ -62,24 +63,25 @@ export default function Template({ children }: { children: React.ReactNode }) {
   );
 }
 
-const SlideInRight = keyframes`
+// Entrada: aparece subindo 8px. Saída: some subindo 8px; o fim dela dispara a navegação.
+const FadeIn = keyframes`
   0% {
-    transform: translateX(1000px);
+    transform: translateY(8px);
     opacity: 0;
   }
   100% {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 `;
 
-const SlideOutLeft = keyframes`
+const FadeOut = keyframes`
   0% {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
   100% {
-    transform: translateX(-1000px);
+    transform: translateY(-8px);
     opacity: 0;
   }
 `;
@@ -87,8 +89,8 @@ const SlideOutLeft = keyframes`
 const MainSection = styled(Section).attrs<{ $exiting: boolean }>(props => ({
   $exiting: props.$exiting,
 }))`
-  animation: ${({ $exiting }) => (!$exiting ? SlideInRight : SlideOutLeft)} 300ms
-    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: ${({ $exiting }) => ($exiting ? FadeOut : FadeIn)} ${transitions.fast}
+    ${transitions.easing} both;
 `;
 
 const MainSectionContent = styled.div`
