@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import HeaderComponent from './components/Header.component';
-import { Container, Main, Section } from './styles/styles';
+import { Container, Main, Page } from './styles/styles';
 import styled, { keyframes } from 'styled-components';
 import { transitions } from './styles/theme';
 import FooterComponent from './components/Footer.component';
@@ -43,9 +43,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const { exiting, nextRoute } = transitionState;
 
   return (
-    <Main>
+    <Page>
       <HeaderComponent setTransitionState={setTransitionState} />
-      <MainSection
+      <MainContent
         $exiting={exiting}
         onAnimationEnd={() => {
           if (exiting) {
@@ -54,12 +54,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
           }
         }}
       >
-        <MainSectionContent>
+        <PageContent>
           <Container>{children}</Container>
-        </MainSectionContent>
-      </MainSection>
+        </PageContent>
+      </MainContent>
       {!ROUTES_WITHOUT_FOOTER.includes(pathname) && <FooterComponent />}
-    </Main>
+    </Page>
   );
 }
 
@@ -86,14 +86,14 @@ const FadeOut = keyframes`
   }
 `;
 
-const MainSection = styled(Section).attrs<{ $exiting: boolean }>(props => ({
+const MainContent = styled(Main).attrs<{ $exiting: boolean }>(props => ({
   $exiting: props.$exiting,
 }))`
   animation: ${({ $exiting }) => ($exiting ? FadeOut : FadeIn)} ${transitions.fast}
     ${transitions.easing} both;
 `;
 
-const MainSectionContent = styled.div`
+const PageContent = styled.div`
   margin: 0 auto;
   text-align: center;
 `;

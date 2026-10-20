@@ -2,7 +2,8 @@
 import styled from 'styled-components';
 import { breakpoints, colors } from './theme';
 
-export const Main = styled.main`
+// Estrutura de toda página: header, <main> com o conteúdo e, quando existe, o footer.
+export const Page = styled.div`
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -12,7 +13,7 @@ export const Main = styled.main`
 
 // Ocupa a altura que sobrar: o conteúdo começa logo abaixo do header em todas as páginas e o
 // footer, quando existe, fica no pé da tela.
-export const Section = styled.section`
+export const Main = styled.main`
   width: 100%;
   flex-grow: 1;
 `;
