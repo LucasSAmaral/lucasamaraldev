@@ -35,3 +35,13 @@ export const Eyebrow = styled.span`
     font-size: 14px;
   }
 `;
+
+// Texto só para leitores de tela (ex.: "abre em nova aba").
+export const VisuallyHidden = styled.span`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+`;

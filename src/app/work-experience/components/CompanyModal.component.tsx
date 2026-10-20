@@ -6,6 +6,7 @@ import { LanguageOptionsContext } from '@/app/components/language-options/Langua
 import { MODAL_TITLE_ID } from '@/app/components/modal/Modal.container';
 import { Chip, ChipList } from '@/app/components/Chip.component';
 import { breakpoints, colors, fonts, radii } from '@/app/styles/theme';
+import { VisuallyHidden } from '@/app/styles/styles';
 
 const {
   locale: {
@@ -187,15 +188,6 @@ const CompanyLink = styled.a`
   &:hover {
     text-decoration: underline;
   }
-`;
-
-const VisuallyHidden = styled.span`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
 `;
 
 export default CompanyModalComponent;

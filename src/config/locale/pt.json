@@ -87,6 +87,10 @@
         }
       },
       "contact": {
+        "eyebrow": "Contato",
+        "title": "Vamos conversar?",
+        "intro": "Tem uma vaga, um projeto ou só quer trocar uma ideia sobre front-end (ou cinema)? Mande uma mensagem pelo formulário ou me chame em uma das redes abaixo.",
+        "opensInNewTab": "abre em nova aba",
         "form": {
           "labels": {
             "fromName": "Nome",

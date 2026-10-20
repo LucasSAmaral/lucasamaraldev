@@ -87,6 +87,10 @@
         }
       },
       "contact": {
+        "eyebrow": "Contact",
+        "title": "Shall we talk?",
+        "intro": "Have a job opening, a project or just want to chat about front-end (or movies)? Send a message through the form or reach me on one of the networks below.",
+        "opensInNewTab": "opens in a new tab",
         "form": {
           "labels": {
             "fromName": "Name",

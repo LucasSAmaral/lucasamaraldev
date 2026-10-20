@@ -14,7 +14,9 @@ import { MODAL_TITLE_ID } from '../components/modal/Modal.container';
 import { buildContactFormRules } from './helpers';
 import Image from 'next/image';
 import LoadingIcon from '../../assets/loading-icon.gif';
-import { colors } from '@/app/styles/theme';
+import { breakpoints, colors, fonts, radii } from '@/app/styles/theme';
+import { Eyebrow } from '../styles/styles';
+import ContactShortcutsComponent from './components/ContactShortcuts.component';
 
 export type FormValues = {
   fromName: string;
@@ -61,6 +63,8 @@ const Contact: React.FC = () => {
     closeModal,
     modalState: { modalStatus },
   } = useModal();
+
+  const contactLocale = LOCALE[selectedLanguage].contact;
 
   const {
     contact: {
@@ -136,23 +140,31 @@ const Contact: React.FC = () => {
   });
 
   return (
-    <Form onSubmit={onSubmit}>
-      {fieldList.map((Field, index) => (
-        <InputComponent
-          key={`${Field}-${index}`}
-          name={Field as keyof FormValues}
-          type={Field === 'replyTo' ? 'email' : undefined}
-          labels={labels}
-          control={control}
-          errors={errors}
-          rules={buildContactFormRules(labels[Field as keyof FormValues], errorMessage)}
-          useTextArea={Field === 'message'}
-        />
-      ))}
-      <Button data-cy="send-button" type="submit">
-        {sendButtonText}
-      </Button>
-    </Form>
+    <ContactLayout>
+      <Intro>
+        <Eyebrow>{contactLocale.eyebrow}</Eyebrow>
+        <Title>{contactLocale.title}</Title>
+        <IntroText>{contactLocale.intro}</IntroText>
+        <ContactShortcutsComponent />
+      </Intro>
+      <Form onSubmit={onSubmit}>
+        {fieldList.map((Field, index) => (
+          <InputComponent
+            key={`${Field}-${index}`}
+            name={Field as keyof FormValues}
+            type={Field === 'replyTo' ? 'email' : undefined}
+            labels={labels}
+            control={control}
+            errors={errors}
+            rules={buildContactFormRules(labels[Field as keyof FormValues], errorMessage)}
+            useTextArea={Field === 'message'}
+          />
+        ))}
+        <Button data-cy="send-button" type="submit">
+          {sendButtonText}
+        </Button>
+      </Form>
+    </ContactLayout>
   );
 };
 
@@ -166,12 +178,70 @@ const Wrapper = styled.div`
   }
 `;
 
-const Form = styled.form`
+const ContactLayout = styled.div`
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 80px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+  text-align: left;
+
+  @media (max-width: ${breakpoints.columns}px) {
+    gap: 40px;
+    padding: 36px 20px 48px;
+  }
+`;
+
+const Intro = styled.section`
+  flex: 1 1 380px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  max-width: 380px;
-  margin: 0 auto;
+  gap: 22px;
+
+  @media (max-width: ${breakpoints.columns}px) {
+    flex-basis: auto;
+    gap: 18px;
+  }
+`;
+
+const Title = styled.h1`
+  font-family: ${fonts.heading};
+  font-size: clamp(32px, 2.4vw + 14px, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+`;
+
+const IntroText = styled.p`
+  color: ${colors.textBody};
+  font-size: 18px;
+  line-height: 1.7;
+
+  @media (max-width: ${breakpoints.columns}px) {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+`;
+
+const Form = styled.form`
+  flex: 1 1 460px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
+  padding: 36px;
+  border: 1px solid ${colors.border};
+  border-radius: ${radii.xl};
+  background-color: ${colors.surface};
+
+  @media (max-width: ${breakpoints.columns}px) {
+    flex-basis: auto;
+    padding: 24px 20px;
+    border-radius: ${radii.lg};
+  }
 
   #message-wrapper {
     margin-bottom: 0;
