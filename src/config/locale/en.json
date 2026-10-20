@@ -35,12 +35,11 @@
         "title": "{years} years building interfaces.",
         "seeDetails": "See details",
         "subtitle": "Click an experience to see the details.",
-        "modalCommonTitle": {
-          "companyName": "Company's name: ",
-          "periodWorked": "Worked period: ",
-          "function": "Function performed: ",
-          "workDescription": "Work description: ",
-          "technicalSkills": "Technical skills: "
+        "modal": {
+          "workDescription": "Responsibilities",
+          "technicalSkills": "Technical skills",
+          "visitWebsite": "Visit company website",
+          "opensInNewTab": "opens in a new tab"
         },
         "company1": {
           "summary": "Maintenance and evolution of the payment and “my account” flows (orders and user data), from the front end to the BFF.",
@@ -142,6 +141,9 @@
         "navigationLabel": "Main",
         "openMenu": "Open menu",
         "closeMenu": "Close menu"
+      },
+      "modal": {
+        "close": "Close"
       },
       "languageOptions": {
         "groupLabel": "Language"

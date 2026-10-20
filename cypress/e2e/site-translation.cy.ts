@@ -17,7 +17,7 @@ describe('Site translation', () => {
 
     // cy.getDataCy('experience-card').first().click();
 
-    // cy.get('.modal-content').contains(locale['en'].workExperience.modalCommonTitle.companyName);
+    // cy.get('.modal-content').contains(locale['en'].workExperience.company1.companyName);
 
     // cy.wait(1000).then(() => {
     //   cy.get('.close-modal').click();

@@ -1,13 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
 import { useModal } from './Modal.context';
 import ModalBackdropComponent from './ModalBackdrop.component';
-import { colors } from '@/app/styles/theme';
+import { breakpoints, colors, radii, transitions } from '@/app/styles/theme';
+import { LanguageOptionsContext } from '../language-options/LanguageOptions.context';
+import config from '../../../../generated-config.json';
+
+const { locale } = config;
+
+// Id do título do conteúdo aberto no modal (usado pelo aria-labelledby do diálogo).
+export const MODAL_TITLE_ID = 'modal-title';
 
 const ModalContainer: React.FC = () => {
+  const {
+    languageOptionsState: { selectedLanguage },
+  } = useContext(LanguageOptionsContext);
+
   const {
     closeModal,
     closingHandle,
@@ -50,9 +61,27 @@ const ModalContainer: React.FC = () => {
           onClick={(e: React.MouseEvent) => e.stopPropagation()}
           className={`modal-content ${wrapperClassName}`}
         >
-          <div className="close-modal" onClick={closeModal}>
-            X
-          </div>
+          <CloseButton
+            type="button"
+            className="close-modal"
+            aria-label={locale[selectedLanguage].modal.close}
+            onClick={closeModal}
+          >
+            <svg
+              aria-hidden="true"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </CloseButton>
           {children}
         </ModalContent>
       </ModalBackdropComponent>,
@@ -85,12 +114,18 @@ const ModalContainer: React.FC = () => {
 const ModalContent = styled.div`
   position: fixed;
   background-color: ${colors.surface};
-  max-width: 800px;
-  border-radius: 5px;
+  max-width: 680px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: ${radii.xl};
   color: ${colors.text};
   width: 100%;
-  padding: 20px 10px;
+  padding: 36px;
   z-index: 1042;
+
+  @media (max-width: ${breakpoints.columns}px) {
+    padding: 24px 20px;
+    border-radius: ${radii.lg};
+  }
 
   &.sent-message,
   &.sending-message,
@@ -102,14 +137,31 @@ const ModalContent = styled.div`
       display: none;
     }
   }
+`;
 
-  .close-modal {
-    display: inline-block;
-    cursor: pointer;
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    font-weight: bold;
+const CloseButton = styled.button`
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: ${radii.md};
+  background-color: transparent;
+  color: ${colors.textSecondary};
+  cursor: pointer;
+  transition: background-color ${transitions.fast};
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (max-width: ${breakpoints.columns}px) {
+    top: 16px;
+    right: 12px;
   }
 `;
 
