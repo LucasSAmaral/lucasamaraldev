@@ -16,6 +16,7 @@ const SkipLinkComponent: React.FC = () => {
 
   return (
     <SkipLink
+      data-cy="skip-link"
       href={`#${MAIN_CONTENT_ID}`}
       onClick={event => {
         event.preventDefault();
