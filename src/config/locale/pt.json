@@ -98,6 +98,12 @@
             "subject": "Assunto",
             "message": "Mensagem"
           },
+          "placeholders": {
+            "fromName": "Como posso te chamar?",
+            "replyTo": "voce@email.com",
+            "subject": "Sobre o que vamos falar?",
+            "message": "Escreva sua mensagem…"
+          },
           "sendButtonText": "Enviar mensagem",
           "error": {
             "message": "O campo {fieldName} é obrigatório"

@@ -70,6 +70,7 @@ const Contact: React.FC = () => {
     contact: {
       form: {
         labels,
+        placeholders,
         sendButtonText,
         error: { message: errorMessage },
         modal: {
@@ -154,10 +155,12 @@ const Contact: React.FC = () => {
             name={Field as keyof FormValues}
             type={Field === 'replyTo' ? 'email' : undefined}
             labels={labels}
+            placeholders={placeholders}
             control={control}
             errors={errors}
             rules={buildContactFormRules(labels[Field as keyof FormValues], errorMessage)}
             useTextArea={Field === 'message'}
+            fullWidth={Field === 'subject' || Field === 'message'}
           />
         ))}
         <Button data-cy="send-button" type="submit">
@@ -229,9 +232,10 @@ const IntroText = styled.p`
 const Form = styled.form`
   flex: 1 1 460px;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 20px;
   padding: 36px;
   border: 1px solid ${colors.border};
   border-radius: ${radii.xl};
@@ -239,12 +243,14 @@ const Form = styled.form`
 
   @media (max-width: ${breakpoints.columns}px) {
     flex-basis: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
     padding: 24px 20px;
     border-radius: ${radii.lg};
   }
 
-  #message-wrapper {
-    margin-bottom: 0;
+  > button[type='submit'] {
+    grid-column: 1 / -1;
   }
 `;
 

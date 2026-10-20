@@ -68,7 +68,7 @@ O canvas tem 8 telas: Início, Sobre mim, Experiência e Contato (desktop), o mo
 ## Fase 7 — Contato
 
 - [x] 7.1 Duas colunas: introdução "Vamos conversar?" + atalhos (e-mail, LinkedIn, GitHub) à esquerda; formulário em card à direita.
-- [ ] 7.2 Rótulos visíveis acima dos campos, espaçamento 16–20px, Nome/E-mail lado a lado no desktop (`Input.component.tsx`).
+- [x] 7.2 Rótulos visíveis acima dos campos, espaçamento 16–20px, Nome/E-mail lado a lado no desktop (`Input.component.tsx`).
 - [ ] 7.3 Estados de foco e erro conforme o guia de estilo.
 - [ ] 7.4 Botão "Enviar mensagem" preenchido na cor de destaque (manter `data-cy="send-button"`).
 - [ ] 7.5 Margem lateral de 20px no mobile.

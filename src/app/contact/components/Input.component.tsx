@@ -1,10 +1,10 @@
 'use client';
 
-import styled from 'styled-components';
-import { colors } from '@/app/styles/theme';
-import { Control, Controller, FieldError, FieldErrors, RegisterOptions } from 'react-hook-form';
+import styled, { css } from 'styled-components';
+import { breakpoints, colors, radii } from '@/app/styles/theme';
+import { Control, Controller, FieldErrors, RegisterOptions } from 'react-hook-form';
 import { FormValues } from '../page';
-import { HTMLInputTypeAttribute, useState } from 'react';
+import { HTMLInputTypeAttribute } from 'react';
 
 type Labels = { [K in keyof FormValues]: string };
 
@@ -16,112 +16,110 @@ export type Rules = Omit<
 type InputComponentProps = {
   name: keyof FormValues;
   labels: Labels;
+  placeholders: Labels;
   control: Control<FormValues, any>;
   errors: FieldErrors<FormValues>;
   type?: HTMLInputTypeAttribute;
   rules?: Rules;
   useTextArea?: boolean;
+  fullWidth?: boolean;
 };
 
 const InputComponent: React.FC<InputComponentProps> = ({
   name,
   labels,
+  placeholders,
   control,
   errors,
   type = 'text',
   rules,
   useTextArea = false,
+  fullWidth = false,
 }) => {
-  const [isInputFocused, updateInputFocused] = useState(false);
   return (
     <Controller
       name={name}
       control={control}
       rules={rules}
-      render={({ field: { name, onChange, onBlur, value } }) => (
-        <Wrapper id={`${name}-wrapper`} $fieldError={errors[name]}>
-          <Label htmlFor={name} $isInputFocused={isInputFocused}>
-            {labels[name]}
-          </Label>
-          {useTextArea ? (
-            <TextArea
-              name={name}
-              id={name}
-              onBlur={e => {
-                if (e.target.value === '') {
-                  updateInputFocused(false);
-                }
-                onBlur();
-              }}
-              onFocus={() => updateInputFocused(true)}
-              onChange={onChange}
-              value={value}
-            />
-          ) : (
-            <Input
-              type={type}
-              name={name}
-              id={name}
-              onBlur={e => {
-                if (e.target.value === '') {
-                  updateInputFocused(false);
-                }
-                onBlur();
-              }}
-              onFocus={() => updateInputFocused(true)}
-              onChange={onChange}
-              value={value}
-            />
-          )}
-          {errors[name] && <span>{errors[name]?.message}</span>}
-        </Wrapper>
-      )}
+      render={({ field: { name, onChange, onBlur, value } }) => {
+        const fieldProps = {
+          name,
+          id: name,
+          placeholder: placeholders[name],
+          onBlur,
+          onChange,
+          value: value ?? '',
+        };
+
+        return (
+          <Wrapper id={`${name}-wrapper`} $fullWidth={fullWidth}>
+            <Label htmlFor={name}>{labels[name]}</Label>
+            {useTextArea ? (
+              <TextArea {...fieldProps} rows={6} />
+            ) : (
+              <Input {...fieldProps} type={type} />
+            )}
+            {errors[name] && <ErrorMessage>{errors[name]?.message}</ErrorMessage>}
+          </Wrapper>
+        );
+      }}
     />
   );
 };
 
+const fieldStyle = css`
+  width: 100%;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: ${radii.sm};
+  background-color: ${colors.background};
+  color: ${colors.text};
+  font: inherit;
+  font-size: 15px;
+
+  &::placeholder {
+    color: #6f7888;
+  }
+`;
+
 const Input = styled.input`
-  height: 35px;
+  ${fieldStyle}
+  height: 48px;
 `;
 
 const TextArea = styled.textarea`
-  height: 70px;
+  ${fieldStyle}
+  padding: 12px 14px;
+  resize: vertical;
 `;
 
-const Wrapper = styled.div.attrs<{ $fieldError?: FieldError }>(props => ({
-  $fieldError: props.$fieldError,
-}))`
+const Wrapper = styled.div<{ $fullWidth: boolean }>`
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  min-width: 0;
   text-align: left;
-  position: relative;
-  margin-bottom: 30px;
 
-  ${Input}, ${TextArea} {
-    ${({ $fieldError }) => (!$fieldError ? 'margin-bottom: 27px;' : 'margin-bottom: 10px;')}
-    color: ${colors.text};
-    border-radius: 4px;
-    padding: 8px 15px;
-    border: none;
-    background-color: ${colors.surface};
-  }
+  ${({ $fullWidth }) =>
+    $fullWidth &&
+    css`
+      grid-column: 1 / -1;
+    `}
 
-  span {
-    color: ${colors.errorText};
-    font-size: 14px;
-    margin-left: 15px;
+  @media (max-width: ${breakpoints.columns}px) {
+    grid-column: 1 / -1;
   }
 `;
 
-const Label = styled.label.attrs<{ $isInputFocused: boolean }>(props => ({
-  $isInputFocused: props.$isInputFocused,
-}))`
-  position: absolute;
-  left: 15px;
-  transition: 200ms;
-  cursor: text;
+const Label = styled.label`
+  color: #c3c9d4;
+  font-size: 14px;
+  font-weight: 500;
+`;
 
-  ${({ $isInputFocused }) => ($isInputFocused ? 'top: -27px' : 'top: 7px')}
+const ErrorMessage = styled.span`
+  color: ${colors.errorText};
+  font-size: 13px;
 `;
 
 export default InputComponent;

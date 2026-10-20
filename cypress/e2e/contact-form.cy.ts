@@ -6,15 +6,19 @@ describe('Contact form', () => {
     message: 'Testando o preenchimento do formulário.',
   };
 
-  it('should test label animation', () => {
+  it('should show every label above its field', () => {
     cy.visit('/contact');
 
-    cy.get('#fromName-wrapper label').should('have.css', 'top', '7px');
-
-    cy.get('#fromName').click();
-
-    cy.wait(1000).then(() => {
-      cy.get('#fromName-wrapper label').should('have.css', 'top', '-27px');
+    ['fromName', 'replyTo', 'subject', 'message'].forEach(field => {
+      cy.get(`#${field}-wrapper label`)
+        .should('be.visible')
+        .then($label => {
+          cy.get(`#${field}`).then($field => {
+            expect($label[0].getBoundingClientRect().bottom).to.be.at.most(
+              $field[0].getBoundingClientRect().top,
+            );
+          });
+        });
     });
   });
 
