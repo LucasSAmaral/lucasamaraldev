@@ -33,6 +33,7 @@
       "workExperience": {
         "eyebrow": "Work experience",
         "title": "{years} years building interfaces.",
+        "seeDetails": "See details",
         "subtitle": "Click an experience to see the details.",
         "modalCommonTitle": {
           "companyName": "Company's name: ",
@@ -42,6 +43,7 @@
           "technicalSkills": "Technical skills: "
         },
         "company1": {
+          "summary": "Maintenance and evolution of the payment and “my account” flows (orders and user data), from the front end to the BFF.",
           "companyName": "Americanas S.A.",
           "periodWorked": "April 2019 - Nowadays",
           "function": "Mid-level Front-End Developer",
@@ -52,6 +54,7 @@
           }
         },
         "company2": {
+          "summary": "Visual adjustments with CSS in an internal application for Bradesco bank.",
           "companyName": "MJV Technology & Innovation",
           "periodWorked": "December 2018 - April 2019",
           "function": "Front-End Developer",
@@ -62,6 +65,7 @@
           }
         },
         "company3": {
+          "summary": "Responsiveness and maintenance of the TIM Brasil website, plus interactive pages built with Vue.js.",
           "companyName": "GRITO.cc",
           "periodWorked": "November 2016 - November 2018",
           "function": "Mid-level Front-End Developer",
@@ -72,6 +76,7 @@
           }
         },
         "company4": {
+          "summary": "Maintenance and new pages for the TIM Brasil website, according to client requests.",
           "companyName": "Agência Amo",
           "periodWorked": "January 2015 - October 2016",
           "function": "Junior Front-End Developer",

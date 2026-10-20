@@ -5,6 +5,7 @@ import CONFIG from '../../../../../generated-config.json';
 const { locale } = CONFIG;
 
 const companyLocale = locale.pt.workExperience.company1;
+const commonCompanyLocale = locale.commonLocale.workExperience.company1;
 
 describe('<ExperienceCardComponent />', () => {
   beforeEach(() => {
@@ -17,6 +18,22 @@ describe('<ExperienceCardComponent />', () => {
       cy.contains(companyLocale.function).should('be.visible');
       cy.contains(companyLocale.periodWorked).should('be.visible');
     });
+  });
+
+  it('should render the summary and the first four technical skills', () => {
+    const topSkills = commonCompanyLocale.modal.text.technicalSkills
+      .split(',')
+      .map(skill => skill.trim())
+      .slice(0, 4);
+
+    cy.contains(companyLocale.summary).should('be.visible');
+    cy.get('article ul li').should('have.length', 4);
+    topSkills.forEach(skill => cy.get('article ul').contains('li', skill));
+  });
+
+  it('should hide decorative initials and "see details" from screen readers', () => {
+    cy.contains(commonCompanyLocale.initials).should('have.attr', 'aria-hidden', 'true');
+    cy.contains(locale.pt.workExperience.seeDetails).should('have.attr', 'aria-hidden', 'true');
   });
 
   it('should expose the company name as an accessible button', () => {

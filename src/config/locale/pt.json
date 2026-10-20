@@ -33,6 +33,7 @@
       "workExperience": {
         "eyebrow": "Experiência profissional",
         "title": "{years} anos construindo interfaces.",
+        "seeDetails": "Ver detalhes",
         "subtitle": "Clique em uma experiência para ver os detalhes.",
         "modalCommonTitle": {
           "companyName": "Nome da empresa: ",
@@ -42,6 +43,7 @@
           "technicalSkills": "Habilidades técnicas: "
         },
         "company1": {
+          "summary": "Manutenção e evolução dos fluxos de pagamento e de “minha conta” (pedidos e dados do usuário), do front ao BFF.",
           "companyName": "Americanas S.A.",
           "periodWorked": "Abril de 2019 - Atualmente",
           "function": "Desenvolvedor Front-End Pleno",
@@ -52,6 +54,7 @@
           }
         },
         "company2": {
+          "summary": "Ajustes visuais com CSS em uma aplicação interna do banco Bradesco.",
           "companyName": "MJV Technology & Innovation",
           "periodWorked": "Dezembro de 2018 - Abril de 2019",
           "function": "Desenvolvedor Front-End",
@@ -62,6 +65,7 @@
           }
         },
         "company3": {
+          "summary": "Responsividade e manutenção do site da TIM Brasil, além de páginas interativas com Vue.js.",
           "companyName": "GRITO.cc",
           "periodWorked": "Novembro de 2016 - Novembro de 2018",
           "function": "Desenvolvedor Front-End Pleno",
@@ -72,6 +76,7 @@
           }
         },
         "company4": {
+          "summary": "Manutenção e criação de novas páginas para o site da TIM Brasil, conforme a demanda do cliente.",
           "companyName": "Agência Amo",
           "periodWorked": "Janeiro de 2015 - Outubro de 2016",
           "function": "Desenvolvedor Front-End Junior",

@@ -54,9 +54,9 @@ O canvas tem 8 telas: Início, Sobre mim, Experiência e Contato (desktop), o mo
 ## Fase 5 — Experiência profissional
 
 - [x] 5.1 Timeline vertical à esquerda (desktop e mobile) substituindo `Desk.component.tsx`/`Mobile.component.tsx` por um único componente responsivo.
-- [ ] 5.2 Cards como `<button>` com hover: iniciais/logo, empresa, cargo, período em pílula, resumo, 3–4 habilidades e "Ver detalhes" (`DeskCard`/`MobileCard`/`InfoCard`). Novo campo de resumo no locale.
+- [x] 5.2 Cards como `<button>` com hover: iniciais/logo, empresa, cargo, período em pílula, resumo, 3–4 habilidades e "Ver detalhes" (`DeskCard`/`MobileCard`/`InfoCard`). Novo campo de resumo no locale.
 - [x] 5.3 Esconder os marcadores "+" de leitores de tela (`aria-hidden`). → resolvido no 5.1: os "+" saíram e as bolinhas da timeline são `aria-hidden`.
-- [ ] 5.4 Atualizar os component tests `DeskCard`/`MobileCard` (ou unificá-los) conforme a nova estrutura.
+- [x] 5.4 Atualizar os component tests `DeskCard`/`MobileCard` (ou unificá-los) conforme a nova estrutura. → unificados em `ExperienceCard.component.cy.tsx`.
 
 ## Fase 6 — Modal
 
