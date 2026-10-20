@@ -1,7 +1,7 @@
 'use client';
 
 import styled, { css } from 'styled-components';
-import { breakpoints, colors, radii } from '@/app/styles/theme';
+import { breakpoints, colors, radii, transitions } from '@/app/styles/theme';
 import { Control, Controller, FieldErrors, RegisterOptions } from 'react-hook-form';
 import { FormValues } from '../page';
 import { HTMLInputTypeAttribute } from 'react';
@@ -42,8 +42,13 @@ const InputComponent: React.FC<InputComponentProps> = ({
       control={control}
       rules={rules}
       render={({ field: { name, onChange, onBlur, value } }) => {
+        const error = errors[name];
+        const errorId = `${name}-error`;
+
         const fieldProps = {
           name,
+          'aria-invalid': error ? true : undefined,
+          'aria-describedby': error ? errorId : undefined,
           id: name,
           placeholder: placeholders[name],
           onBlur,
@@ -52,14 +57,14 @@ const InputComponent: React.FC<InputComponentProps> = ({
         };
 
         return (
-          <Wrapper id={`${name}-wrapper`} $fullWidth={fullWidth}>
+          <Wrapper id={`${name}-wrapper`} $fullWidth={fullWidth} $hasError={!!error}>
             <Label htmlFor={name}>{labels[name]}</Label>
             {useTextArea ? (
               <TextArea {...fieldProps} rows={6} />
             ) : (
               <Input {...fieldProps} type={type} />
             )}
-            {errors[name] && <ErrorMessage>{errors[name]?.message}</ErrorMessage>}
+            {error && <ErrorMessage id={errorId}>{error.message}</ErrorMessage>}
           </Wrapper>
         );
       }}
@@ -76,9 +81,23 @@ const fieldStyle = css`
   color: ${colors.text};
   font: inherit;
   font-size: 15px;
+  transition:
+    border-color ${transitions.fast},
+    outline-color ${transitions.fast};
 
   &::placeholder {
     color: #6f7888;
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.24);
+  }
+
+  &:focus,
+  &:focus-visible {
+    border-color: ${colors.accent};
+    outline: 3px solid ${colors.accentSoft};
+    outline-offset: 0;
   }
 `;
 
@@ -93,12 +112,24 @@ const TextArea = styled.textarea`
   resize: vertical;
 `;
 
-const Wrapper = styled.div<{ $fullWidth: boolean }>`
+const Wrapper = styled.div<{ $fullWidth: boolean; $hasError: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 8px;
   min-width: 0;
   text-align: left;
+
+  ${({ $hasError }) =>
+    $hasError &&
+    css`
+      ${Input}, ${TextArea} {
+        border-color: ${colors.error};
+      }
+
+      ${Input}:focus, ${TextArea}:focus {
+        outline-color: rgba(224, 121, 107, 0.2);
+      }
+    `}
 
   ${({ $fullWidth }) =>
     $fullWidth &&
