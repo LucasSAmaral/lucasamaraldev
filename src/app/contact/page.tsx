@@ -10,9 +10,13 @@ import { LanguageOptionsContext } from '../components/language-options/LanguageO
 import { sendEmailValues } from './actions';
 import Link from 'next/link';
 import { useModal } from '../components/modal/Modal.context';
+import { MODAL_TITLE_ID } from '../components/modal/Modal.container';
 import { buildContactFormRules } from './helpers';
 import Image from 'next/image';
 import LoadingIcon from '../../assets/loading-icon.gif';
+import { breakpoints, colors, fonts, radii, transitions } from '@/app/styles/theme';
+import { Eyebrow } from '../styles/styles';
+import ContactShortcutsComponent from './components/ContactShortcuts.component';
 
 export type FormValues = {
   fromName: string;
@@ -60,10 +64,13 @@ const Contact: React.FC = () => {
     modalState: { modalStatus },
   } = useModal();
 
+  const contactLocale = LOCALE[selectedLanguage].contact;
+
   const {
     contact: {
       form: {
         labels,
+        placeholders,
         sendButtonText,
         error: { message: errorMessage },
         modal: {
@@ -95,7 +102,7 @@ const Contact: React.FC = () => {
       openModal(
         <Wrapper>
           <Image src={LoadingIcon} width={30} alt={loadingImgAlt} unoptimized />
-          <h2>{loadingTitle}</h2>
+          <h2 id={MODAL_TITLE_ID}>{loadingTitle}</h2>
         </Wrapper>,
         { wrapperClassName: 'sending-message' },
       );
@@ -106,7 +113,7 @@ const Contact: React.FC = () => {
       }
       openModal(
         <Wrapper>
-          <h2>{successTitle}</h2>
+          <h2 id={MODAL_TITLE_ID}>{successTitle}</h2>
           <p>{successText}</p>
           <ButtonLink href="/">{successButtonText}</ButtonLink>
         </Wrapper>,
@@ -120,9 +127,11 @@ const Contact: React.FC = () => {
       const formValues = getValues();
       openModal(
         <Wrapper>
-          <h2>{errorTitle}</h2>
+          <h2 id={MODAL_TITLE_ID}>{errorTitle}</h2>
           <p>{errorText}</p>
-          <Button onClick={() => sendEmail(formValues)}>{errorButtonText}</Button>
+          <Button type="button" onClick={() => sendEmail(formValues)}>
+            {errorButtonText}
+          </Button>
         </Wrapper>,
         { wrapperClassName: 'error-message' },
       );
@@ -134,71 +143,182 @@ const Contact: React.FC = () => {
   });
 
   return (
-    <Form onSubmit={onSubmit}>
-      {fieldList.map((Field, index) => (
-        <InputComponent
-          key={`${Field}-${index}`}
-          name={Field as keyof FormValues}
-          type={Field === 'replyTo' ? 'email' : undefined}
-          labels={labels}
-          control={control}
-          errors={errors}
-          rules={buildContactFormRules(labels[Field as keyof FormValues], errorMessage)}
-          useTextArea={Field === 'message'}
-        />
-      ))}
-      <Button data-cy="send-button" type="submit">
-        {sendButtonText}
-      </Button>
-    </Form>
+    <ContactLayout>
+      <Intro>
+        <Eyebrow>{contactLocale.eyebrow}</Eyebrow>
+        <Title>{contactLocale.title}</Title>
+        <IntroText>{contactLocale.intro}</IntroText>
+        <ContactShortcutsComponent />
+      </Intro>
+      <Form onSubmit={onSubmit}>
+        {fieldList.map((Field, index) => (
+          <InputComponent
+            key={`${Field}-${index}`}
+            name={Field as keyof FormValues}
+            type={Field === 'replyTo' ? 'email' : undefined}
+            labels={labels}
+            placeholders={placeholders}
+            control={control}
+            errors={errors}
+            rules={buildContactFormRules(labels[Field as keyof FormValues], errorMessage)}
+            useTextArea={Field === 'message'}
+            fullWidth={Field === 'subject' || Field === 'message'}
+          />
+        ))}
+        <SubmitButton data-cy="send-button" type="submit">
+          {sendButtonText}
+          <svg
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m22 2-7 20-4-9-9-4Z" />
+            <path d="M22 2 11 13" />
+          </svg>
+        </SubmitButton>
+      </Form>
+    </ContactLayout>
   );
 };
 
+// Conteúdo dos avisos de envio (enviando, enviado e erro) abertos no modal.
 const Wrapper = styled.div`
-  img {
-    margin-bottom: 10px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: min(320px, 100%);
 
   h2 {
-    margin-bottom: 10px;
+    font-family: ${fonts.heading};
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  p {
+    color: ${colors.textBody};
+    font-size: 16px;
+    line-height: 1.6;
+  }
+`;
+
+const ContactLayout = styled.div`
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 80px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+  text-align: left;
+
+  @media (max-width: ${breakpoints.columns}px) {
+    gap: 40px;
+    padding: 36px 20px 48px;
+  }
+`;
+
+const Intro = styled.section`
+  flex: 1 1 380px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  @media (max-width: ${breakpoints.columns}px) {
+    flex-basis: auto;
+    gap: 18px;
+  }
+`;
+
+const Title = styled.h1`
+  font-family: ${fonts.heading};
+  font-size: clamp(32px, 2.4vw + 14px, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+`;
+
+const IntroText = styled.p`
+  color: ${colors.textBody};
+  font-size: 18px;
+  line-height: 1.7;
+
+  @media (max-width: ${breakpoints.columns}px) {
+    font-size: 16px;
+    line-height: 1.65;
   }
 `;
 
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 380px;
-  margin: 0 auto;
-  gap: 10px;
+  flex: 1 1 460px;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 20px;
+  padding: 36px;
+  border: 1px solid ${colors.border};
+  border-radius: ${radii.xl};
+  background-color: ${colors.surface};
 
-  #message-wrapper {
-    margin-bottom: 0;
+  @media (max-width: ${breakpoints.columns}px) {
+    flex-basis: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    padding: 24px 20px;
+    border-radius: ${radii.lg};
   }
 `;
 
-const ButtonLink = styled(Link)`
-  ${() => ButtonStyle()}
+const accentButtonStyle = css`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  border: 0;
+  border-radius: ${radii.md};
+  background-color: ${colors.accent};
+  color: ${colors.onAccent};
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
   text-decoration: none;
-  display: inline-block;
+  cursor: pointer;
+  transition: filter ${transitions.fast};
+
+  &:hover {
+    filter: brightness(1.08);
+  }
+`;
+
+const SubmitButton = styled.button`
+  ${accentButtonStyle}
+  grid-column: 1 / -1;
+`;
+
+// Botões dos avisos no modal ("Ok" e "Tentar novamente").
+const modalButtonStyle = css`
+  ${accentButtonStyle}
+  min-width: 160px;
+  margin-top: 12px;
+  padding: 0 24px;
+`;
+
+const ButtonLink = styled(Link)`
+  ${modalButtonStyle}
 `;
 
 const Button = styled.button`
-  ${() => ButtonStyle()}
+  ${modalButtonStyle}
 `;
-
-const ButtonStyle = () => {
-  return css`
-    width: 100%;
-    max-width: 280px;
-    margin: 0 auto;
-    margin-top: 30px;
-    border-radius: 4px;
-    border: 1px solid #fffffe;
-    padding: 8px 12px;
-    cursor: pointer;
-    background-color: #363b3f;
-    color: #fffffe;
-  `;
-};
 
 export default Contact;

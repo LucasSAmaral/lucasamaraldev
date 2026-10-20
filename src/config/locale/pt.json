@@ -2,24 +2,47 @@
   "locale": {
     "pt": {
       "home": {
+        "greeting": "Olá, eu sou",
+        "intro": "Construo interfaces com React, TypeScript e Next.js desde 2015. Hoje cuido dos fluxos de pagamento e de “minha conta” na Americanas S.A.",
+        "location": "Rio de Janeiro, Brasil",
+        "actions": {
+          "seeExperience": "Ver experiência",
+          "contact": "Entrar em contato",
+          "downloadCv": "Baixar CV"
+        },
         "profission": "Desenvolvedor Front-End",
         "alt": "Minha selfie no pé da torre Eiffel",
         "title": "Minha selfie"
       },
       "aboutMe": {
+        "eyebrow": "Sobre mim",
+        "title": "Front-end no Rio de Janeiro, apaixonado por cultura pop.",
         "paragraph1": "Meu nome é Lucas Amaral. Tenho 34 anos. Moro no Rio de Janeiro e sou desenvolvedor front-end.",
-        "paragraph2": "Gosto de conversar sobre a cultura pop, mas especificamente sobre cinema. Gosto de assistir filmes e séries, jogar video game e ler livros e quadrinhos no meu tempo livre.",
-        "paragraph3": "Me formei em Sistemas de Informação em 2014 e trabalho como desenvolvedor front-end desde 2015."
+        "paragraph2": "Gosto de conversar sobre cultura pop, mais especificamente sobre cinema. Gosto de assistir filmes e séries, jogar video game e ler livros e quadrinhos no meu tempo livre.",
+        "paragraph3": "Me formei em Sistemas de Informação em 2014 e trabalho como desenvolvedor front-end desde 2015.",
+        "stackTitle": "Stack principal",
+        "hobbiesTitle": "Fora do código",
+        "hobbies": ["Cinema", "Séries", "Video game", "Livros", "Quadrinhos"],
+        "cta": "Vamos conversar",
+        "stats": {
+          "years": "anos de front-end",
+          "companies": "empresas",
+          "graduation": "formado em S.I."
+        }
       },
       "workExperience": {
-        "modalCommonTitle": {
-          "companyName": "Nome da empresa: ",
-          "periodWorked": "Período trabalhado: ",
-          "function": "Função exercida: ",
-          "workDescription": "Descrição do trabalho: ",
-          "technicalSkills": "Habilidades técnicas: "
+        "eyebrow": "Experiência profissional",
+        "title": "{years} anos construindo interfaces.",
+        "seeDetails": "Ver detalhes",
+        "subtitle": "Clique em uma experiência para ver os detalhes.",
+        "modal": {
+          "workDescription": "Atividades",
+          "technicalSkills": "Habilidades técnicas",
+          "visitWebsite": "Visitar site da empresa",
+          "opensInNewTab": "abre em nova aba"
         },
         "company1": {
+          "summary": "Manutenção e evolução dos fluxos de pagamento e de “minha conta” (pedidos e dados do usuário), do front ao BFF.",
           "companyName": "Americanas S.A.",
           "periodWorked": "Abril de 2019 - Atualmente",
           "function": "Desenvolvedor Front-End Pleno",
@@ -30,6 +53,7 @@
           }
         },
         "company2": {
+          "summary": "Ajustes visuais com CSS em uma aplicação interna do banco Bradesco.",
           "companyName": "MJV Technology & Innovation",
           "periodWorked": "Dezembro de 2018 - Abril de 2019",
           "function": "Desenvolvedor Front-End",
@@ -40,6 +64,7 @@
           }
         },
         "company3": {
+          "summary": "Responsividade e manutenção do site da TIM Brasil, além de páginas interativas com Vue.js.",
           "companyName": "GRITO.cc",
           "periodWorked": "Novembro de 2016 - Novembro de 2018",
           "function": "Desenvolvedor Front-End Pleno",
@@ -50,6 +75,7 @@
           }
         },
         "company4": {
+          "summary": "Manutenção e criação de novas páginas para o site da TIM Brasil, conforme a demanda do cliente.",
           "companyName": "Agência Amo",
           "periodWorked": "Janeiro de 2015 - Outubro de 2016",
           "function": "Desenvolvedor Front-End Junior",
@@ -61,12 +87,22 @@
         }
       },
       "contact": {
+        "eyebrow": "Contato",
+        "title": "Vamos conversar?",
+        "intro": "Tem uma vaga, um projeto ou só quer trocar uma ideia sobre front-end (ou cinema)? Mande uma mensagem pelo formulário ou me chame em uma das redes abaixo.",
+        "opensInNewTab": "abre em nova aba",
         "form": {
           "labels": {
             "fromName": "Nome",
             "replyTo": "E-mail",
             "subject": "Assunto",
             "message": "Mensagem"
+          },
+          "placeholders": {
+            "fromName": "Como posso te chamar?",
+            "replyTo": "voce@email.com",
+            "subject": "Sobre o que vamos falar?",
+            "message": "Escreva sua mensagem…"
           },
           "sendButtonText": "Enviar mensagem",
           "error": {
@@ -89,33 +125,17 @@
           }
         }
       },
-      "footer": {
-        "socialNetworks": {
-          "text": "Redes sociais:",
-          "list": [
-            {
-              "socialNetworkName": "LinkedIn",
-              "alt": "Logo do LinkedIn",
-              "title": "Me encontre no LinkedIn"
-            },
-            {
-              "socialNetworkName": "GitHub",
-              "alt": "Logo do GitHub",
-              "title": "Me siga no GitHub"
-            },
-            {
-              "socialNetworkName": "Instagram",
-              "alt": "Logo do Instagram",
-              "title": "Me siga no Instagram"
-            }
-          ]
-        }
+      "header": {
+        "skipToContent": "Pular para o conteúdo",
+        "navigationLabel": "Principal",
+        "openMenu": "Abrir menu",
+        "closeMenu": "Fechar menu"
+      },
+      "modal": {
+        "close": "Fechar"
       },
       "languageOptions": {
-        "language": "Idioma: ",
-        "selectedLanguage": "Português",
-        "portugueseOption": "Português",
-        "englishOption": "Inglês"
+        "groupLabel": "Idioma"
       },
       "loading": "Carregando..."
     }

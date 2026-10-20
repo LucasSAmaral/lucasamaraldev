@@ -2,15 +2,33 @@
   "locale": {
     "commonLocale": {
       "name": "Lucas Amaral",
+      "aboutMe": {
+        "stack": [
+          "React",
+          "TypeScript",
+          "Next.js",
+          "NestJS",
+          "Styled-Components",
+          "Cypress",
+          "Express.js",
+          "Git"
+        ]
+      },
+      "languageOptions": {
+        "pt": "Português",
+        "en": "English"
+      },
       "workExperience": {
         "company1": {
+          "initials": "AM",
           "modal": {
             "text": {
-              "technicalSkills": "React, Typescript, NestJS, NextJS, Git, HTML5, Styled-Components, Cypress, Express.js, Responsive Web Design"
+              "technicalSkills": "React, TypeScript, NestJS, Next.js, Git, HTML5, Styled-Components, Cypress, Express.js, Responsive Web Design"
             }
           }
         },
         "company2": {
+          "initials": "MJV",
           "modal": {
             "text": {
               "technicalSkills": "React, Git, HTML5, CSS, SCSS"
@@ -18,6 +36,7 @@
           }
         },
         "company3": {
+          "initials": "GR",
           "modal": {
             "text": {
               "technicalSkills": "HTML5, CSS, jQuery, JavaScript, Vue.js, Git, Gulp, SCSS, Responsive Web Design"
@@ -25,6 +44,7 @@
           }
         },
         "company4": {
+          "initials": "AMO",
           "modal": {
             "text": {
               "technicalSkills": "HTML5, CSS, jQuery, JavaScript"
@@ -33,6 +53,10 @@
         }
       },
       "contact": {
+        "shortcuts": {
+          "linkedIn": { "label": "LinkedIn", "handle": "Lucas Amaral" },
+          "gitHub": { "label": "GitHub", "handle": "LucasSAmaral" }
+        },
         "form": {
           "success": {
             "buttonText": "Ok"

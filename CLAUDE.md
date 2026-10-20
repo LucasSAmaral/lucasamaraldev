@@ -24,13 +24,13 @@ Node version is pinned via `.nvmrc` (22) and the Dockerfile (`node:22.22-alpine`
 
 ### Tests (Cypress only — no Jest/unit test runner)
 
-- Component tests live next to the components under `tests/` folders as `*.component.cy.tsx` (e.g. `src/app/work-experience/components/tests/DeskCard.component.cy.tsx`). Shared test data/helpers go in `tests/helper/` (e.g. `test.helper.ts`). Component testing uses the `next` framework with the **webpack** bundler (`cypress.config.ts`).
+- Component tests live next to the components under `tests/` folders as `*.component.cy.tsx` (e.g. `src/app/work-experience/components/tests/ExperienceCard.component.cy.tsx`). Shared test data/helpers, when needed, go in a `tests/helper/` folder. Component testing uses the `next` framework with the **webpack** bundler (`cypress.config.ts`).
 - E2E tests live in `cypress/e2e/*.cy.ts` and run against a built/served app (`baseUrl: http://localhost:3000`).
 
 ```bash
 npx cypress open                              # interactive runner (component or e2e)
 npx cypress run --component                   # all component tests, headless
-npx cypress run --component --spec "src/app/work-experience/components/tests/DeskCard.component.cy.tsx"
+npx cypress run --component --spec "src/app/work-experience/components/tests/ExperienceCard.component.cy.tsx"
 npx cypress run --e2e                          # all e2e tests, headless (requires app running/build+start)
 npx cypress run --e2e --spec "cypress/e2e/contact-form.cy.ts"
 ```
@@ -57,11 +57,14 @@ There is no i18n library. `pt.json` / `en.json` under `src/config/locale/` are m
 
 - **App Router** under `src/app/`: the home page is `src/app/page.tsx`; other routes have one folder each (`about-me/`, `work-experience/`, `contact/`) with its own `page.tsx` and, where needed, a local `components/` folder for route-specific components. Root-level `template.tsx` and `loading.tsx` provide the per-navigation wrapper and loading fallback.
 - **Shared UI** lives in `src/app/components/`. Cross-cutting concerns are implemented as React Context providers, each colocated as a `<Feature>.context.tsx` next to its `<Feature>.component.tsx`:
-  - `modal/Modal.context.tsx` + `Modal.container.tsx` — global modal, driven by a state machine (`CLOSED → OPENING → OPENED → CLOSING → CLOSED`) rendered into `#modal` (see `layout.tsx`). Open modals via the `useModal()` hook, not by rendering modal components directly.
-  - `navigation-menu/NavigationMenu.context.tsx` — navigation menu state: current route (`actualRouteState`) and the mobile menu's open/close status (`navigationMenuMobileStatus`). The `MenuStatus` type (`'CLOSED' | 'CLOSING' | 'OPENED' | 'OPENING'`) is defined in `NavigationMenu.component.tsx`.
-  - `language-options/LanguageOptions.context.tsx` — current language (described above) plus the language menu's own open/close state (`languageMenuStatus`). It reuses the `MenuStatus` **type** from the navigation menu but keeps separate state — the two menus don't share status.
+  - `modal/Modal.context.tsx` + `Modal.container.tsx` — global modal, driven by a state machine (`CLOSED → OPENING → OPENED → CLOSING → CLOSED`) rendered into `#modal` (see `layout.tsx`). Open modals via the `useModal()` hook, not by rendering modal components directly. The container is an accessible dialog (focus trap, Esc closes, focus returns to the opener, body scroll locked); give the heading of any content you open `id={MODAL_TITLE_ID}` (exported by `Modal.container.tsx`) so `aria-labelledby` resolves.
+  - `navigation-menu/NavigationMenu.context.tsx` — the mobile menu's open/close status (`navigationMenuMobileStatus`). The `MenuStatus` type (`'CLOSED' | 'CLOSING' | 'OPENED' | 'OPENING'`) is defined in `NavigationMenu.component.tsx`. The active route is not stored in context: menu options compare `usePathname()` with their route and set `aria-current="page"`.
+  - `language-options/LanguageOptions.context.tsx` — current language (described above). The selector itself is a segmented PT | EN control (`LanguageOptions.component.tsx`), with no menu state.
+  - The header bar (logo, menu, language selector and mobile menu toggle) is `components/Header.component.tsx`, rendered by `template.tsx`.
+  - `template.tsx` renders the page structure `<div>` → header, `<main>` (page content, with the ~200ms fade between pages) and `Footer.component.tsx`. The footer is hidden on `/` and `/contact` (`ROUTES_WITHOUT_FOOTER`), because those pages already show the social links in their content.
+  - Other shared building blocks: `SocialLinks.component.tsx` (LinkedIn and GitHub icon links; also exports the icons and `getSocialUrls` for reuse), `ActionLink.component.tsx` (Link styled as a button, `$variant` `primary | secondary | tertiary`), `Chip.component.tsx` (`ChipList` + `Chip`, `$variant` `filled | outline`), and `Eyebrow` / `VisuallyHidden` in `styles/styles.ts`.
   - All providers are composed in `src/app/Providers.tsx` (`QueryClientProvider > Suspense > LanguageOptionsProvider > ModalProvider > NavigationMenuProvider`); add new global providers there, innermost-last.
-- **Styling** is `styled-components` with SSR support via `src/app/lib/registry.tsx` (`StyledComponentsRegistry`, wraps the app in `layout.tsx`). Global styles are in `src/app/styles/globalStyle.ts`; shared style primitives/tokens are in `src/app/components/commons/styles.ts`.
+- **Styling** is `styled-components` with SSR support via `src/app/lib/registry.tsx` (`StyledComponentsRegistry`, wraps the app in `layout.tsx`). Global styles are in `src/app/styles/globalStyle.ts`; design tokens (colors, fonts, radii, breakpoints, transitions) are plain constants in `src/app/styles/theme.ts` — import them directly instead of using a `ThemeProvider`, so Cypress component tests (mounted without providers) keep working.
 - **File naming convention** (follow this for new files): `Name.component.tsx` (component), `Name.context.tsx` (context/provider), `Name.container.tsx` (container wiring context to render output), plain `helpers.ts`/`actions.ts` for logic. Cypress component specs mirror the component name: `Name.component.cy.tsx` in a sibling `tests/` folder.
 - **Server actions**: `'use server'` functions (e.g. `src/app/contact/actions.ts`) are used for backend calls (EmailJS submission) instead of API routes.
 - Path alias `@/*` maps to `src/*` (see `tsconfig.json`).

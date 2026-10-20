@@ -1,39 +1,30 @@
 'use client';
 import styled from 'styled-components';
+import { breakpoints, colors } from './theme';
 
-export const Main = styled.main`
+// Estrutura de toda página: header, <main> com o conteúdo e, quando existe, o footer.
+export const Page = styled.div`
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 
-export const Section = styled.section`
+// Ocupa a altura que sobrar: o conteúdo começa logo abaixo do header em todas as páginas e o
+// footer, quando existe, fica no pé da tela.
+export const Main = styled.main`
   width: 100%;
-`;
+  flex-grow: 1;
 
-export const Title = styled.h1`
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 10px;
-`;
-
-export const Subtitle = styled.p`
-  font-size: 20px;
+  /* Recebe o foco do link "Pular para o conteúdo"; o contorno ficaria em volta da página inteira. */
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const Container = styled.div`
   height: auto;
-
-  img {
-    border-radius: 50%;
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    margin-bottom: 20px;
-  }
 `;
 
 export const Wrapper = styled.div`
@@ -41,11 +32,24 @@ export const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export const Column = styled.div`
-  padding: 40px 20px;
-  position: relative;
+// Rótulo curto na cor de destaque acima dos títulos ("Olá, eu sou", "Sobre mim"...).
+export const Eyebrow = styled.span`
+  color: ${colors.accent};
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 
-  @media (max-width: 864px) {
-    padding: 20px;
+  @media (max-width: ${breakpoints.columns}px) {
+    font-size: 14px;
   }
+`;
+
+// Texto só para leitores de tela (ex.: "abre em nova aba").
+export const VisuallyHidden = styled.span`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 `;

@@ -3,10 +3,9 @@ import CONFIG from '../../generated-config.json';
 const { locale } = CONFIG;
 
 describe('Site translation', () => {
-  it('should check if all site is translated after clicking on language-button', () => {
+  it('should check if all site is translated after clicking on the en language option', () => {
     cy.visit('/');
 
-    cy.getDataCy('language-button').click();
     cy.getDataCy('en').click();
     cy.getDataCy('subtitle').contains(locale['en'].home.profission);
 
@@ -16,11 +15,9 @@ describe('Site translation', () => {
     cy.getDataCy('work-experience-option').click();
     cy.get('body').contains(locale['en'].workExperience.company1.periodWorked);
 
-    // cy.getDataCy('desk-card-component').then(el => {
-    //   el[0].click();
-    // });
+    // cy.getDataCy('experience-card').first().click();
 
-    // cy.get('.modal-content').contains(locale['en'].workExperience.modalCommonTitle.companyName);
+    // cy.get('.modal-content').contains(locale['en'].workExperience.company1.companyName);
 
     // cy.wait(1000).then(() => {
     //   cy.get('.close-modal').click();

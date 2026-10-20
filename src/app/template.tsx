@@ -1,21 +1,22 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import NavigationMenuComponent from './components/navigation-menu/NavigationMenu.component';
-import { Container, Main, Section } from './styles/styles';
+import { usePathname, useRouter } from 'next/navigation';
+import HeaderComponent from './components/Header.component';
+import SkipLinkComponent, { MAIN_CONTENT_ID } from './components/SkipLink.component';
+import { Container, Main, Page } from './styles/styles';
 import styled, { keyframes } from 'styled-components';
+import { transitions } from './styles/theme';
 import FooterComponent from './components/Footer.component';
-import { Inter } from 'next/font/google';
 import { useModal } from './components/modal/Modal.context';
-import LanguageOptionsComponent from './components/language-options/LanguageOptions.component';
 
 export type TransitionStateType = {
   exiting: boolean;
   nextRoute: string;
 };
 
-const inter = Inter({ subsets: ['latin'] });
+// Home e Contato já mostram as redes sociais no conteúdo da página, então não repetem no footer.
+const ROUTES_WITHOUT_FOOTER = ['/', '/contact'];
 
 const initialTransitionState = {
   exiting: false,
@@ -24,6 +25,7 @@ const initialTransitionState = {
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const pathname = usePathname();
   const {
     modalState: { modalStatus },
     closeModal,
@@ -42,12 +44,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const { exiting, nextRoute } = transitionState;
 
   return (
-    <Main className={inter.className}>
-      <div>
-        <NavigationMenuComponent setTransitionState={setTransitionState} />
-        <LanguageOptionsComponent />
-      </div>
-      <MainSection
+    <Page>
+      <SkipLinkComponent />
+      <HeaderComponent setTransitionState={setTransitionState} />
+      <MainContent
+        id={MAIN_CONTENT_ID}
+        tabIndex={-1}
         $exiting={exiting}
         onAnimationEnd={() => {
           if (exiting) {
@@ -56,45 +58,46 @@ export default function Template({ children }: { children: React.ReactNode }) {
           }
         }}
       >
-        <MainSectionContent>
+        <PageContent>
           <Container>{children}</Container>
-        </MainSectionContent>
-      </MainSection>
-      <FooterComponent />
-    </Main>
+        </PageContent>
+      </MainContent>
+      {!ROUTES_WITHOUT_FOOTER.includes(pathname) && <FooterComponent />}
+    </Page>
   );
 }
 
-const SlideInRight = keyframes`
+// Entrada: aparece subindo 8px. Saída: some subindo 8px; o fim dela dispara a navegação.
+const FadeIn = keyframes`
   0% {
-    transform: translateX(1000px);
+    transform: translateY(8px);
     opacity: 0;
   }
   100% {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 `;
 
-const SlideOutLeft = keyframes`
+const FadeOut = keyframes`
   0% {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
   100% {
-    transform: translateX(-1000px);
+    transform: translateY(-8px);
     opacity: 0;
   }
 `;
 
-const MainSection = styled(Section).attrs<{ $exiting: boolean }>(props => ({
+const MainContent = styled(Main).attrs<{ $exiting: boolean }>(props => ({
   $exiting: props.$exiting,
 }))`
-  animation: ${({ $exiting }) => (!$exiting ? SlideInRight : SlideOutLeft)} 300ms
-    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: ${({ $exiting }) => ($exiting ? FadeOut : FadeIn)} ${transitions.fast}
+    ${transitions.easing} both;
 `;
 
-const MainSectionContent = styled.div`
+const PageContent = styled.div`
   margin: 0 auto;
   text-align: center;
 `;

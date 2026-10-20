@@ -1,6 +1,5 @@
 'use client';
-import React, { createContext, useState } from 'react';
-import { MenuStatus, UpdateMenuStatus } from '../navigation-menu/NavigationMenu.component';
+import React, { createContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 export type SelectedLanguage = 'pt' | 'en';
@@ -11,9 +10,7 @@ export type LanguageOptionsState = {
 
 type LanguageOptionsContext = {
   languageOptionsState: LanguageOptionsState;
-  languageMenuStatus: MenuStatus;
   updateLanguageOptionsState: React.Dispatch<React.SetStateAction<LanguageOptionsState>>;
-  updateLanguageMenuStatus: UpdateMenuStatus;
 };
 
 const initialState: LanguageOptionsState = {
@@ -22,9 +19,7 @@ const initialState: LanguageOptionsState = {
 
 export const LanguageOptionsContext = createContext<LanguageOptionsContext>({
   languageOptionsState: initialState,
-  languageMenuStatus: 'CLOSED',
   updateLanguageOptionsState: () => {},
-  updateLanguageMenuStatus: () => {},
 });
 
 LanguageOptionsContext.displayName = 'LanguageOptionsContext';
@@ -42,15 +37,15 @@ export const LanguageOptionsProvider = ({ children }: { children: React.ReactNod
     languageOptionInitialState,
   );
 
-  const [languageMenuStatus, updateLanguageMenuStatus] = useState<MenuStatus>('CLOSED');
+  useEffect(() => {
+    document.documentElement.lang = languageOptionsState.selectedLanguage === 'en' ? 'en' : 'pt-BR';
+  }, [languageOptionsState.selectedLanguage]);
 
   return (
     <LanguageOptionsContext.Provider
       value={{
         languageOptionsState,
-        languageMenuStatus,
         updateLanguageOptionsState,
-        updateLanguageMenuStatus,
       }}
     >
       {children}

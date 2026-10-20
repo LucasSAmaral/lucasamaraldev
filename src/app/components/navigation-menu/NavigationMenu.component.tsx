@@ -1,15 +1,14 @@
 import { Dispatch, SetStateAction, useContext } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { breakpoints, colors, transitions } from '@/app/styles/theme';
 import { TransitionStateType } from '../../template';
 import NavigationMenuOption from './NavigationMenuOption.component';
-import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
+import { NavigationMenuContext } from './NavigationMenu.context';
+import { NAVIGATION_MENU_ID } from './NavigationMenuMobileToggle.component';
 import config from '../../../../generated-config.json';
-import NavigationMenuMobileToggle from './NavigationMenuMobileToggle.component';
-import {
-  LanguageOptionsContext,
-  SelectedLanguage,
-} from '../language-options/LanguageOptions.context';
-import { Menu, MenuTooltipStyle } from '../commons/styles';
+import { LanguageOptionsContext } from '../language-options/LanguageOptions.context';
+
+const { locale } = config;
 
 type NavigationMenuComponentProps = {
   setTransitionState: React.Dispatch<React.SetStateAction<TransitionStateType>>;
@@ -24,162 +23,110 @@ const NavigationMenuComponent: React.FC<NavigationMenuComponentProps> = ({
 }) => {
   const {
     languageOptionsState: { selectedLanguage },
-    languageMenuStatus,
-    updateLanguageMenuStatus,
   } = useContext(LanguageOptionsContext);
 
-  const {
-    navigationMenuState: { actualRouteState },
-    navigationMenuMobileStatus,
-    updateNavigationMenuMobileStatus,
-  } = useContext(NavigationMenuContext);
+  const { navigationMenuMobileStatus, updateNavigationMenuMobileStatus } =
+    useContext(NavigationMenuContext);
 
   return (
-    <NavigationMenuWrapper>
-      <NavigationMenuMobileToggle />
-      <NavigationMenu
-        $menuStatus={navigationMenuMobileStatus}
-        onAnimationEnd={() => {
-          if (languageMenuStatus === 'OPENED') {
-            updateLanguageMenuStatus('CLOSING');
-          }
-          switch (navigationMenuMobileStatus) {
-            case 'OPENING':
-              return updateNavigationMenuMobileStatus('OPENED');
-            case 'CLOSING':
-              return updateNavigationMenuMobileStatus('CLOSED');
-            default:
-              return;
-          }
-        }}
-      >
+    <NavigationMenu
+      id={NAVIGATION_MENU_ID}
+      aria-label={locale[selectedLanguage].header.navigationLabel}
+      $menuStatus={navigationMenuMobileStatus}
+      onAnimationEnd={() => {
+        switch (navigationMenuMobileStatus) {
+          case 'OPENING':
+            return updateNavigationMenuMobileStatus('OPENED');
+          case 'CLOSING':
+            return updateNavigationMenuMobileStatus('CLOSED');
+          default:
+            return;
+        }
+      }}
+    >
+      <NavigationMenuList>
         {config.navigationMenu.navigationMenuOptionList.map((navigationMenuOption, index) => (
-          <NavigationMenuOption
-            key={`${navigationMenuOption.optionName[selectedLanguage]}-${index}`}
-            nextRoute={navigationMenuOption.nextRoute}
-            setTransitionState={setTransitionState}
-          >
-            {navigationMenuOption.optionName[selectedLanguage]}
-          </NavigationMenuOption>
+          <li key={`${navigationMenuOption.optionName[selectedLanguage]}-${index}`}>
+            <NavigationMenuOption
+              nextRoute={navigationMenuOption.nextRoute}
+              setTransitionState={setTransitionState}
+            >
+              {navigationMenuOption.optionName[selectedLanguage]}
+            </NavigationMenuOption>
+          </li>
         ))}
-      </NavigationMenu>
-      <ActiveBarWrapper $selectedLanguage={selectedLanguage}>
-        <ActiveBar $actualRoute={actualRouteState} $selectedLanguage={selectedLanguage} />
-      </ActiveBarWrapper>
-    </NavigationMenuWrapper>
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 };
 
-const NavigationMenuWrapper = styled.div`
-  background-color: #363b3f;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 20px;
-
-  @media (max-width: 672px) {
-    padding: 0;
-    height: 62px;
-    position: relative;
-    justify-content: center;
+const MobileMenuIn = keyframes`
+  0% {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 `;
 
-const NavigationMenu = styled(Menu)`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding-bottom: 0;
-
-  @media (max-width: 672px) {
-    top: 80px;
-    ${({ $menuStatus }) => MenuTooltipStyle($menuStatus)}
+const MobileMenuOut = keyframes`
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-8px);
+    opacity: 0;
   }
 `;
 
-const ActiveBarWrapper = styled.div.attrs<{ $selectedLanguage: SelectedLanguage }>(props => ({
-  $selectedLanguage: props.$selectedLanguage,
-}))`
-  height: 2px;
-  width: 100%;
-  max-width: ${({ $selectedLanguage }) => ($selectedLanguage === 'pt' ? '443px' : '385.69px')};
-  position: relative;
-
-  @media (max-width: 672px) {
-    display: none;
-  }
-`;
-
-const ActiveBar = styled.div.attrs<{
-  $actualRoute: ActualRoute;
-  $selectedLanguage: SelectedLanguage;
-}>(props => ({
-  $actualRoute: props.$actualRoute,
-  $selectedLanguage: props.$selectedLanguage,
-}))`
-  background-color: #fffffe;
-  height: 100%;
-  transition: 0.3s;
-  position: absolute;
-  ${({ $actualRoute, $selectedLanguage }) => TransformActiveBar($actualRoute, $selectedLanguage)}
-`;
-
-const TransformActiveBar = (actualRoute: ActualRoute, selectedLanguage: SelectedLanguage) => {
-  switch (actualRoute) {
-    case '/': {
-      if (selectedLanguage === 'pt') {
-        return css`
-          width: 41.47px;
-          transform: translateX(0);
-        `;
-      }
+const MobileMenuStatusStyle = (menuStatus: MenuStatus) => {
+  switch (menuStatus) {
+    case 'OPENING':
       return css`
-        width: 45.48px;
-        transform: translateX(0);
+        animation: ${MobileMenuIn} ${transitions.fast} ${transitions.easing} both;
       `;
-    }
-
-    case '/about-me':
-      {
-        if (selectedLanguage === 'pt') {
-          return css`
-            width: 82.87px;
-            transform: translateX(65px);
-          `;
-        }
-      }
+    case 'CLOSING':
       return css`
-        width: 75.17px;
-        transform: translateX(69px);
+        animation: ${MobileMenuOut} ${transitions.fast} ${transitions.easing} both;
       `;
-
-    case '/work-experience':
-      {
-        if (selectedLanguage === 'pt') {
-          return css`
-            width: 185.33px;
-            transform: translateX(173px);
-          `;
-        }
-      }
+    case 'OPENED':
       return css`
-        width: 131px;
-        transform: translateX(168px);
+        display: block;
       `;
-
-    case '/contact': {
-      if (selectedLanguage === 'pt') {
-        return css`
-          width: 62.38px;
-          transform: translateX(382px);
-        `;
-      }
+    case 'CLOSED':
       return css`
-        width: 62.38px;
-        transform: translateX(323px);
+        display: none;
       `;
-    }
   }
 };
+
+const NavigationMenu = styled.nav.attrs<{ $menuStatus: MenuStatus }>(props => ({
+  $menuStatus: props.$menuStatus,
+}))`
+  @media (max-width: ${breakpoints.navigationMenu}px) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 12px 20px 20px;
+    background-color: ${colors.background};
+    border-bottom: 1px solid ${colors.border};
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+    ${({ $menuStatus }) => MobileMenuStatusStyle($menuStatus)}
+  }
+`;
+
+const NavigationMenuList = styled.ul`
+  display: flex;
+  gap: 4px;
+  list-style: none;
+
+  @media (max-width: ${breakpoints.navigationMenu}px) {
+    flex-direction: column;
+  }
+`;
 
 export default NavigationMenuComponent;

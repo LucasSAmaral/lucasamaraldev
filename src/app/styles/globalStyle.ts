@@ -1,5 +1,6 @@
-"use client";
-import { createGlobalStyle } from "styled-components";
+'use client';
+import { createGlobalStyle } from 'styled-components';
+import { colors, fonts } from './theme';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -9,9 +10,35 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-  background-color: #4c5665;
-  color: #fffffe;
-  overflow: hidden;
+  background-color: ${colors.background};
+  color: ${colors.text};
+  font-family: ${fonts.body};
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid ${colors.accent};
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 `;
 

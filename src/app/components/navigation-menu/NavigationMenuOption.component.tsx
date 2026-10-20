@@ -1,11 +1,10 @@
 import { TransitionStateType } from '@/app/template';
-import { Inter } from 'next/font/google';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
-import { ActualRoute, NavigationMenuContext } from './NavigationMenu.context';
-import { useContext, useEffect } from 'react';
-
-const inter = Inter({ subsets: ['latin'] });
+import { NavigationMenuContext } from './NavigationMenu.context';
+import { useContext } from 'react';
+import { breakpoints, colors, radii, transitions } from '@/app/styles/theme';
 
 const exitingObject = { exiting: true };
 
@@ -22,26 +21,24 @@ const NavigationMenuOptionComponent: React.FC<NavigationMenuOptionComponentProps
 }) => {
   const actualRoute = usePathname();
 
-  const { updateNavigationMenuState, updateNavigationMenuMobileStatus } =
-    useContext(NavigationMenuContext);
+  const { updateNavigationMenuMobileStatus } = useContext(NavigationMenuContext);
 
   const nextRouteDataCy =
     nextRoute.split('/')[1] === '' ? 'home-option' : `${nextRoute.split('/')[1]}-option`;
 
-  useEffect(() => {
-    updateNavigationMenuState({ actualRouteState: actualRoute as ActualRoute });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const isActive = actualRoute === nextRoute;
 
   return (
     <NavigationMenuOption
+      href={nextRoute}
       data-cy={nextRouteDataCy}
-      className={inter.className}
-      onClick={() => {
-        if (actualRoute != nextRoute) {
+      aria-current={isActive ? 'page' : undefined}
+      onClick={event => {
+        event.preventDefault();
+        if (!isActive) {
           setTransitionState({ ...exitingObject, nextRoute });
         }
-        if (window.innerWidth <= 672) {
+        if (window.innerWidth <= breakpoints.navigationMenu) {
           updateNavigationMenuMobileStatus('CLOSING');
         }
       }}
@@ -51,21 +48,33 @@ const NavigationMenuOptionComponent: React.FC<NavigationMenuOptionComponentProps
   );
 };
 
-const NavigationMenuOption = styled.button`
+const NavigationMenuOption = styled(Link)`
+  padding: 9px 16px;
+  border-radius: ${radii.pill};
+  color: ${colors.textMuted};
+  font-size: 15px;
+  font-weight: 500;
   text-decoration: none;
-  color: #fffffe;
-  font-size: 16px;
-  font-weight: 600;
-  transition: 200ms;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color ${transitions.fast},
+    background-color ${transitions.fast};
 
   &:hover {
-    scale: 1.02;
+    color: ${colors.text};
   }
-  &:active {
-    scale: 0.98;
+
+  &[aria-current='page'] {
+    color: ${colors.accent};
+    background-color: ${colors.accentSoft};
+  }
+
+  @media (max-width: ${breakpoints.navigationMenu}px) {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    border-radius: ${radii.md};
+    font-size: 17px;
   }
 `;
 
