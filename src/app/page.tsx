@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { LanguageOptionsContext } from './components/language-options/LanguageOptions.context';
 import SocialLinksComponent from './components/SocialLinks.component';
 import { breakpoints, colors, fonts, radii, transitions } from './styles/theme';
+import { Eyebrow } from './styles/styles';
 
 const {
   locale: { commonLocale, ...locale },
@@ -24,7 +25,7 @@ export default function Home() {
   return (
     <Hero>
       <HeroText>
-        <Greeting>{homeLocale.greeting}</Greeting>
+        <Eyebrow>{homeLocale.greeting}</Eyebrow>
         <Title data-cy="title">{commonLocale.name}</Title>
         <Subtitle data-cy="subtitle">{homeLocale.profission}</Subtitle>
         <Intro>{homeLocale.intro}</Intro>
@@ -82,7 +83,7 @@ export default function Home() {
             src={Photo}
             alt={homeLocale.alt}
             title={homeLocale.title}
-            sizes={`(max-width: ${breakpoints.homeColumns}px) 96px, 360px`}
+            sizes={`(max-width: ${breakpoints.columns}px) 96px, 360px`}
             priority={true}
           />
         </PhotoRing>
@@ -119,7 +120,7 @@ const Hero = styled.div`
   gap: 56px;
   text-align: left;
 
-  @media (max-width: ${breakpoints.homeColumns}px) {
+  @media (max-width: ${breakpoints.columns}px) {
     flex-direction: column;
     align-items: stretch;
     gap: 20px;
@@ -134,20 +135,9 @@ const HeroText = styled.div`
   flex-direction: column;
   gap: 24px;
 
-  @media (max-width: ${breakpoints.homeColumns}px) {
+  @media (max-width: ${breakpoints.columns}px) {
     flex-basis: auto;
     gap: 20px;
-  }
-`;
-
-const Greeting = styled.span`
-  color: ${colors.accent};
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-
-  @media (max-width: ${breakpoints.homeColumns}px) {
-    font-size: 14px;
   }
 `;
 
@@ -172,7 +162,7 @@ const Intro = styled.p`
   font-size: 17px;
   line-height: 1.65;
 
-  @media (max-width: ${breakpoints.homeColumns}px) {
+  @media (max-width: ${breakpoints.columns}px) {
     font-size: 16px;
     line-height: 1.6;
   }
@@ -184,7 +174,7 @@ const Actions = styled.div`
   gap: 12px;
   margin-top: 8px;
 
-  @media (max-width: ${breakpoints.homeColumns}px) {
+  @media (max-width: ${breakpoints.columns}px) {
     flex-direction: column;
     gap: 10px;
     margin-top: 4px;
@@ -236,7 +226,7 @@ const ActionLink = styled(Link)<{ $variant: ActionVariant }>`
     filter ${transitions.fast};
   ${({ $variant }) => actionVariantStyle[$variant]}
 
-  @media (max-width: ${breakpoints.homeColumns}px) {
+  @media (max-width: ${breakpoints.columns}px) {
     min-height: 52px;
     font-size: 16px;
   }
@@ -253,7 +243,7 @@ const HeroPhoto = styled.div`
   align-items: center;
   gap: 20px;
 
-  @media (max-width: ${breakpoints.homeColumns}px) {
+  @media (max-width: ${breakpoints.columns}px) {
     order: -1;
     flex-basis: auto;
     flex-direction: row;
@@ -266,7 +256,7 @@ const PhotoRing = styled.div`
   border: 2px solid ${colors.accentLine};
   border-radius: 50%;
 
-  @media (max-width: ${breakpoints.homeColumns}px) {
+  @media (max-width: ${breakpoints.columns}px) {
     flex-shrink: 0;
     padding: 5px;
   }
@@ -281,7 +271,7 @@ const Selfie = styled(Image)`
   object-fit: cover;
   border-radius: 50%;
 
-  @media (max-width: ${breakpoints.homeColumns}px) {
+  @media (max-width: ${breakpoints.columns}px) {
     width: 96px;
   }
 `;
@@ -302,7 +292,7 @@ const LocationBadge = styled.span`
     color: ${colors.accent};
   }
 
-  @media (max-width: ${breakpoints.homeColumns}px) {
+  @media (max-width: ${breakpoints.columns}px) {
     gap: 6px;
     padding: 7px 12px;
     font-size: 13px;

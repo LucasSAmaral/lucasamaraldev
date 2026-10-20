@@ -39,7 +39,7 @@ export const radii = {
 // Larguras (px) em que o layout muda. Números para servir tanto ao CSS quanto ao matchMedia.
 export const breakpoints = {
   navigationMenu: 864,
-  homeColumns: 864,
+  columns: 864,
 } as const;
 
 export const space = (multiplier: number) => `${multiplier * 4}px`;

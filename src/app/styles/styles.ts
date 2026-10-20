@@ -1,5 +1,6 @@
 'use client';
 import styled from 'styled-components';
+import { breakpoints, colors } from './theme';
 
 export const Main = styled.main`
   width: 100%;
@@ -29,5 +30,17 @@ export const Column = styled.div`
 
   @media (max-width: 864px) {
     padding: 20px;
+  }
+`;
+
+// Rótulo curto na cor de destaque acima dos títulos ("Olá, eu sou", "Sobre mim"...).
+export const Eyebrow = styled.span`
+  color: ${colors.accent};
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+
+  @media (max-width: ${breakpoints.columns}px) {
+    font-size: 14px;
   }
 `;

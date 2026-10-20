@@ -47,7 +47,7 @@ O canvas tem 8 telas: Início, Sobre mim, Experiência e Contato (desktop), o mo
 
 ## Fase 4 — Sobre mim
 
-- [ ] 4.1 Título + parágrafos alinhados à esquerda em coluna principal.
+- [x] 4.1 Título + parágrafos alinhados à esquerda em coluna principal.
 - [ ] 4.2 Cards de números (11 anos de front-end, 4 empresas, formado em 2014).
 - [ ] 4.3 Coluna lateral com chips de stack e "Fora do código" + CTA "Vamos conversar".
 
