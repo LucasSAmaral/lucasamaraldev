@@ -1,7 +1,7 @@
 "use client";
 
 import styled, { keyframes } from "styled-components";
-import { colors } from '@/app/styles/theme';
+import { breakpoints, colors } from '@/app/styles/theme';
 
 export default function ModalBackdropComponent({
   children,
@@ -75,6 +75,11 @@ const Backdrop = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 24px;
+
+  @media (max-width: ${breakpoints.columns}px) {
+    padding: 16px;
+  }
 
   &.--opening {
     animation: ${BackdropFadeIn} 500ms ease-in both;

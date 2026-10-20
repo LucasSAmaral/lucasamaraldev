@@ -112,7 +112,12 @@ const ModalContainer: React.FC = () => {
 };
 
 const ModalContent = styled.div`
-  position: fixed;
+  position: relative;
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  text-align: left;
   background-color: ${colors.surface};
   max-width: 680px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -123,6 +128,8 @@ const ModalContent = styled.div`
   z-index: 1042;
 
   @media (max-width: ${breakpoints.columns}px) {
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
     padding: 24px 20px;
     border-radius: ${radii.lg};
   }
