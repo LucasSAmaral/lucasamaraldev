@@ -63,7 +63,7 @@ O canvas tem 8 telas: Início, Sobre mim, Experiência e Contato (desktop), o mo
 - [x] 6.1 Redesenhar `CompanyModal.component.tsx`: cabeçalho com iniciais, cargo · período, botão fechar com ícone, seções "O que eu fazia" e "Habilidades técnicas" (chips), link "Visitar site da empresa". → seção "O que eu fazia" virou "Atividades" (a Americanas é o emprego atual).
 - [x] 6.2 Texto do modal alinhado à esquerda; `max-height` com rolagem interna.
 - [x] 6.3 Encurtar as animações de `ModalBackdrop.component.tsx` (hoje 500ms + 500ms de atraso) para ~250ms no total.
-- [ ] 6.4 Acessibilidade: `role="dialog"`, `aria-modal`, foco preso no modal e Esc para fechar.
+- [x] 6.4 Acessibilidade: `role="dialog"`, `aria-modal`, foco preso no modal e Esc para fechar.
 
 ## Fase 7 — Contato
 

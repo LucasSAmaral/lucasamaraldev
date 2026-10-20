@@ -10,6 +10,7 @@ import { LanguageOptionsContext } from '../components/language-options/LanguageO
 import { sendEmailValues } from './actions';
 import Link from 'next/link';
 import { useModal } from '../components/modal/Modal.context';
+import { MODAL_TITLE_ID } from '../components/modal/Modal.container';
 import { buildContactFormRules } from './helpers';
 import Image from 'next/image';
 import LoadingIcon from '../../assets/loading-icon.gif';
@@ -96,7 +97,7 @@ const Contact: React.FC = () => {
       openModal(
         <Wrapper>
           <Image src={LoadingIcon} width={30} alt={loadingImgAlt} unoptimized />
-          <h2>{loadingTitle}</h2>
+          <h2 id={MODAL_TITLE_ID}>{loadingTitle}</h2>
         </Wrapper>,
         { wrapperClassName: 'sending-message' },
       );
@@ -107,7 +108,7 @@ const Contact: React.FC = () => {
       }
       openModal(
         <Wrapper>
-          <h2>{successTitle}</h2>
+          <h2 id={MODAL_TITLE_ID}>{successTitle}</h2>
           <p>{successText}</p>
           <ButtonLink href="/">{successButtonText}</ButtonLink>
         </Wrapper>,
@@ -121,7 +122,7 @@ const Contact: React.FC = () => {
       const formValues = getValues();
       openModal(
         <Wrapper>
-          <h2>{errorTitle}</h2>
+          <h2 id={MODAL_TITLE_ID}>{errorTitle}</h2>
           <p>{errorText}</p>
           <Button onClick={() => sendEmail(formValues)}>{errorButtonText}</Button>
         </Wrapper>,

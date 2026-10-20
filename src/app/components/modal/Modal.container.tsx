@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
 import { useModal } from './Modal.context';
@@ -13,6 +13,14 @@ const { locale } = config;
 
 // Id do título do conteúdo aberto no modal (usado pelo aria-labelledby do diálogo).
 export const MODAL_TITLE_ID = 'modal-title';
+
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+const getFocusableElements = (container: HTMLElement) =>
+  Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+    element => element.offsetParent !== null,
+  );
 
 const ModalContainer: React.FC = () => {
   const {
@@ -30,85 +38,125 @@ const ModalContainer: React.FC = () => {
     openingHandle,
   } = useModal();
 
-  const classRelation = {
-    OPENED: '--opened',
-    OPENING: '--opening',
-    CLOSED: '--closed',
-    CLOSING: '--closing',
+  const contentRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+
+  const isOpen = modalStatus !== 'CLOSED';
+
+  // Ao abrir: guarda o elemento focado, move o foco para o diálogo e trava a rolagem da página.
+  // Ao fechar: devolve o foco para quem abriu o modal.
+  useEffect(() => {
+    if (!isOpen) {
+      previouslyFocusedRef.current?.focus();
+      previouslyFocusedRef.current = null;
+      return;
+    }
+
+    if (!previouslyFocusedRef.current) {
+      previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+    }
+    contentRef.current?.focus();
+
+    const { overflow } = document.body.style;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = overflow;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (modalStatus !== 'OPENED' && modalStatus !== 'OPENING') {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [modalStatus, closeModal]);
+
+  // Mantém o Tab circulando entre os elementos focáveis do modal.
+  const trapFocus = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'Tab' || !contentRef.current) {
+      return;
+    }
+
+    const focusableElements = getFocusableElements(contentRef.current);
+
+    if (focusableElements.length === 0) {
+      event.preventDefault();
+      return;
+    }
+
+    const first = focusableElements[0];
+    const last = focusableElements[focusableElements.length - 1];
+    const active = document.activeElement;
+
+    if (event.shiftKey && (active === first || active === contentRef.current)) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && active === last) {
+      event.preventDefault();
+      first.focus();
+    }
   };
 
-  const Modal = ({
-    children,
-    closeModal = () => {},
-    classRelation = '',
-    onBackdropAnimationEnd = () => {},
-    onModalAnimationEnd,
-  }: {
-    children: React.ReactNode;
-    closeModal?: () => void;
-    classRelation?: string;
-    onBackdropAnimationEnd?: () => void;
-    onModalAnimationEnd?: () => void;
-  }) => {
-    return ReactDom.createPortal(
-      <ModalBackdropComponent
-        onAnimationEnd={onBackdropAnimationEnd}
-        onClick={closeModal}
-        className={classRelation}
-      >
-        <ModalContent
-          onAnimationEnd={onModalAnimationEnd}
-          onClick={(e: React.MouseEvent) => e.stopPropagation()}
-          className={`modal-content ${wrapperClassName}`}
-        >
-          <CloseButton
-            type="button"
-            className="close-modal"
-            aria-label={locale[selectedLanguage].modal.close}
-            onClick={closeModal}
-          >
-            <svg
-              aria-hidden="true"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
-          </CloseButton>
-          {children}
-        </ModalContent>
-      </ModalBackdropComponent>,
-      document.getElementById('modal') as Element,
-    );
-  };
-
-  switch (modalStatus) {
-    case 'OPENED':
-      return <Modal closeModal={closeModal}>{modalComponent}</Modal>;
-
-    case 'OPENING':
-      return (
-        <Modal classRelation={classRelation[modalStatus]} onModalAnimationEnd={openingHandle}>
-          {modalComponent}
-        </Modal>
-      );
-    case 'CLOSING':
-      return (
-        <Modal classRelation={classRelation[modalStatus]} onBackdropAnimationEnd={closingHandle}>
-          {modalComponent}
-        </Modal>
-      );
-
-    case 'CLOSED':
-      return null;
+  if (!isOpen) {
+    return null;
   }
+
+  const isOpened = modalStatus === 'OPENED';
+
+  return ReactDom.createPortal(
+    <ModalBackdropComponent
+      onAnimationEnd={modalStatus === 'CLOSING' ? closingHandle : () => {}}
+      onClick={isOpened ? closeModal : () => {}}
+      className={
+        modalStatus === 'OPENING' ? '--opening' : modalStatus === 'CLOSING' ? '--closing' : ''
+      }
+    >
+      <ModalContent
+        ref={contentRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={MODAL_TITLE_ID}
+        tabIndex={-1}
+        onKeyDown={trapFocus}
+        onAnimationEnd={modalStatus === 'OPENING' ? openingHandle : undefined}
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}
+        className={`modal-content ${wrapperClassName}`}
+      >
+        <CloseButton
+          type="button"
+          className="close-modal"
+          aria-label={locale[selectedLanguage].modal.close}
+          onClick={isOpened ? closeModal : () => {}}
+        >
+          <svg
+            aria-hidden="true"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </CloseButton>
+        {modalComponent}
+      </ModalContent>
+    </ModalBackdropComponent>,
+    document.getElementById('modal') as Element,
+  );
 };
 
 const ModalContent = styled.div`
@@ -126,6 +174,10 @@ const ModalContent = styled.div`
   width: 100%;
   padding: 36px;
   z-index: 1042;
+
+  &:focus {
+    outline: none;
+  }
 
   @media (max-width: ${breakpoints.columns}px) {
     max-height: calc(100vh - 32px);
