@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import styled, { keyframes } from "styled-components";
-import { breakpoints, colors } from '@/app/styles/theme';
+import styled, { keyframes } from 'styled-components';
+import { breakpoints, colors, transitions } from '@/app/styles/theme';
 
 export default function ModalBackdropComponent({
   children,
@@ -16,7 +16,12 @@ export default function ModalBackdropComponent({
 }) {
   return (
     <Backdrop
-      onAnimationEnd={onAnimationEnd}
+      onAnimationEnd={event => {
+        // Ignora o animationend do conteúdo, que sobe até aqui por bubbling.
+        if (event.target === event.currentTarget) {
+          onAnimationEnd();
+        }
+      }}
       className={className}
       onClick={onClick}
     >
@@ -26,44 +31,47 @@ export default function ModalBackdropComponent({
 }
 
 const BackdropFadeIn = keyframes`
-0% {
-      opacity: 0;
-    }
-100% {
-      opacity: 1;
-    }`;
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 const ModalFadeInBottom = keyframes`
-0% {
-      transform: translateY(50px);
-      opacity: 0;
-    }
-100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  0% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 `;
 
 const BackdropFadeOut = keyframes`
-0% {
-      opacity: 1;
-    }
-100% {
-      opacity: 0;
-    }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 `;
 
 const ModalFadeOutBottom = keyframes`
-    0% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(50px);
-      opacity: 0;
-    }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
 `;
 
+// Abrindo: fundo em 200ms e conteúdo em 250ms, juntos. Fechando: conteúdo some em 200ms e o
+// fundo termina em 250ms (o fim da animação do fundo é o que fecha o modal).
 const Backdrop = styled.div`
   width: 100%;
   height: 100%;
@@ -82,17 +90,17 @@ const Backdrop = styled.div`
   }
 
   &.--opening {
-    animation: ${BackdropFadeIn} 500ms ease-in both;
+    animation: ${BackdropFadeIn} ${transitions.fast} ease-out both;
     > .modal-content {
-      animation: ${ModalFadeInBottom} 500ms ease-out both 500ms;
+      animation: ${ModalFadeInBottom} 250ms ${transitions.easing} both;
     }
   }
 
   &.--closing {
-    animation: ${BackdropFadeOut} 500ms ease-out both 500ms;
+    animation: ${BackdropFadeOut} 250ms ease-in both;
 
     > .modal-content {
-      animation: ${ModalFadeOutBottom} 500ms ease-in both;
+      animation: ${ModalFadeOutBottom} ${transitions.fast} ease-in both;
     }
   }
 `;
