@@ -29,6 +29,10 @@
         ]
       }
     },
+    "aboutMePage": {
+      "careerStartYear": 2015,
+      "graduationYear": 2014
+    },
     "contactPage": {
       "emailJsUrl": "https://api.emailjs.com/api/v1.0/email/send"
     }
