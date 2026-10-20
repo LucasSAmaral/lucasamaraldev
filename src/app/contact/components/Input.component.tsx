@@ -86,7 +86,7 @@ const fieldStyle = css`
     outline-color ${transitions.fast};
 
   &::placeholder {
-    color: #6f7888;
+    color: #768090;
   }
 
   &:hover {
