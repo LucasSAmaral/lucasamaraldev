@@ -23,17 +23,26 @@ const ExperienceTimelineComponent: React.FC = () => {
   );
 };
 
+// Medidas da linha e das bolinhas. A bolinha é posicionada a partir delas para ficar centralizada
+// na linha: recua o padding do <ol> e metade da linha, depois metade da própria bolinha.
+const LINE_WIDTH = 2;
+const desktop = { indent: 36, dotSize: 14 };
+const mobile = { indent: 22, dotSize: 12 };
+
+const dotLeft = ({ indent, dotSize }: { indent: number; dotSize: number }) =>
+  -(indent + LINE_WIDTH / 2 + dotSize / 2);
+
 const Timeline = styled.ol`
   display: flex;
   flex-direction: column;
   gap: 28px;
-  padding-left: 36px;
-  border-left: 2px solid ${colors.accentLine};
+  padding-left: ${desktop.indent}px;
+  border-left: ${LINE_WIDTH}px solid ${colors.accentLine};
   list-style: none;
 
   @media (max-width: ${breakpoints.columns}px) {
     gap: 18px;
-    padding-left: 22px;
+    padding-left: ${mobile.indent}px;
   }
 `;
 
@@ -44,18 +53,18 @@ const TimelineItem = styled.li`
 const TimelineDot = styled.span`
   position: absolute;
   top: 30px;
-  left: -46px;
-  width: 14px;
-  height: 14px;
+  left: ${dotLeft(desktop)}px;
+  width: ${desktop.dotSize}px;
+  height: ${desktop.dotSize}px;
   border: 3px solid ${colors.accent};
   border-radius: 50%;
   background-color: ${colors.background};
 
   @media (max-width: ${breakpoints.columns}px) {
     top: 24px;
-    left: -31px;
-    width: 12px;
-    height: 12px;
+    left: ${dotLeft(mobile)}px;
+    width: ${mobile.dotSize}px;
+    height: ${mobile.dotSize}px;
   }
 `;
 
