@@ -24,15 +24,6 @@ export const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export const Column = styled.div`
-  padding: 40px 20px;
-  position: relative;
-
-  @media (max-width: 864px) {
-    padding: 20px;
-  }
-`;
-
 // Rótulo curto na cor de destaque acima dos títulos ("Olá, eu sou", "Sobre mim"...).
 export const Eyebrow = styled.span`
   color: ${colors.accent};

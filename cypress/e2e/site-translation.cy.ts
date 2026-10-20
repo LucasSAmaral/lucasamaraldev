@@ -15,9 +15,7 @@ describe('Site translation', () => {
     cy.getDataCy('work-experience-option').click();
     cy.get('body').contains(locale['en'].workExperience.company1.periodWorked);
 
-    // cy.getDataCy('desk-card-component').then(el => {
-    //   el[0].click();
-    // });
+    // cy.getDataCy('experience-card').first().click();
 
     // cy.get('.modal-content').contains(locale['en'].workExperience.modalCommonTitle.companyName);
 

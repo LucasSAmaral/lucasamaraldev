@@ -29,9 +29,7 @@ describe('Site navigation', () => {
   it('should interact with modal', () => {
     cy.visit('/work-experience');
 
-    cy.getDataCy('desk-card-component').then(el => {
-      el[0].click();
-    });
+    cy.getDataCy('experience-card').first().click();
 
     cy.get('.modal-content').contains(locale['pt'].workExperience.modalCommonTitle.companyName);
 

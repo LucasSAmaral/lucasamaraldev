@@ -24,13 +24,13 @@ Node version is pinned via `.nvmrc` (22) and the Dockerfile (`node:22.22-alpine`
 
 ### Tests (Cypress only — no Jest/unit test runner)
 
-- Component tests live next to the components under `tests/` folders as `*.component.cy.tsx` (e.g. `src/app/work-experience/components/tests/DeskCard.component.cy.tsx`). Shared test data/helpers go in `tests/helper/` (e.g. `test.helper.ts`). Component testing uses the `next` framework with the **webpack** bundler (`cypress.config.ts`).
+- Component tests live next to the components under `tests/` folders as `*.component.cy.tsx` (e.g. `src/app/work-experience/components/tests/ExperienceCard.component.cy.tsx`). Shared test data/helpers, when needed, go in a `tests/helper/` folder. Component testing uses the `next` framework with the **webpack** bundler (`cypress.config.ts`).
 - E2E tests live in `cypress/e2e/*.cy.ts` and run against a built/served app (`baseUrl: http://localhost:3000`).
 
 ```bash
 npx cypress open                              # interactive runner (component or e2e)
 npx cypress run --component                   # all component tests, headless
-npx cypress run --component --spec "src/app/work-experience/components/tests/DeskCard.component.cy.tsx"
+npx cypress run --component --spec "src/app/work-experience/components/tests/ExperienceCard.component.cy.tsx"
 npx cypress run --e2e                          # all e2e tests, headless (requires app running/build+start)
 npx cypress run --e2e --spec "cypress/e2e/contact-form.cy.ts"
 ```

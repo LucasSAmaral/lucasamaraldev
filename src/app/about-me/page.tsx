@@ -5,16 +5,15 @@ import { useContext } from 'react';
 import { LanguageOptionsContext } from '../components/language-options/LanguageOptions.context';
 import { breakpoints, colors, fonts, radii } from '../styles/theme';
 import { Eyebrow } from '../styles/styles';
+import { getYearsOfCareer } from '../helpers';
 import ActionLink from '../components/ActionLink.component';
 import { Chip, ChipList } from '../components/Chip.component';
 
 const {
   locale: { commonLocale, ...locale },
   appConfig: {
-    aboutMePage: { careerStartYear, graduationYear },
-    workExperiencePage: {
-      mobile: { companies },
-    },
+    aboutMePage: { graduationYear },
+    workExperiencePage: { companies },
   },
 } = config;
 
@@ -26,7 +25,7 @@ const AboutMe: React.FC = () => {
   const aboutMeLocale = locale[selectedLanguage].aboutMe;
 
   const statList = [
-    { value: new Date().getFullYear() - careerStartYear, label: aboutMeLocale.stats.years },
+    { value: getYearsOfCareer(), label: aboutMeLocale.stats.years },
     { value: companies.length, label: aboutMeLocale.stats.companies },
     { value: graduationYear, label: aboutMeLocale.stats.graduation },
   ];

@@ -31,6 +31,9 @@
         }
       },
       "workExperience": {
+        "eyebrow": "Experiência profissional",
+        "title": "{years} anos construindo interfaces.",
+        "subtitle": "Clique em uma experiência para ver os detalhes.",
         "modalCommonTitle": {
           "companyName": "Nome da empresa: ",
           "periodWorked": "Período trabalhado: ",
