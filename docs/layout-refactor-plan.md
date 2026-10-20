@@ -83,5 +83,5 @@ O canvas tem 8 telas: Início, Sobre mim, Experiência e Contato (desktop), o mo
 
 - [x] 9.1 Revisar mobile (390px) e desktop (1440px) com Playwright em todas as páginas, menus e modal.
 - [x] 9.2 Conferir contraste (≥ 4.5:1) e navegação por teclado.
-- [ ] 9.3 Rodar a suíte completa do Cypress e atualizar o `CLAUDE.md` se a arquitetura mudar (ex.: `ThemeProvider`, componentes unificados).
+- [x] 9.3 Rodar a suíte completa do Cypress e atualizar o `CLAUDE.md` se a arquitetura mudar (ex.: `ThemeProvider`, componentes unificados).
 - [ ] 9.4 Abrir PR de `layout-refactor` para `main`.
