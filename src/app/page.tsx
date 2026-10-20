@@ -113,7 +113,7 @@ const Hero = styled.div`
   width: 100%;
   max-width: 1160px;
   margin: 0 auto;
-  padding: 64px 48px;
+  padding: 80px 48px 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -8,11 +8,13 @@ export const Main = styled.main`
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 
+// Ocupa a altura que sobrar: o conteúdo começa logo abaixo do header em todas as páginas e o
+// footer, quando existe, fica no pé da tela.
 export const Section = styled.section`
   width: 100%;
+  flex-grow: 1;
 `;
 
 export const Container = styled.div`
