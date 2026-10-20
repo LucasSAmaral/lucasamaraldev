@@ -125,28 +125,6 @@
           }
         }
       },
-      "footer": {
-        "socialNetworks": {
-          "text": "Social networks:",
-          "list": [
-            {
-              "socialNetworkName": "LinkedIn",
-              "alt": "LinkedIn's Logo",
-              "title": "Find me on LinkedIn"
-            },
-            {
-              "socialNetworkName": "GitHub",
-              "alt": "GitHub's Logo",
-              "title": "Follow me on GitHub"
-            },
-            {
-              "socialNetworkName": "Instagram",
-              "alt": "Instagram's Logo",
-              "title": "Follow me on Instagram"
-            }
-          ]
-        }
-      },
       "header": {
         "navigationLabel": "Main",
         "openMenu": "Open menu",

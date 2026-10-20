@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import HeaderComponent from './components/Header.component';
 import { Container, Main, Section } from './styles/styles';
 import styled, { keyframes } from 'styled-components';
@@ -13,6 +13,9 @@ export type TransitionStateType = {
   nextRoute: string;
 };
 
+// Home e Contato já mostram as redes sociais no conteúdo da página, então não repetem no footer.
+const ROUTES_WITHOUT_FOOTER = ['/', '/contact'];
+
 const initialTransitionState = {
   exiting: false,
   nextRoute: '',
@@ -20,6 +23,7 @@ const initialTransitionState = {
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const pathname = usePathname();
   const {
     modalState: { modalStatus },
     closeModal,
@@ -53,7 +57,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           <Container>{children}</Container>
         </MainSectionContent>
       </MainSection>
-      <FooterComponent />
+      {!ROUTES_WITHOUT_FOOTER.includes(pathname) && <FooterComponent />}
     </Main>
   );
 }
