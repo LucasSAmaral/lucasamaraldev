@@ -1,14 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Photo from '../assets/selfie.jpg';
 import config from '../../generated-config.json';
 import { useContext } from 'react';
 import { LanguageOptionsContext } from './components/language-options/LanguageOptions.context';
 import SocialLinksComponent from './components/SocialLinks.component';
-import { breakpoints, colors, fonts, radii, transitions } from './styles/theme';
+import ActionLink from './components/ActionLink.component';
+import { breakpoints, colors, fonts, radii } from './styles/theme';
 import { Eyebrow } from './styles/styles';
 
 const {
@@ -178,57 +178,6 @@ const Actions = styled.div`
     flex-direction: column;
     gap: 10px;
     margin-top: 4px;
-  }
-`;
-
-type ActionVariant = 'primary' | 'secondary' | 'tertiary';
-
-const actionVariantStyle = {
-  primary: css`
-    background-color: ${colors.accent};
-    color: ${colors.onAccent};
-
-    &:hover {
-      filter: brightness(1.08);
-    }
-  `,
-  secondary: css`
-    border: 1px solid ${colors.borderStrong};
-    color: ${colors.text};
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.06);
-    }
-  `,
-  tertiary: css`
-    padding: 0 18px;
-    color: ${colors.textSecondary};
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.06);
-    }
-  `,
-};
-
-const ActionLink = styled(Link)<{ $variant: ActionVariant }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: 48px;
-  padding: 0 24px;
-  border-radius: ${radii.md};
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    background-color ${transitions.fast},
-    filter ${transitions.fast};
-  ${({ $variant }) => actionVariantStyle[$variant]}
-
-  @media (max-width: ${breakpoints.columns}px) {
-    min-height: 52px;
-    font-size: 16px;
   }
 `;
 

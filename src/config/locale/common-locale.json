@@ -2,6 +2,18 @@
   "locale": {
     "commonLocale": {
       "name": "Lucas Amaral",
+      "aboutMe": {
+        "stack": [
+          "React",
+          "TypeScript",
+          "Next.js",
+          "NestJS",
+          "Styled-Components",
+          "Cypress",
+          "Express.js",
+          "Git"
+        ]
+      },
       "languageOptions": {
         "pt": "Português",
         "en": "English"
