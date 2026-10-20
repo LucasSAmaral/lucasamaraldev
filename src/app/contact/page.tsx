@@ -14,7 +14,7 @@ import { MODAL_TITLE_ID } from '../components/modal/Modal.container';
 import { buildContactFormRules } from './helpers';
 import Image from 'next/image';
 import LoadingIcon from '../../assets/loading-icon.gif';
-import { breakpoints, colors, fonts, radii } from '@/app/styles/theme';
+import { breakpoints, colors, fonts, radii, transitions } from '@/app/styles/theme';
 import { Eyebrow } from '../styles/styles';
 import ContactShortcutsComponent from './components/ContactShortcuts.component';
 
@@ -163,9 +163,23 @@ const Contact: React.FC = () => {
             fullWidth={Field === 'subject' || Field === 'message'}
           />
         ))}
-        <Button data-cy="send-button" type="submit">
+        <SubmitButton data-cy="send-button" type="submit">
           {sendButtonText}
-        </Button>
+          <svg
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m22 2-7 20-4-9-9-4Z" />
+            <path d="M22 2 11 13" />
+          </svg>
+        </SubmitButton>
       </Form>
     </ContactLayout>
   );
@@ -248,9 +262,27 @@ const Form = styled.form`
     padding: 24px 20px;
     border-radius: ${radii.lg};
   }
+`;
 
-  > button[type='submit'] {
-    grid-column: 1 / -1;
+const SubmitButton = styled.button`
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  border: 0;
+  border-radius: ${radii.md};
+  background-color: ${colors.accent};
+  color: ${colors.onAccent};
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter ${transitions.fast};
+
+  &:hover {
+    filter: brightness(1.08);
   }
 `;
 
