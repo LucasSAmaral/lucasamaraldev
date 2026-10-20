@@ -126,6 +126,7 @@
         }
       },
       "header": {
+        "skipToContent": "Skip to content",
         "navigationLabel": "Main",
         "openMenu": "Open menu",
         "closeMenu": "Close menu"

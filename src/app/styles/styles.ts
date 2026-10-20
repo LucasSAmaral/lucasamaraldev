@@ -16,6 +16,11 @@ export const Page = styled.div`
 export const Main = styled.main`
   width: 100%;
   flex-grow: 1;
+
+  /* Recebe o foco do link "Pular para o conteúdo"; o contorno ficaria em volta da página inteira. */
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const Container = styled.div`

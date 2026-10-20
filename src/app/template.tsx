@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import HeaderComponent from './components/Header.component';
+import SkipLinkComponent, { MAIN_CONTENT_ID } from './components/SkipLink.component';
 import { Container, Main, Page } from './styles/styles';
 import styled, { keyframes } from 'styled-components';
 import { transitions } from './styles/theme';
@@ -44,8 +45,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   return (
     <Page>
+      <SkipLinkComponent />
       <HeaderComponent setTransitionState={setTransitionState} />
       <MainContent
+        id={MAIN_CONTENT_ID}
+        tabIndex={-1}
         $exiting={exiting}
         onAnimationEnd={() => {
           if (exiting) {
